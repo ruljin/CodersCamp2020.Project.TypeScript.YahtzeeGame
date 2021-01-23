@@ -1,0 +1,15 @@
+{
+  "name": "yahtzee-game",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "repository": {
+    "url": "https://github.com/ruljin/CodersCamp2020.Project.TypeScript.YahtzeeGame",
+    "type": "git"
+  },
+  "author": "Mrozelek",
+  "license": "",
+  "devDependencies": {
+    "typescript": "^4.1.3"
+  }
+}
