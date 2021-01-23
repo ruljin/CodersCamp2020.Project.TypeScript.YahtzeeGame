@@ -2,5 +2,5 @@
   "compilerOptions": {
     "sourceMap": true
   },
-  "exclude": [".yarn", "coverage", "dist"]
+  "exclude": [".yarn", "coverage", "dist", "node-modules"]
 }
