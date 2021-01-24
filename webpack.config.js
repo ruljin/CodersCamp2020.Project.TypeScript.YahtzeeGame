@@ -6,16 +6,16 @@ module.exports = {
   entry: './src/index.ts',
   mode: 'production',
   target: 'node',
-  externals: [ nodeExternals() ],
+  externals: [nodeExternals()],
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'index.js'
   },
   resolve: {
-    extensions: ['.ts', '.js'],
+    extensions: ['.ts', '.js']
   },
   plugins: [
-    new NodemonPlugin(),
+    new NodemonPlugin()
   ],
   module: {
     rules: [
@@ -47,4 +47,4 @@ module.exports = {
       }
     ]
   }
-}
+};
