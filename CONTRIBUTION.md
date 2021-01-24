@@ -19,4 +19,3 @@ Branch types:
  - feature - any new code, should be merged into dev branch, eg. `feature/integration-with-api`
  - bugfix - necessary fixes for non-production code, should be merged into dev branch, eg. `bugfix/login-form-validation`
  - hotfix - necessary fixes for production code, should be merged into main branch, eg. `hotfix/missing-unauthorized-user-redirect`
- - gh-pages - last stable version of app deployed for github pages using yarn script
