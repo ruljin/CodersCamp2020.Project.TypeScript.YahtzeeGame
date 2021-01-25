@@ -1,5 +1,5 @@
-import { render } from './sample';
+import { SampleComponent } from './sample';
 
 test('Test rendering', () => {
-  expect(render()).toBe('<p class="my-p">sample text</p>');
+  expect((new SampleComponent()).render()).toBe('<p class="my-p">sample text</p>');
 });
