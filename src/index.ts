@@ -1,14 +1,5 @@
-import * as express from 'express';
-import { Request, Response } from 'express';
+import './style.scss';
+import { render } from './components/sample/sample';
 
-const app = express();
-
-const {
-  PORT = 3000
-} = process.env;
-
-app.get('/', (req: Request, res: Response) => res.send('Helloee World!'));
-
-app.listen(PORT, () => {
-  console.log('server started at http://localhost:'+PORT);
-});
+const root = document.querySelector('#root')!;
+root.innerHTML = render();

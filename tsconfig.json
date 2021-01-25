@@ -1,11 +1,17 @@
 {
   "compilerOptions": {
+    "outDir": "./dist/",
     "target": "ES2015",
     "module": "commonjs",
     "strict": true,
     "sourceMap": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true,
+    "typeRoots": [
+      "node_modules/@types",
+      "typings"
+    ]
   },
   "include": ["src/**/*"],
   "exclude": [".yarn", "coverage", "dist", "node-modules"]

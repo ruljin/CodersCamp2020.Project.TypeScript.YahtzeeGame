@@ -15,11 +15,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Contribution guide file.
 - Changelog file.
 - Webpack.
-- Routing with express.
 - Typescript loader for Webpack.
-- TS-Jest library for testing Typescript.
+- Jest for testing Typescript.
 - ESLint for Typescript.
-- Sass style loaders for Webpack.
+- Sass style loaders with autoprefixer for Webpack.
 - Stylelint for Sass.
 
 [unreleased]: https://github.com/Mrozelek/bitcoin-stock-exchange/compare/v0.1.0...HEAD
