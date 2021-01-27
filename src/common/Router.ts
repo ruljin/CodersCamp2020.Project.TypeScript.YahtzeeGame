@@ -11,6 +11,7 @@ class Router {
 
   addRefreshListener(element: HTMLAnchorElement, event: string): void {
     element.addEventListener(event, this.refreshHandler);
+    element.setAttribute('hasRefreshListener', 'true');
   }
 
   renderComponent(component: Element): void {

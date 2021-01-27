@@ -45,3 +45,13 @@ test('Check element rendering', () => {
   expect(document.body.innerHTML.includes('<a href="/#/sample">Go to sample component</a>'))
     .toBe(true);
 });
+
+test('Check adding refresh listener', () => {
+  document.body.innerHTML = '<div id="root"></div>';
+  const router = new Router(document.querySelector('#root')!);
+  router.renderComponent(createElementFromString('<a href="/#/sample">Go to sample component</a>'));
+  router.addRefreshListener(document.querySelector('a')!, 'click');
+
+  expect(document.querySelector('a')!.getAttribute('hasRefreshListener'))
+    .toBe('true');
+});
