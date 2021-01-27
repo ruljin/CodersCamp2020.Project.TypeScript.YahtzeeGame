@@ -4,7 +4,7 @@
   "description": "Web implementation of Yahtzee Game",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --config webpack.dev.js --mode none",
+    "start": "webpack serve --config webpack.dev.js --mode none",
     "build": "webpack --config webpack.prod.js --mode production",
     "test": "jest",
     "lint": "eslint . --ext .ts && stylelint 'src/**/*.scss' && html-validate 'src/**/*.{html,ts}'"
@@ -30,6 +30,7 @@
     "node-sass": "^5.0.0",
     "postcss-loader": "^4.2.0",
     "sass-loader": "^10.1.1",
+    "serve": "^11.3.2",
     "style-loader": "^2.0.0",
     "stylelint": "^13.9.0",
     "stylelint-config-sass-guidelines": "^7.1.0",
