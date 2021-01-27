@@ -11,15 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - HTML Validator.
 - Web Component interface.
+- Images for ui.
 - Router class.
-
-## [0.1.1] - 2021-01-27
-
-### Added
-
-- Images for board background for different game styles.
-- Images for background - desktop and mobile. 
-- Scores table example. 
 
 ## [0.1.0] - 2021-01-25
 
