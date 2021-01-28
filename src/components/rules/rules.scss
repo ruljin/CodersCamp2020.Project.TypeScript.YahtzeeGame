@@ -1,0 +1,43 @@
+.box {
+  margin: 0 auto;
+  width: 60vw;
+  height: 60vh;
+  overflow: auto;
+  text-align: center;
+  font-size: 1.3em;
+  line-height: 1.5;
+  padding-right: 3%;
+  color: #fff;
+
+  & p {
+    margin: 1.5em 0 0;
+  }
+
+  & p:first-child {
+    margin: 0;
+  }
+}
+
+.list {
+  text-align: center;
+  list-style-position: inside;
+  margin: 0;
+  list-style-type: square;
+
+  &--bold {
+    font-weight: 700;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #46060f;
+  border-radius: 70%;
+}
