@@ -9,8 +9,8 @@ class Router {
     return path === '' ? window.location.hash === '' : window.location.hash === `#/${path}`;
   }
 
-  addRefreshListener(element: HTMLAnchorElement, event: string): void {
-    element.addEventListener(event, this.refreshHandler);
+  static addRefreshListener(element: HTMLAnchorElement, event: string): void {
+    element.addEventListener(event, Router.refreshHandler);
     element.setAttribute('hasRefreshListener', 'true');
   }
 
