@@ -22,7 +22,7 @@ class LogoComponent implements WebComponent {
     return;
   }
 
-  public deleteLink(): void {
+  deleteLink(): void {
     this.componentElement.querySelector('a')!.removeAttribute('href');
   }
 }
