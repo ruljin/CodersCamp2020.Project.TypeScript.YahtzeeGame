@@ -46,12 +46,12 @@ test('Check element rendering', () => {
     .toBe(true);
 });
 
-test('Check adding refresh listener', () => {
+test('Check root clearing', () => {
   document.body.innerHTML = '<div id="root"></div>';
   const router = new Router(document.querySelector('#root')!);
   router.renderComponent(createElementFromString('<a href="/#/sample">Go to sample component</a>'));
-  Router.addRefreshListener(document.querySelector('a')!, 'click');
+  router.clearRoot();
 
-  expect(document.querySelector('a')!.getAttribute('hasRefreshListener'))
-    .toBe('true');
+  expect(document.querySelector('#root')!.innerHTML)
+    .toBe('');
 });

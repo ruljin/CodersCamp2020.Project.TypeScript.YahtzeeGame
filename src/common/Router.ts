@@ -9,18 +9,16 @@ class Router {
     return path === '' ? window.location.hash === '' : window.location.hash === `#/${path}`;
   }
 
-  static addRefreshListener(element: HTMLAnchorElement, event: string): void {
-    element.addEventListener(event, Router.refreshHandler);
-    element.setAttribute('hasRefreshListener', 'true');
+  clearRoot(): void {
+    this.root.innerHTML = '';
   }
 
   renderComponent(component: Element): void {
     this.root.appendChild(component);
   }
 
-  private static refreshHandler(evt: Event): void {
-    window.location.href = (evt.currentTarget as HTMLAnchorElement).href;
-    window.location.reload(true);
+  addHashChangeListener(routePathsHandler: () => void): void {
+    window.addEventListener('hashchange', routePathsHandler, false);
   }
 }
 
