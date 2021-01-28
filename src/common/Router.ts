@@ -9,8 +9,8 @@ class Router {
     return path === '' ? window.location.hash === '' : window.location.hash === `#/${path}`;
   }
 
-  addRefreshListener(element: HTMLAnchorElement, event: string): void {
-    element.addEventListener(event, this.refreshHandler);
+  static addRefreshListener(element: HTMLAnchorElement, event: string): void {
+    element.addEventListener(event, Router.refreshHandler);
     element.setAttribute('hasRefreshListener', 'true');
   }
 
@@ -18,7 +18,7 @@ class Router {
     this.root.appendChild(component);
   }
 
-  private refreshHandler(evt: Event): void {
+  private static refreshHandler(evt: Event): void {
     window.location.href = (evt.currentTarget as HTMLAnchorElement).href;
     window.location.reload(true);
   }
