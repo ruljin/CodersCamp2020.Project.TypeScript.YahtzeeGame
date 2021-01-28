@@ -1,5 +1,10 @@
 {
   "extends": [
     "html-validate:recommended"
-  ]
+  ],
+  "rules": {
+    "element-name": "off",
+    "no-dup-id": "warn",
+    "void-style": "warn"
+  }
 }
