@@ -1,5 +1,6 @@
 import './logo.scss';
 import WebComponent, { createElementFromString } from '../../common/WebComponent';
+import * as Logo from '../../assets/logo.svg';
 
 class LogoComponent implements WebComponent {
   private componentElement: Element = document.createElement('null');
@@ -9,7 +10,7 @@ class LogoComponent implements WebComponent {
       this.componentElement = createElementFromString(`
         <header class="logo">
           <a href="#">
-            <img src="../assets/logo.svg" alt="logo" />
+            <img src="${Logo}" alt="logo" />
           </a>
         </header>
       `);

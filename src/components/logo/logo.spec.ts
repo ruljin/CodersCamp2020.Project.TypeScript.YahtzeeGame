@@ -1,16 +1,23 @@
 import LogoComponent from './logo';
+import { createElementFromString } from '../../common/WebComponent';
+import * as Logo from '../../assets/logo.svg';
 
 test('Check rendering logo', () => {
-  const logo = `
-    <header class="logo">
-      <a href="#">
-        <img src="../assets/logo.svg" alt="logo">
-      </a>
-    </header>
-  `;
+  const logo = createElementFromString(`
+        <header class="logo">
+          <a href="#">
+            <img src="${Logo}" alt="logo" />
+          </a>
+        </header>
+      `);
 
-  expect((new LogoComponent()).render().outerHTML.replace(/  /g, '').trim())
-    .toStrictEqual(logo.replace(/  /g, '').trim());
+  const logoComponent = new LogoComponent();
+
+  expect(logoComponent.render())
+    .toStrictEqual(logo);
+
+  expect(logoComponent.render())
+    .toStrictEqual(logo);
 });
 
 test('Deleting link in logo', () => {

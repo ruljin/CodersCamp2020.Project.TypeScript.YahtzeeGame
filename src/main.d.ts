@@ -1,4 +1,9 @@
 declare module '*.png' {
-   const value: any;
+   const value: unknown;
+   export = value;
+}
+
+declare module '*.svg' {
+   const value: unknown;
    export = value;
 }
