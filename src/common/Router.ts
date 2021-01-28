@@ -19,7 +19,7 @@ class Router {
   }
 
   private static refreshHandler(evt: Event): void {
-    window.location.href = (evt.currentTarget as HTMLAnchorElement).href;
+    window.location.hash = (evt.currentTarget as HTMLAnchorElement).hash;
     window.location.reload(true);
   }
 }
