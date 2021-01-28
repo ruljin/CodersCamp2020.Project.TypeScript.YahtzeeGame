@@ -8,8 +8,8 @@ class LogoComponent implements WebComponent {
     if (this.componentElement.outerHTML === '<null></null>') {
       this.componentElement = createElementFromString(`
         <header class="logo">
-          <a href="#/index.html">
-            <img src="../../assets/logo.svg" alt="logo" />
+          <a href="#">
+            <img src="../assets/logo.svg" alt="logo" />
           </a>
         </header>
       `);

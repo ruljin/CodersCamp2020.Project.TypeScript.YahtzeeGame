@@ -3,8 +3,8 @@ import LogoComponent from './logo';
 test('Check rendering logo', () => {
   const logo = `
     <header class="logo">
-      <a href="#/index.html">
-        <img src="../../assets/logo.svg" alt="logo">
+      <a href="#">
+        <img src="../assets/logo.svg" alt="logo">
       </a>
     </header>
   `;
