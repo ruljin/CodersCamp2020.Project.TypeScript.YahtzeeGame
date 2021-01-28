@@ -7,7 +7,7 @@ const router = new Router(document.querySelector('#root')!);
 
 if (router.checkPath('')) {
   router.renderComponent(createElementFromString('<a href="/#/sample">Go to sample component</a>'));
-  router.addRefreshListener(document.querySelector('a')!, 'click');
+  Router.addRefreshListener(document.querySelector('a')!, 'click');
 }
 
 if (router.checkPath('sample')) {
@@ -16,5 +16,5 @@ if (router.checkPath('sample')) {
   sampleComponent.setup();
 
   router.renderComponent(createElementFromString('<a href="/">Go back</a>'));
-  router.addRefreshListener(document.querySelector('a')!, 'click');
+  Router.addRefreshListener(document.querySelector('a')!, 'click');
 }
