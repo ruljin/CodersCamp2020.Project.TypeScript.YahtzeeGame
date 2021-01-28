@@ -18,8 +18,8 @@ class Router {
     this.root.appendChild(component);
   }
 
-  private static refreshHandler(evt: Event): void {
-    window.location.href = (evt.currentTarget as HTMLAnchorElement).href;
+  private refreshHandler(evt: Event): void {
+    window.location.hash = (evt.currentTarget as HTMLAnchorElement).hash;
     window.location.reload(true);
   }
 }
