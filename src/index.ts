@@ -5,16 +5,21 @@ import { createElementFromString } from './common/WebComponent';
 
 const router = new Router(document.querySelector('#root')!);
 
-if (router.checkPath('')) {
-  router.renderComponent(createElementFromString('<a href="/#/sample">Go to sample component</a>'));
-  Router.addRefreshListener(document.querySelector('a')!, 'click');
+function routePathsHandler() {
+  if (router.checkPath('')) {
+    router.clearRoot();
+
+    router.renderComponent(createElementFromString('<a href="#/sample">Go to sample component</a>'));
+  } else if (router.checkPath('sample')) {
+    router.clearRoot();
+
+    const sampleComponent = new SampleComponent();
+    router.renderComponent(sampleComponent.render());
+    sampleComponent.setup();
+
+    router.renderComponent(createElementFromString('<a href="#">Go back</a>'));
+  }
 }
 
-if (router.checkPath('sample')) {
-  const sampleComponent = new SampleComponent();
-  router.renderComponent(sampleComponent.render());
-  sampleComponent.setup();
-
-  router.renderComponent(createElementFromString('<a href="/">Go back</a>'));
-  Router.addRefreshListener(document.querySelector('a')!, 'click');
-}
+routePathsHandler();
+router.addHashChangeListener(routePathsHandler);

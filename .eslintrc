@@ -22,7 +22,6 @@
     "indent": ["error", 2],
     "quotes": ["error", "single"],
     "semi": ["error", "always"],
-    "arrow-body-style": ["error", "as-needed"],
     "arrow-parens": ["error", "always"],
     "arrow-spacing": ["error", { "before": true, "after": true }],
     "no-useless-constructor": ["error"],
