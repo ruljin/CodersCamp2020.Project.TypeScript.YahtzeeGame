@@ -3,6 +3,7 @@ import SampleComponent from './components/sample/sample';
 import Router from './common/Router';
 import { createElementFromString } from './common/WebComponent';
 import LogoComponent from './components/logo/logo';
+import AuthorsComponent from './components/authors/authors';
 
 const router = new Router(document.querySelector('#root')!);
 
@@ -16,6 +17,10 @@ function routePathsHandler() {
 
     const logo = new LogoComponent();
     router.renderComponent(logo.render());
+
+    const authorsComponent = new AuthorsComponent();
+    router.renderComponent(authorsComponent.render());
+    authorsComponent.setup();
 
     const sampleComponent = new SampleComponent();
     router.renderComponent(sampleComponent.render());
