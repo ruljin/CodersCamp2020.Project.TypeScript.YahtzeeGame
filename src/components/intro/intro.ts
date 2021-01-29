@@ -4,7 +4,7 @@ import WebComponent, { createElementFromString } from '../../common/WebComponent
 
 class IntroComponent implements WebComponent {
   render(): Element {
-    return createElementFromString(`<main>
+    return createElementFromString(`<section>
         <div class="container">
         Yahtzee is a dice game based on Poker.<br>
         You can choose to play against computer or with your friends.<br>
@@ -12,7 +12,7 @@ class IntroComponent implements WebComponent {
         Your best scores will be saved.<br>
         Enjoy playing Yahtzee!
         </div>
-      </main>`);
+      </section>`);
   }
 
   setup(): void {
