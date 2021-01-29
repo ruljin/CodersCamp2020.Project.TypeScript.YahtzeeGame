@@ -11,6 +11,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Rules Component.
 - Logo Component.
+- Background styles.
+- Background dice component.
+- Style reset.
+
+### Changes
+
+- Rename assets to english words.
 
 ## [0.2.0] - 2021-01-28
 
