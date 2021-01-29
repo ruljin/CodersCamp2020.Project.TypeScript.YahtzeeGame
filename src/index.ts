@@ -3,6 +3,7 @@ import SampleComponent from './components/sample/sample';
 import Router from './common/Router';
 import { createElementFromString } from './common/WebComponent';
 import LogoComponent from './components/logo/logo';
+import ScoresComponent from './components/scores/scores';
 
 const router = new Router(document.querySelector('#root')!);
 
@@ -16,6 +17,10 @@ function routePathsHandler() {
 
     const logo = new LogoComponent();
     router.renderComponent(logo.render());
+
+    const scoresComponent = new ScoresComponent();
+    router.renderComponent(scoresComponent.render());
+    scoresComponent.setup();
 
     const sampleComponent = new SampleComponent();
     router.renderComponent(sampleComponent.render());
