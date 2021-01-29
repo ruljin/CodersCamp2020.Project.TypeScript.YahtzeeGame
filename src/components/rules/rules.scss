@@ -31,13 +31,13 @@
 
 ::-webkit-scrollbar {
   width: 15px;
-}
 
-::-webkit-scrollbar-track {
-  background: transparent;
-}
+  &-track {
+    background: transparent;
+  }
 
-::-webkit-scrollbar-thumb {
-  background-color: #46060f;
-  border-radius: 70%;
+  &-thumb {
+    background-color: #46060f;
+    border-radius: 70%;
+  }
 }

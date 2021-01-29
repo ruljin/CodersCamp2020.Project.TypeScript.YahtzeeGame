@@ -58,7 +58,7 @@ test('Check rendering text with rules', () => {
             unused the Yahtzee would score 0 if the Full House, Small Straight or Large Straight categories were chosen.
         </p>
         <p>The winner is the player with the highest total.</p>
-        <p class="list--bold">Enjoy the game!</p>
+        <p class="list list--bold">Enjoy the game!</p>
         </main>`);
 
   const rulesComponent = new RulesComponent();
