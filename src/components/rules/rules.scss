@@ -1,0 +1,48 @@
+.container {
+  color: #fff;
+  font-size: 1.3rem;
+  height: 60vh;
+  line-height: 1.5;
+  margin: 0 auto;
+  overflow: auto;
+  padding-right: 3%;
+  text-align: center;
+  text-shadow: 10px 20px 10px rgba(70, 6, 15, 0.62);
+  width: 60vw;
+
+  &::-webkit-scrollbar {
+    width: 15px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #46060f;
+    border-radius: 70%;
+  }
+}
+
+.text {
+  margin: 1.5em 0 0;
+
+  &--first {
+    margin: 0;
+  }
+
+  &--last {
+    font-weight: 700;
+  }
+}
+
+.list {
+  list-style-position: inside;
+  list-style-type: square;
+  margin: 0;
+  text-align: center;
+
+  &--bold {
+    font-weight: 700;
+  }
+}
