@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-- Logo Component with tests.
+- Logo Component.
 
 ## [0.2.0] - 2021-01-28
 
