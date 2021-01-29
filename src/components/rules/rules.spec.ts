@@ -2,7 +2,7 @@ import RulesComponent from './rules';
 import { createElementFromString } from '../../common/WebComponent';
 
 test('Check rendering text with rules', () => {
-  const rules = createElementFromString(`<main>
+  const rules = createElementFromString(`<section>
       <div class="container">
         <p class="text text--first">The game consists of a number of rounds. In each round, a player gets three rolls of the dice,
             although they can choose to end their turn after one or two rolls. In each turn a player may throw the dice
@@ -61,7 +61,7 @@ test('Check rendering text with rules', () => {
         <p class="text">The winner is the player with the highest total.</p>
         <p class="text text--last">Enjoy the game!</p>
       </div>
-    </main>`);
+    </section>`);
 
   const rulesComponent = new RulesComponent();
 

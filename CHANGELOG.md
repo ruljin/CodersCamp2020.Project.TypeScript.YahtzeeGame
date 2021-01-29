@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Rules Component for rules page.
+- Rules Component.
 
 ## [0.2.0] - 2021-01-28
 
