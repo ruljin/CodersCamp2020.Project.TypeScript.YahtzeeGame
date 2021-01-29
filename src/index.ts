@@ -5,7 +5,6 @@ import { createElementFromString } from './common/WebComponent';
 import LogoComponent from './components/logo/logo';
 
 const router = new Router(document.querySelector('#root')!);
-
 function routePathsHandler() {
   if (router.checkPath('')) {
     router.clearRoot();
