@@ -7,7 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.2.0] - 2021-01-29
+### Added
+
+- Rules Component for rules page.
+
+## [0.2.0] - 2021-01-28
 
 ### Added
 
@@ -16,7 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Images for ui.
 - Router class.
 - Deploy script.
-- Rules Component for rules page.
+
 
 ## [0.1.0] - 2021-01-25
 
