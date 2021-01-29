@@ -4,12 +4,12 @@ import Router from '../../common/Router';
 
 class MenuComponent implements WebComponent {
   render(): Element {
-    return createElementFromString(`<footer class="button-container">
+    return createElementFromString(`<nav class="button-container">
       <a href="#/scores" class="button">Scores</a>
       <a href="#/rules" class="button">Rules</a>
       <a href="#/settings" class="button">Game</a>
       <a href="#/authors" class="button">Authors</a>
-    </footer>`);
+    </nav>`);
   }
 
   setup(): void {
