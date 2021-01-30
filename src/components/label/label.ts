@@ -17,7 +17,7 @@ class LabelComponent implements WebComponent {
   }
 
   settingsStyleLabel(): string {
-    this.text = `<p class="label__settings-style-label">${this.text}</p>`;
+    this.text = `<p class="label--alternative">${this.text}</p>`;
     return this.text;
   }
 }

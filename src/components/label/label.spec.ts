@@ -9,7 +9,7 @@ test('Check rendering labels', () => {
   const checkLabelStyle = new LabelComponent('style');
   checkLabelStyle.settingsStyleLabel();
   expect(checkLabelStyle.render())
-    .toStrictEqual(createElementFromString('<div class="label"><p class="label__settings-style-label">style</p></div>'));
+    .toStrictEqual(createElementFromString('<div class="label"><p class="label--alternative">style</p></div>'));
 
   const checkLabelWhoPlays = new LabelComponent('Maciej plays!');
   expect(checkLabelWhoPlays.render())
