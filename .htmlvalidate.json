@@ -4,8 +4,7 @@
   ],
   "rules": {
     "element-name": "off",
-    "no-dup-id": "warn",
-    "void-style": "warn",
+    "no-dup-id": "off",
     "no-raw-characters": "off"
   }
 }
