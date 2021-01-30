@@ -5,6 +5,7 @@
   "rules": {
     "element-name": "off",
     "no-dup-id": "warn",
-    "void-style": "warn"
+    "void-style": "warn",
+    "no-raw-characters": "off"
   }
 }
