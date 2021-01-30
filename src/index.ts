@@ -1,28 +1,28 @@
 import './style.scss';
-import SampleComponent from './components/sample/sample';
 import Router from './common/Router';
-import { createElementFromString } from './common/WebComponent';
-import LogoComponent from './components/logo/logo';
+import ScoreTableDuringGameComponent from './components/score-table-during-game/score-table-during-game';
 
 const router = new Router(document.querySelector('#root')!);
 
 function routePathsHandler() {
-  if (router.checkPath('')) {
-    router.clearRoot();
+  const scoreTableuringGame = new ScoreTableDuringGameComponent(['Player 1', 'Player 2', 'Player 3', 'Player 4']);
+  router.renderComponent(scoreTableuringGame.render());
+  // if (router.checkPath('')) {
+  //   router.clearRoot();
 
-    router.renderComponent(createElementFromString('<a href="#/sample">Go to sample component</a>'));
-  } else if (router.checkPath('sample')) {
-    router.clearRoot();
+  //   router.renderComponent(createElementFromString('<a href="#/sample">Go to sample component</a>'));
+  // } else if (router.checkPath('sample')) {
+  //   router.clearRoot();
 
-    const logo = new LogoComponent();
-    router.renderComponent(logo.render());
+  //   const logo = new LogoComponent();
+  //   router.renderComponent(logo.render());
 
-    const sampleComponent = new SampleComponent();
-    router.renderComponent(sampleComponent.render());
-    sampleComponent.setup();
+  //   const sampleComponent = new SampleComponent();
+  //   router.renderComponent(sampleComponent.render());
+  //   sampleComponent.setup();
 
-    router.renderComponent(createElementFromString('<a href="#">Go back</a>'));
-  }
+  //   router.renderComponent(createElementFromString('<a href="#">Go back</a>'));
+  // }
 }
 
 routePathsHandler();

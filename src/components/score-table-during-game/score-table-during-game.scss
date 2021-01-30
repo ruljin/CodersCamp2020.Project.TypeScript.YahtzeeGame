@@ -1,0 +1,140 @@
+$cell-width: 30px;
+
+.score-table {
+  background: repeating-linear-gradient(to right , #fff 0, #fff $cell-width - 1px, rgba(0, 0, 255, 0.2) $cell-width);
+  display: flex;
+  width: fit-content;
+  
+  * {
+    box-sizing: border-box;
+  }
+
+  &__names {
+    border-right: 3px solid #00f;
+    width: 3*$cell-width;
+  }
+
+  &__names-item {
+    align-items: center;
+    border-bottom: 1px solid #00f;
+    display: flex;
+    font-family: sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    height: 30px;
+    padding: 5px 0 5px 2px;
+  }
+
+  &__names-item:last-child {
+    border-bottom: 0;
+  }
+
+  &__names-item--blue {
+    background-color: #94d4cc;
+    position: relative;
+  }
+
+  &__names-item--blue::before,
+  &__names-item--blue::after {
+    background-color: rgba(0, 0, 255, 0.2);
+    content: '';
+    height: 100%;
+    left: $cell-width - 0.5px;
+    position: absolute;
+    top: 0;
+    transform: translate(-50%, 0);
+    width: 0.5px;
+  }
+
+  &__names-item--blue::after {
+    left: 2*$cell-width - 1px;
+  }
+
+  &__names-item--empty {
+    border-bottom: 3px solid #00f;
+    height: 60px;
+    padding: 0;
+    position: relative;
+    width: 3*$cell-width;
+  }
+
+  &__names-item--empty::after {
+    background-color: rgba(0, 0, 255, 0.2);
+    content: '';
+    height: 0.5px;
+    left: 0;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    width: 100%;
+  }
+
+  &__players-container {
+    display: flex;
+    width: 100%;
+  }
+
+  &__player {
+    flex-basis: 100%;
+  }
+
+  &__player-name {
+    align-items: center;
+    border-bottom: 3px solid #00f;
+    border-right: 1px solid #00f;
+    display: flex;
+    font-family: sans-serif;
+    font-size: 0.875rem;
+    height: 60px;
+    justify-content: center;
+    position: relative;
+    width: 2*$cell-width;
+  }
+
+  &__player-name::after {
+    background-color: rgba(0, 0, 255, 0.2);
+    content: '';
+    height: 0.5px;
+    left: 0;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    width: 100%;
+  }
+
+  &__player-field {
+    border-bottom: 1px solid #00f;
+    border-right: 1px solid #00f;
+    height: 30px;
+    width: 2*$cell-width;
+  }
+
+  &__player-field:last-child {
+    border-bottom: 0;
+  }
+
+  &__player-field--blue {
+    background-color: #94d4cc;
+    position: relative;
+  }
+
+  &__player-field--blue::after {
+    background-color: rgba(0, 0, 255, 0.2);
+    content: '';
+    height: 100%;
+    left: 50%;
+    position: absolute;
+    top: 0;
+    transform: translate(-50%, 0);
+    width: 0.5px;
+  }
+}
+
+.rotate {
+  position: absolute;
+  transform: rotate(-45deg);
+}
+
+.border-right-none {
+  border-right: 0;
+}
