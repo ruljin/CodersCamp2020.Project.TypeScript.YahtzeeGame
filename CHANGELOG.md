@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Logo Component.
 - Svg logo asset.
 - Types declaration for Typescript in `main.d.ts` file.
-- Selector component
+- Selector Component
 
 ### Changed
 
