@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Logo Component.
 - Svg logo asset.
 - Types declaration for Typescript in `main.d.ts` file.
+- Github actions.
 
 ### Changed
 
@@ -28,7 +29,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Images for ui.
 - Router class.
 - Deploy script.
-
 
 ## [0.1.0] - 2021-01-25
 
