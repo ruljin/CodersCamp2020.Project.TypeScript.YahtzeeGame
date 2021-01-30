@@ -3,8 +3,10 @@ import SampleComponent from './components/sample/sample';
 import Router from './common/Router';
 import { createElementFromString } from './common/WebComponent';
 import LogoComponent from './components/logo/logo';
+import SelectorComponent from './components/selector/selector';
 
 const router = new Router(document.querySelector('#root')!);
+const dropDown: HTMLSelectElement = document.createElement('select');
 
 function routePathsHandler() {
   if (router.checkPath('')) {
@@ -16,6 +18,9 @@ function routePathsHandler() {
 
     const logo = new LogoComponent();
     router.renderComponent(logo.render());
+
+    const selector = new SelectorComponent(dropDown);
+    router.renderComponent(selector.render());
 
     const sampleComponent = new SampleComponent();
     router.renderComponent(sampleComponent.render());
