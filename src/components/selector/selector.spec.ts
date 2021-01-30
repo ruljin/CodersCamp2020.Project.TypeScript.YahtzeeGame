@@ -14,7 +14,7 @@ test('component rendering test', () => {
           </select>
         </div>`);
 
-  const selComponent = new SelectorComponent(dropDown);
+  const selectorComp = new SelectorComponent(dropDown);
 
-  expect(selComponent.render()).toStrictEqual(selector);
+  expect(selectorComp.render()).toStrictEqual(selector);
 });
