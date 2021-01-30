@@ -1,4 +1,4 @@
-import './selector.scss';
+import './selector.css';
 import WebComponent, { createElementFromString } from '../../common/WebComponent';
 
 class SelectorComponent implements WebComponent {
