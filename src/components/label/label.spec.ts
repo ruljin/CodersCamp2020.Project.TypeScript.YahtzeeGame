@@ -2,20 +2,15 @@ import LabelComponent from './label';
 import { createElementFromString } from '../../common/WebComponent';
 
 test('Check rendering labels', () => {
-  const checkLabelPlayers = new LabelComponent('players');
+  const checkLabelPlayers = new LabelComponent('players', 8);
   expect(checkLabelPlayers.render())
-    .toStrictEqual(createElementFromString('<div class="label ">players</div>'));
+    .toStrictEqual(createElementFromString('<div class="label" style="width: 8rem;">players</div>'));
 
-  const checkLabelStyle = new LabelComponent('style');
-  checkLabelStyle.alternateAppearance();
-  expect(checkLabelStyle.render())
-    .toStrictEqual(createElementFromString('<div class="label label--alternative">style</div>'));
-
-  const checkLabelWhoPlays = new LabelComponent('Maciej plays!');
+  const checkLabelWhoPlays = new LabelComponent('Maciej plays!', 10);
   expect(checkLabelWhoPlays.render())
-    .toStrictEqual(createElementFromString('<div class="label ">Maciej plays!</div>'));
+    .toStrictEqual(createElementFromString('<div class="label" style="width: 10rem;">Maciej plays!</div>'));
 
-  const checkLabelCategory = new LabelComponent('choose category');
+  const checkLabelCategory = new LabelComponent('choose category', 15);
   expect(checkLabelCategory.render())
-    .toStrictEqual(createElementFromString('<div class="label ">choose category</div>'));
+    .toStrictEqual(createElementFromString('<div class="label" style="width: 15rem;">choose category</div>'));
 });

@@ -3,6 +3,7 @@ import SampleComponent from './components/sample/sample';
 import Router from './common/Router';
 import { createElementFromString } from './common/WebComponent';
 import DiceBackground, { DiceTypes } from './components/dice-background/dice-background';
+import LabelComponent from './components/label/label';
 
 const router = new Router(document.querySelector('#root')!);
 function routePathsHandler() {
@@ -20,7 +21,7 @@ function routePathsHandler() {
     router.renderComponent(sampleComponent.render());
     sampleComponent.setup();
 
-    const x = new LabelComponent('players');
+    const x = new LabelComponent('Ania plays!');
     router.renderComponent(x.render());
     x.setup();
 

@@ -2,20 +2,18 @@ import './label.scss';
 import WebComponent, { createElementFromString } from '../../common/WebComponent';
 
 class LabelComponent implements WebComponent {
-  private isAlternated = false;
+  private label: HTMLElement = document.createElement('null');
 
-  constructor(private text: string) {}
+  constructor(private text: string, private width: number) {}
 
   render(): Element {
-    return createElementFromString(`<div class="label ${this.isAlternated ? 'label--alternative' : ''}">${this.text}</div>`);
+    this.label = createElementFromString(`<div class="label">${this.text}</div>`) as HTMLElement;
+    this.label.style.width = `${this.width}rem`;
+    return this.label as Element;
   }
 
   setup(): void {
     return;
-  }
-
-  alternateAppearance(): void {
-    this.isAlternated = !this.isAlternated;
   }
 }
 
