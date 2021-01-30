@@ -1,14 +1,9 @@
-.button-container {
-  align-items: center;
-  display: flex;
-  justify-content: space-around;
-}
-
 .button {
   background-color: #46060f;
   border: 3px solid #fff;
   border-radius: 20px;
   color: #fff;
+  display: block;
   font-size: 2rem;
   height: 3.5rem;
   line-height: 3.5rem;
@@ -18,7 +13,7 @@
   text-transform: lowercase;
   width: 17rem;
 
-  &--hover {
+  &--disabled {
     box-shadow: -10px -10px 40px rgba(41, 231, 162, 0.6), 10px 10px 40px rgba(41, 231, 162, 0.6);
   }
 }

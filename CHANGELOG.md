@@ -11,7 +11,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Rules Component.
 - Logo Component.
-- Menu Component.
+- Reference Component.
+
+### Changed
+
+- ESLint config for `no-useless-constructor` rule to be removed.
 
 ## [0.2.0] - 2021-01-28
 
