@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Rules Component.
 - Logo Component.
+- Authors Component. 
 - Background styles.
 - Background dice component.
 - Style reset.
