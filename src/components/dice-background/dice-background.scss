@@ -1,0 +1,25 @@
+.background-dice {
+  position: absolute;
+
+  &--default {
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  &--alt {
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  &--mob {
+    left: 0;
+    top: 0;
+  }
+
+  &--mob-alt {
+    right: 0;
+    top: 0;
+  }
+}
