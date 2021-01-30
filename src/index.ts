@@ -2,11 +2,9 @@ import './style.scss';
 import SampleComponent from './components/sample/sample';
 import Router from './common/Router';
 import { createElementFromString } from './common/WebComponent';
-import LogoComponent from './components/logo/logo';
-import IntroComponent from './components/intro/intro';
+import DiceBackground, { DiceTypes } from './components/dice-background/dice-background';
 
 const router = new Router(document.querySelector('#root')!);
-
 function routePathsHandler() {
   if (router.checkPath('')) {
     router.clearRoot();
@@ -15,12 +13,8 @@ function routePathsHandler() {
   } else if (router.checkPath('sample')) {
     router.clearRoot();
 
-    const logo = new LogoComponent();
+    const logo = new DiceBackground(DiceTypes.BG_MOB_ALT);
     router.renderComponent(logo.render());
-
-    const introComponent = new IntroComponent();
-    router.renderComponent(introComponent.render());
-    introComponent.setup();
 
     const sampleComponent = new SampleComponent();
     router.renderComponent(sampleComponent.render());
