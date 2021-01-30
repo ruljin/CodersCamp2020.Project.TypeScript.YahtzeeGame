@@ -24,7 +24,6 @@
     "semi": ["error", "always"],
     "arrow-parens": ["error", "always"],
     "arrow-spacing": ["error", { "before": true, "after": true }],
-    "no-useless-constructor": ["error"],
     "no-var": ["error"],
     "prefer-const": ["warn"],
     "comma-dangle": ["error", "never"],

@@ -11,14 +11,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Rules Component.
 - Logo Component.
+- Background styles.
+- Background dice component.
+- Style reset.
 - Svg logo asset.
 - Types declaration for Typescript in `main.d.ts` file.
 - Github actions.
 
 ### Changed
 
-- ESLint config for `no-regex-spaces` rule to be disabled.
-- Jest config to transform `.svg`.
+- Disable ESLint config for `no-regex-spaces` rule.
+- Jest transforms `.svg`.
+
+### Fixed
+
+- html-validator no longer throws warnings.
+- Rename assets to english words.
 
 ## [0.2.0] - 2021-01-28
 
