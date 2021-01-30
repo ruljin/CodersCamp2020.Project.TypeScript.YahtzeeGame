@@ -15,7 +15,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- ESLint config for `no-useless-constructor` rule to be removed.
+- Background styles.
+- Background dice component.
+- Style reset.
+- Svg logo asset.
+- Types declaration for Typescript in `main.d.ts` file.
+- Github actions.
+
+### Changed
+
+- Disable ESLint config for `no-regex-spaces` rule.
+- Jest transforms `.svg`.
+
+### Fixed
+
+- html-validator no longer throws warnings.
+- Rename assets to english words.
 
 ## [0.2.0] - 2021-01-28
 
@@ -26,7 +41,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Images for ui.
 - Router class.
 - Deploy script.
-
 
 ## [0.1.0] - 2021-01-25
 
