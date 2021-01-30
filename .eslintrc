@@ -44,7 +44,6 @@
     "semi-spacing": ["error", { "before": false, "after": true }],
     "max-len": ["error", { "code": 80, "ignoreComments": true, "ignoreUrls": true, "ignoreStrings": true,
         "ignoreTemplateLiterals": true, "ignoreRegExpLiterals": true }],
-    "@typescript-eslint/no-non-null-assertion": ["off"],
-    "no-inline-style": ["off"]
+    "@typescript-eslint/no-non-null-assertion": ["off"]
   }
 }
