@@ -7,7 +7,7 @@ class ReferenceComponent implements WebComponent {
 
   render(): Element {
     const router = new Router(document.querySelector('#root')!);
-    return createElementFromString(`<a href="#/${this.link}" 
+    return createElementFromString(`<a href="#${this.link === '' ? '' : `/${this.link}`}" 
       class="button ${router.checkPath(`${this.link}`) ? 'button--disabled' : ''}">${this.name}</a>`);
   }
 
