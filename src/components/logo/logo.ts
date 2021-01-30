@@ -10,7 +10,7 @@ class LogoComponent implements WebComponent {
       this.componentElement = createElementFromString(`
         <header class="logo">
           <a href="#">
-            <img src="${Logo}" alt="logo" />
+            <img src="${Logo}" alt="logo">
           </a>
         </header>
       `);
