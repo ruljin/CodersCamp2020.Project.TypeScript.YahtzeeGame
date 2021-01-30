@@ -6,7 +6,7 @@ test('Check rendering logo', () => {
   const logo = createElementFromString(`
         <header class="logo">
           <a href="#">
-            <img src="${Logo}" alt="logo" />
+            <img src="${Logo}" alt="logo">
           </a>
         </header>
       `);
