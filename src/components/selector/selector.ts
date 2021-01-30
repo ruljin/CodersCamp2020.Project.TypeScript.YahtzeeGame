@@ -1,4 +1,4 @@
-import './selector.css';
+import './selector.scss';
 import WebComponent, { createElementFromString } from '../../common/WebComponent';
 
 class SelectorComponent implements WebComponent {
@@ -26,7 +26,7 @@ class SelectorComponent implements WebComponent {
       this.options = dropdown.options;
     }
 
-    onChange() {
+    onChange(): void {
       document.location.href = this.options[this.options.selectedIndex].value;
     }
 
