@@ -10,10 +10,10 @@
   padding: 0.6rem 1.6rem;
   text-align: center;
   width: auto;
-}
-
-.label--alternative {
-  margin: 0;
-  padding-left: 0.7rem;
-  padding-right: 0.7rem;
+  
+  &--alternative {
+    margin: 0;
+    padding-left: 0.7rem;
+    padding-right: 0.7rem;
+  }
 }

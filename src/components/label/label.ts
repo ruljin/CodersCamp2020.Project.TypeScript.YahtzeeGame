@@ -2,11 +2,8 @@ import './label.scss';
 import WebComponent, { createElementFromString } from '../../common/WebComponent';
 
 class LabelComponent implements WebComponent {
-  private text: string;
 
-  constructor(text: string) {
-    this.text = text;
-  }
+  constructor(private text: string) {}
 
   render(): Element {
     return createElementFromString(`<div class="label">${this.text}</div>`);
