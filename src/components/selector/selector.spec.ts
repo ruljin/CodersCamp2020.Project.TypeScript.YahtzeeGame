@@ -4,8 +4,8 @@ import { createElementFromString } from '../../common/WebComponent';
 test('component rendering test', () => {
   const dropDown: HTMLSelectElement = document.createElement('select');
   const selector = createElementFromString(
-    `<div class ="selector"> 
-          <select>
+    `<div class="selector"> 
+          <select class="sel">
             <option selected="selected" disabled hidden>Select oponent: </option>
             <option value="0">computer/easy</option>
             <option value="1">computer/medium</option>
