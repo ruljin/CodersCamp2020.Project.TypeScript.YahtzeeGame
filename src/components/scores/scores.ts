@@ -1,12 +1,22 @@
 import './scores.scss';
 import WebComponent, { createElementFromString } from '../../common/WebComponent';
+import { createTracing } from 'trace_events';
 
+interface Scores {
+  nickname: string,
+  points: number
+}
 
 class ScoresComponent implements WebComponent {
+  scores: Scores[]
+  constructor() {
+    this.scores = JSON.parse(localStorage.getItem('') || '[]');
+  }
+
+
   render(): Element {
     return createElementFromString(
-      `<section>
-        <div class="container">
+      `<section class="container">
         <h1 class="scores">Best Yahtzee players</h1>
         <table class="table">
             <thead>
@@ -16,32 +26,60 @@ class ScoresComponent implements WebComponent {
             <th scope="col">points</th>
             </tr>
             </thead>
-            <tbody>
-            <tr>
-                <td>1st</td>
-                <td>Ania</td>
-                <td>254</td>
-            </tr>
-            <tr>
-            <td>2nd</td>
-            <td>Bartek</td>
-            <td>196</td>
-            </tr>
-            <tr>
-            <td>3rd</td>
-            <td>Ola</td>
-            <td>184</td>
-            </tr>
+            <tbody id="tableBody" class="table__body">
             </tbody>
         </table>
-        </div>
-    </section>`
+      </section>`
     );
   }
 
   setup(): void {
-    return;
+    console.log(this.scores === []);
+    const tableBody = document.querySelector('#tableBody')!;
+    if (this.scores.length == 0) {
+      tableBody.innerHTML = this.tableEmpty();
+    } else {
+      this.scores = this.sortRows(this.scores);
+      for (let i=0; i < this.scores.length; i++){
+        tableBody.innerHTML +=
+      this.createTR(i+1, this.scores[i].nickname, this.scores[i].points);
+      }
+    }
+    console.log(this.scores);
   }
+
+
+private createTR = (place: number, nickname: string, points: number):string => {
+  return `
+      <tr class="table__row">
+        <td class="table__data">${place}</td>
+        <td class="table__data">${nickname}</td>
+        <td class="table__data">${points}</td>
+      </tr>
+    `;
+}
+private tableEmpty = () => {
+  return `
+      <tr class="table__row">
+        <td class="table__data table__data--wide">
+          no scores
+        </td>
+      </tr>
+    `;
+}
+
+private sortRows(scores: Scores[]) {
+  for (let i=0; i<scores.length; i++) {
+    for (let j=0; j<scores.length-(i+1); j++) {
+      if (scores[j].points < scores[j+1].points) {
+        const a = scores[j];
+        scores[j] = scores[j+1];
+        scores[j+1] = a;
+      }
+    }
+  }
+  return scores;
+}
 }
 
 export default ScoresComponent;

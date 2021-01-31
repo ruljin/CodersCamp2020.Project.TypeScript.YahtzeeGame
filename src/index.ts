@@ -8,7 +8,7 @@ import ScoresComponent from './components/scores/scores';
 const router = new Router(document.querySelector('#root')!);
 
 function routePathsHandler() {
-  if (router.checkPath('')) {
+    if (router.checkPath('')) {
     router.clearRoot();
 
     router.renderComponent(createElementFromString('<a href="#/sample">Go to sample component</a>'));
@@ -22,13 +22,13 @@ function routePathsHandler() {
     router.renderComponent(scoresComponent.render());
     scoresComponent.setup();
 
-    const sampleComponent = new SampleComponent();
+    /*const sampleComponent = new SampleComponent();
     router.renderComponent(sampleComponent.render());
-    sampleComponent.setup();
+    sampleComponent.setup();*/
 
-    router.renderComponent(createElementFromString('<a href="#">Go back</a>'));
+    //router.renderComponent(createElementFromString('<a href="#">Go back</a>'));
   }
-}
 
-routePathsHandler();
-router.addHashChangeListener(routePathsHandler);
+
+  routePathsHandler();
+  router.addHashChangeListener(routePathsHandler)}
