@@ -5,6 +5,7 @@
   "rules": {
     "element-name": "off",
     "no-dup-id": "off",
-    "no-inline-style": "off"
+    "no-inline-style": "off",
+    "parser-error": "off"
   }
 }

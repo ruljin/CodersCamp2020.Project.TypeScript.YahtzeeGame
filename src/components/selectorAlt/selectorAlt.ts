@@ -16,7 +16,7 @@ class SelectorComponent implements WebComponent {
 
   setup(): void {
     const arr = this.list;
-    for (let i =0; i<= arr.length - 1; i++) {
+    for (let i = 0; i <= arr.length - 1; i++) {
       const option = document.createElement('option'),
         txt = document.createTextNode(arr[i]);
       option.appendChild(txt);
