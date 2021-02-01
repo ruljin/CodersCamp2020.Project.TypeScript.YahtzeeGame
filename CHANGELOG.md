@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Label Component.
 - Intro Component.
 - Authors Component.
+- Selector Component.
 - Background styles.
 - Background dice component.
 - Style reset.
