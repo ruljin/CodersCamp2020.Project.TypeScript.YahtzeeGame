@@ -7,7 +7,6 @@ test('Test selector rendering', () => {
 
   expect(renderSelector.render()).toStrictEqual(createElementFromString(`
   <select class="select" style="width: 3rem;">
-    <option value="one">one</option>
   </select>`));
 });
 
@@ -15,5 +14,5 @@ test('Test adding list positions', () => {
   const arr = ['one'];
   const renderSelector = new SelectorComponent(arr, 3);
 
-  expect(renderSelector.toBeInstanceOf(SelectorComponent));
+  expect(renderSelector).toBeInstanceOf(SelectorComponent);
 });
