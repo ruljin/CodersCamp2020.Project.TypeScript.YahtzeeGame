@@ -9,7 +9,6 @@ class SelectorComponent implements WebComponent {
   render(): Element {
     this.selector = createElementFromString(`
        <select class="select">
-        <option class="opt" value="default"></option>
        </select>`) as HTMLElement;
     this.selector.style.width = `${this.width}rem`;
     return this.selector as Element;
