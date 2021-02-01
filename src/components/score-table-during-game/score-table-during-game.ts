@@ -2,7 +2,7 @@ import './score-table-during-game.scss';
 import WebComponent, { createElementFromString } from '../../common/WebComponent';
 
 class ScoreTableDuringGameComponent implements WebComponent {
-    playersNames: string[];
+    private playersNames: string[];
 
     constructor(playersNames: string[]) {
       this.playersNames = playersNames;
@@ -11,8 +11,7 @@ class ScoreTableDuringGameComponent implements WebComponent {
     render(): Element {
       let container = '<div class="score-table">';
 
-      const rowNames = `
-        <div id="scoreTableNames" class="score-table__names">
+      const rowNames = `<div id="scoreTableNames" class="score-table__names">
             <div class="score-table__names-item score-table__names-item--empty"></div>
             <div class="score-table__names-item"><p id="ones">ones</p></div>
             <div class="score-table__names-item"><p id="twos">twos</p></div>
@@ -31,18 +30,14 @@ class ScoreTableDuringGameComponent implements WebComponent {
             <div class="score-table__names-item"><p id="chance">chance</p></div>
             <div class="score-table__names-item score-table__names-item--blue"><p id="yahtzeeBonus">yahtzee bonus</p></div>
             <div class="score-table__names-item score-table__names-item--blue"><p id="total">total</p></div>
-        </div>
-       `;
+        </div>`;
 
-      container+= rowNames;
+      container += rowNames;
 
-      let playerColumnsContainer = `
-        <div class="score-table__players-container">
-      `;
+      let playerColumnsContainer = '<div class="score-table__players-container">';
 
       for (let i = 0; i < this.playersNames.length; i++) {
-        const playerColumn = `
-          <div class="score-table__player">
+        const playerColumn = `<div class="score-table__player">
             <div class="score-table__player-name ${i == this.playersNames.length-1 ? 'border-right-none' : ''}"><div class="rotate">${this.playersNames[i]}</div></div>
               <div class="score-table__player-field ${i == this.playersNames.length-1 ? 'border-right-none' : ''}"></div>
               <div class="score-table__player-field ${i == this.playersNames.length-1 ? 'border-right-none' : ''}"></div>
@@ -61,13 +56,12 @@ class ScoreTableDuringGameComponent implements WebComponent {
               <div class="score-table__player-field ${i == this.playersNames.length-1 ? 'border-right-none' : ''}"></div>
               <div class="score-table__player-field score-table__player-field--blue ${i == this.playersNames.length-1 ? 'border-right-none' : ''}"></div>
               <div class="score-table__player-field score-table__player-field--blue ${i == this.playersNames.length-1 ? 'border-right-none' : ''}"></div>
-            </div>
-            `;
+            </div>`;
         playerColumnsContainer+=playerColumn;
       }
 
-      playerColumnsContainer+='</div>';
-      container = container + playerColumnsContainer + '</div>';
+      playerColumnsContainer += '</div>';
+      container += playerColumnsContainer + '</div>';
 
       return createElementFromString(container);
     }
@@ -77,23 +71,24 @@ class ScoreTableDuringGameComponent implements WebComponent {
       const names = nameList.querySelectorAll('.score-table__names-item:not(.score-table__names-item--empty) p')!;
       const namesField = nameList.querySelectorAll('.score-table__names-item:not(.score-table__names-item--empty)')!;
 
-      names.forEach(name => {
+      names.forEach((name) => {
         name.addEventListener('click', this.someFunction.bind(null, name));
       });
 
-      namesField.forEach(field => {
+      namesField.forEach((field) => {
         field.addEventListener('click', this.anotherFunction.bind(null, field));
-      })
+      });
     }
 
-    private someFunction(name: Element): void {
-      alert(`name ${name.innerHTML}`);
+    public someFunction(name: Element): string {
+      return name.innerHTML;
     }
 
-    private anotherFunction(field: Element, e: Event): void {
+    public anotherFunction(field: Element, e: Event): string {
+      if (!e.target) return '';
       const target = e.target as HTMLElement;
-      if (!target.classList.contains('score-table__names-item')) return;
-      alert(`field ${field}`);
+      if (!target.classList.contains('score-table__names-item')) return '';
+      return field.innerHTML;
     }
 }
 

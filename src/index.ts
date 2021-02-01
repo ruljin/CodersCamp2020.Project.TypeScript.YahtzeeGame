@@ -4,7 +4,7 @@ import ScoreTableDuringGameComponent from './components/score-table-during-game/
 
 const router = new Router(document.querySelector('#root')!);
 function routePathsHandler() {
-  const scoreTableDuringGame = new ScoreTableDuringGameComponent(['Player 1', 'Player 2', 'Player 3', 'Player 4']);
+  const scoreTableDuringGame = new ScoreTableDuringGameComponent(['Player 1', 'Player 2']);
   router.renderComponent(scoreTableDuringGame.render());
   scoreTableDuringGame.setup();
   // if (router.checkPath('')) {
