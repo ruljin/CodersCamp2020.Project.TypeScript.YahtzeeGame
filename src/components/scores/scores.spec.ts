@@ -16,8 +16,7 @@ document.body.innerHTML = `<section class="container">
 </section>`;
 
 test('Check rendering scores table', () => {
-  const scores = createElementFromString(
-    `<section class="container">
+  const scores = createElementFromString(`<section class="container">
       <h1 class="scores">Best Yahtzee players</h1>
       <table class="table">
         <thead>
@@ -41,8 +40,7 @@ test('putting rows to the table', () => {
   const scoresComponent = new ScoresComponent();
   scoresComponent.setup();
   scoresComponent.createTR(1, 'test', 200);
-  expect(tableBody.innerHTML).toStrictEqual(`
-    <tr class="table__row">
+  expect(tableBody.innerHTML).toStrictEqual(`<tr class="table__row">
       <td class="table__data">1</td>
       <td class="table__data">test</td>
       <td class="table__data">200</td>
@@ -65,12 +63,11 @@ test('putting rows to the table when no scores', () => {
 
 test('check creating row with scores', () => {
   const scoresComponent = new ScoresComponent();
-  expect(scoresComponent.createTR(1, 'test', 200)).toStrictEqual(`
-      <tr class="table__row">
-        <td class="table__data">1</td>
-        <td class="table__data">test</td>
-        <td class="table__data">200</td>
-      </tr>`
+  expect(scoresComponent.createTR(1, 'test', 200)).toStrictEqual(`<tr class="table__row">
+      <td class="table__data">1</td>
+      <td class="table__data">test</td>
+      <td class="table__data">200</td>
+    </tr>`
   );
 });
 
