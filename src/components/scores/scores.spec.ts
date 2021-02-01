@@ -38,9 +38,10 @@ test('Check rendering scores table', () => {
 test('putting rows to the table', () => {
   const tableBody = document.querySelector('#tableBody')!;
   const scoresComponent = new ScoresComponent();
+  scoresComponent.scores = [{nickname: 'test', points: 200}];
   scoresComponent.setup();
-  scoresComponent.createTR(1, 'test', 200);
-  expect(tableBody.innerHTML).toStrictEqual(`<tr class="table__row">
+  expect(tableBody.innerHTML).toMatch(`
+    <tr class="table__row">
       <td class="table__data">1</td>
       <td class="table__data">test</td>
       <td class="table__data">200</td>
@@ -51,8 +52,9 @@ test('putting rows to the table', () => {
 test('putting rows to the table when no scores', () => {
   const tableBody = document.querySelector('#tableBody')!;
   const scoresComponent = new ScoresComponent();
+  scoresComponent.scores = [];
   scoresComponent.setup();
-  expect(tableBody.innerHTML).toStrictEqual(`
+  expect(tableBody.innerHTML).toMatch(`
     <tr class="table__row">
       <td class="table__data table__data--wide">
         no scores
@@ -63,7 +65,7 @@ test('putting rows to the table when no scores', () => {
 
 test('check creating row with scores', () => {
   const scoresComponent = new ScoresComponent();
-  expect(scoresComponent.createTR(1, 'test', 200)).toStrictEqual(`<tr class="table__row">
+  expect(scoresComponent.createTR(1, 'test', 200)).toMatch(`<tr class="table__row">
       <td class="table__data">1</td>
       <td class="table__data">test</td>
       <td class="table__data">200</td>

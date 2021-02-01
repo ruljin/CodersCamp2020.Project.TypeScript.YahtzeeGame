@@ -46,7 +46,8 @@ class ScoresComponent implements WebComponent {
   }
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   public createTR = (place: number, nickname: string, points: number) => {
-    return `<tr class="table__row">
+    return `
+    <tr class="table__row">
       <td class="table__data">${place}</td>
       <td class="table__data">${nickname}</td>
       <td class="table__data">${points}</td>
