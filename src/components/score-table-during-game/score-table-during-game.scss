@@ -1,28 +1,27 @@
 $cell-width: 30px;
 
 .score-table {
-  background: repeating-linear-gradient(to right , #fff 0, #fff $cell-width - 1px, rgba(0, 0, 255, 0.2) $cell-width);
+  background: repeating-linear-gradient(to right , #fff 0, #fff $cell-width - 0.5px, rgba(100, 100, 245, 0.05) $cell-width);
   display: flex;
   width: fit-content;
-  
-  * {
-    box-sizing: border-box;
-  }
 
   &__names {
     border-right: 3px solid #00f;
+    cursor: pointer;
     width: 3*$cell-width;
   }
 
   &__names-item {
     align-items: center;
     border-bottom: 1px solid #00f;
+    cursor: pointer;
     display: flex;
     font-family: sans-serif;
     font-size: 0.75rem;
     font-weight: 700;
     height: 30px;
     padding: 5px 0 5px 2px;
+    position: relative;
   }
 
   &__names-item:last-child {
@@ -31,11 +30,10 @@ $cell-width: 30px;
 
   &__names-item--blue {
     background-color: #94d4cc;
-    position: relative;
   }
 
-  &__names-item--blue::before,
-  &__names-item--blue::after {
+  &__names-item::before,
+  &__names-item::after {
     background-color: rgba(0, 0, 255, 0.2);
     content: '';
     height: 100%;
@@ -46,12 +44,13 @@ $cell-width: 30px;
     width: 0.5px;
   }
 
-  &__names-item--blue::after {
+  &__names-item::after {
     left: 2*$cell-width - 1px;
   }
 
   &__names-item--empty {
     border-bottom: 3px solid #00f;
+    cursor: default;
     height: 60px;
     padding: 0;
     position: relative;
@@ -67,6 +66,17 @@ $cell-width: 30px;
     top: 50%;
     transform: translate(0, -50%);
     width: 100%;
+  }
+
+  &__names-item--empty::before {
+    background-color: rgba(0, 0, 255, 0.1);
+    content: '';
+    height: 100%;
+    left: 33%;
+    position: absolute;
+    top: 0;
+    transform: translate(-50%, 0);
+    width: 0.5px;
   }
 
   &__players-container {
@@ -119,7 +129,7 @@ $cell-width: 30px;
   }
 
   &__player-field--blue::after {
-    background-color: rgba(0, 0, 255, 0.2);
+    background-color: rgba(0, 0, 255, 0.1);
     content: '';
     height: 100%;
     left: 50%;
