@@ -2,17 +2,12 @@ import SelectorComponent from './selectorAlt';
 import { createElementFromString } from '../../common/WebComponent';
 
 test('Test selector rendering', () => {
-  const arr = ['one'];
+  const arr = ['one', 'two'];
   const renderSelector = new SelectorComponent(arr, 3);
 
   expect(renderSelector.render()).toStrictEqual(createElementFromString(`
   <select class="select" style="width: 3rem;">
+    <option value="one">one</option>
+    <option value="two">two</option>
   </select>`));
-});
-
-test('Test adding list positions', () => {
-  const arr = ['one'];
-  const renderSelector = new SelectorComponent(arr, 3);
-
-  expect(renderSelector).toBeInstanceOf(SelectorComponent);
 });
