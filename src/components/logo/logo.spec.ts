@@ -5,7 +5,7 @@ import * as Logo from '../../assets/logo.svg';
 test('Check rendering logo', () => {
   const logo = createElementFromString(`
         <header class="logo">
-          <a href="#">
+          <a href="#/intro">
             <img src="${Logo}" alt="logo">
           </a>
         </header>

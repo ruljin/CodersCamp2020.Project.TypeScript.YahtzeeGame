@@ -4,7 +4,7 @@ import { createElementFromString } from '../../common/WebComponent';
 
 test('Check rendering authors text', () => {
   const intro = createElementFromString(`
-        <section class="container">
+        <section class="authors">
         <a class="link" href="https://github.com/kami3la" target="_blank">Kamila Grusza</a><br>
         <a class="link" href="https://github.com/KonradMierzejewski" target="_blank">Konrad Mierzejewski</a><br>
         <a class="link" href="https://github.com/brzeczkowskaw" target="_blank">Weronika Brzęczkowska-Kuzianik</a><br>
