@@ -1,4 +1,4 @@
-import SelectorComponent from './selectorAlt';
+import SelectorComponent from './selector';
 import { createElementFromString } from '../../common/WebComponent';
 
 test('Test selector rendering', () => {
