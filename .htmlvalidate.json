@@ -5,6 +5,7 @@
   "rules": {
     "element-name": "off",
     "no-dup-id": "off",
-    "no-raw-characters": "off"
+    "no-raw-characters": "off",
+    "no-inline-style": "off"
   }
 }
