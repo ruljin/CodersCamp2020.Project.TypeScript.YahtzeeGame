@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+Nothing new yet!
+
+## [1.0.0] - 2021-02-03
+
 ### Added
 
 - Rules Component.
@@ -64,6 +68,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Sass style loaders with autoprefixer for Webpack.
 - Stylelint for Sass.
 
-[unreleased]: https://github.com/ruljin/CodersCamp2020.Project.TypeScript.YahtzeeGame/compare/0.2.0...HEAD
+[unreleased]: https://github.com/ruljin/CodersCamp2020.Project.TypeScript.YahtzeeGame/compare/1.0.0...HEAD
+[1.0.0]: https://github.com/ruljin/CodersCamp2020.Project.TypeScript.YahtzeeGame/compare/0.2.0...1.0.0
 [0.2.0]: https://github.com/ruljin/CodersCamp2020.Project.TypeScript.YahtzeeGame/compare/0.1.0...0.2.0
 [0.1.0]: https://github.com/ruljin/CodersCamp2020.Project.TypeScript.YahtzeeGame/releases/tag/0.1.0
