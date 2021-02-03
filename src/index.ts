@@ -3,7 +3,7 @@ import SampleComponent from './components/sample/sample';
 import Router from './common/Router';
 import { createElementFromString } from './common/WebComponent';
 import DiceBackground, { DiceTypes } from './components/dice-background/dice-background';
-import SelectorComponent from './components/selectorAlt/selectorAlt';
+import SelectorComponent from './components/selector/selector';
 
 const list: string[] = ['one', 'two', 'three'];
 
