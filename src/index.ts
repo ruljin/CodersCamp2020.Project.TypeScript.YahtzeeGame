@@ -7,6 +7,7 @@ import IntroComponent from './components/intro/intro';
 import ReferenceComponent from './components/reference/reference';
 import AuthorsComponent from './components/authors/authors';
 import RulesComponent from './components/rules/rules';
+const list: string[] = ['one', 'two', 'three'];
 
 const router = new Router(document.querySelector('#root')!);
 function routePathsHandler() {
