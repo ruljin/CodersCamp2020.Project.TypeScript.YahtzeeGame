@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Label Component.
 - Intro Component.
 - Authors Component.
+- Selector Component.
 - Background styles.
 - Background dice component.
 - Style reset.
@@ -27,13 +28,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Disable ESLint rule for `no-regex-spaces`.
-- Disable html-validate rule for `no-inline-style`.
 - Jest transforms `.svg`.
 
 ### Fixed
 
-- html-validator no longer throws warnings.
 - Rename assets to english words.
+
+### Removed
+
+- HTML Validator package (html-validate).
 
 ## [0.2.0] - 2021-01-28
 
