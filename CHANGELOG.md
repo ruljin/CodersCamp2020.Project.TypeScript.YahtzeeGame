@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Rules Component.
 - Logo Component.
+- Score table Component.
 - Scores Component.
 - Reference Component.
 - Label Component.
