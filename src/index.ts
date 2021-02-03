@@ -4,6 +4,9 @@ import Router from './common/Router';
 import { createElementFromString } from './common/WebComponent';
 import ScoresComponent from './components/scores/scores';
 import DiceBackground, { DiceTypes } from './components/dice-background/dice-background';
+import SelectorComponent from './components/selector/selector';
+
+const list: string[] = ['one', 'two', 'three'];
 
 const router = new Router(document.querySelector('#root')!);
 function routePathsHandler() {
@@ -23,6 +26,10 @@ function routePathsHandler() {
     const sampleComponent = new SampleComponent();
     router.renderComponent(sampleComponent.render());
     sampleComponent.setup();
+
+    const selectorComponent = new SelectorComponent(list, 5);
+    router.renderComponent(selectorComponent.render());
+    selectorComponent.setup();
 
     router.renderComponent(createElementFromString('<a href="#">Go back</a>'));
   }
