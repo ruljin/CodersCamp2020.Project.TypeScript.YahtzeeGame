@@ -19,5 +19,5 @@ test('Check rendering labels with class label--alternative', () => {
   const checkLabelPlayers = new LabelComponent('Player 1', 8, false);
   expect(checkLabelPlayers.render())
     .toStrictEqual(createElementFromString(`
-    <input class="label label--alternative" placeholder="Player 1" style="width: 8rem;"></input>`));
+    <input type="text" class="label label--alternative" placeholder="Player 1" style="width: 8rem;">`));
 });

@@ -10,7 +10,7 @@ class LabelComponent implements WebComponent {
   render(): Element {
     this.label = createElementFromString(`${this.original ?
       `<div class="label">${this.text}</div>` :
-      `<input class="label label--alternative" placeholder="${this.text}"></input>`}`) as HTMLElement;
+      `<input type="text" class="label label--alternative" placeholder="${this.text}">`}`) as HTMLElement;
     this.label.style.width = `${this.width}rem`;
     return this.label as Element;
   }

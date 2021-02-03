@@ -1,13 +1,9 @@
 import './style.scss';
-import SampleComponent from './components/sample/sample';
 import Router from './common/Router';
 import { createElementFromString } from './common/WebComponent';
-import DiceBackground, { DiceTypes } from './components/dice-background/dice-background';
-import SelectorComponent from './components/selector/selector';
 import AddElement from './components/addRemove/addRemove';
-import RemoveElement from './components/addRemove/addRemove';
+import LogoComponent from './components/logo/logo';
 
-const list: string[] = ['one', 'two', 'three'];
 
 const router = new Router(document.querySelector('#root')!);
 function routePathsHandler() {
@@ -18,22 +14,17 @@ function routePathsHandler() {
   } else if (router.checkPath('sample')) {
     router.clearRoot();
 
-    const logo = new DiceBackground(DiceTypes.BG_MOB_ALT);
+    const logo = new LogoComponent();
     router.renderComponent(logo.render());
 
-    const sampleComponent = new SampleComponent();
-    router.renderComponent(sampleComponent.render());
-    sampleComponent.setup();
+    const addremove = new AddElement('+', '-');
+    router.renderComponent(addremove.render());
 
-    const selectorComponent = new SelectorComponent(list, 5);
-    router.renderComponent(selectorComponent.render());
-    selectorComponent.setup();
+    const list: string[] = ['computer/easy', 'computer/medium', 'computer/hard', 'player'];
+    router.renderComponent(addremove.layout('player 1', list, 18));
 
-    const add = new AddElement();
-    router.renderComponent(add.render());
-
-    const remove = new RemoveElement();
-    router.renderComponent(remove.render());
+    router.renderComponent(addremove.adding(list, 18));
+    router.renderComponent(addremove.removing());
 
     router.renderComponent(createElementFromString('<a href="#">Go back</a>'));
   }
