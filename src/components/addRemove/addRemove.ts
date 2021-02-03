@@ -1,20 +1,13 @@
 import './addRemove.scss';
 import WebComponent, { createElementFromString } from '../../common/WebComponent';
 
-class AddSubtract implements WebComponent {
-    private addSub: HTMLElement = document.createElement('null');
-
-    constructor(private check: boolean) { }
+class AddElement implements WebComponent {
+    private add: HTMLElement = document.createElement('null');
 
     render(): Element {
-      if (this.check) {
-        this.addSub = createElementFromString(`
+      this.add = createElementFromString(`
             <button class="add-sub">+</button>`) as HTMLElement;
-      } else {
-        this.addSub = createElementFromString(`
-            <button class="add-sub">-</button>`) as HTMLElement;
-      }
-      return this.addSub as Element;
+      return this.add as Element;
 
     }
     setup(): void {
@@ -22,4 +15,19 @@ class AddSubtract implements WebComponent {
     }
 }
 
-export default AddSubtract;
+class RemoveElement implements WebComponent {
+  private remove: HTMLElement = document.createElement('null');
+
+  render(): Element {
+    this.remove = createElementFromString(`
+          <button class="add-sub">-</button>`) as HTMLElement;
+    return this.remove as Element;
+
+  }
+  setup(): void {
+    return;
+  }
+}
+
+export default AddElement;
+export { RemoveElement };

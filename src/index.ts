@@ -4,7 +4,8 @@ import Router from './common/Router';
 import { createElementFromString } from './common/WebComponent';
 import DiceBackground, { DiceTypes } from './components/dice-background/dice-background';
 import SelectorComponent from './components/selector/selector';
-import AddSubtract from './components/addRemove/addRemove';
+import AddElement from './components/addRemove/addRemove';
+import RemoveElement from './components/addRemove/addRemove';
 
 const list: string[] = ['one', 'two', 'three'];
 
@@ -28,8 +29,11 @@ function routePathsHandler() {
     router.renderComponent(selectorComponent.render());
     selectorComponent.setup();
 
-    const addSub = new AddSubtract(true);
-    router.renderComponent(addSub.render());
+    const add = new AddElement();
+    router.renderComponent(add.render());
+
+    const remove = new RemoveElement();
+    router.renderComponent(remove.render());
 
     router.renderComponent(createElementFromString('<a href="#">Go back</a>'));
   }
