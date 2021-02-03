@@ -7,15 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+Nothing new yet!
+
+## [1.0.0] - 2021-02-03
+
 ### Added
 
 - Rules Component.
 - Logo Component.
+- Score table Component.
 - Scores Component.
 - Reference Component.
 - Label Component.
 - Intro Component.
 - Authors Component.
+- Selector Component.
 - Background styles.
 - Background dice component.
 - Style reset.
@@ -27,13 +33,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Disable ESLint rule for `no-regex-spaces`.
-- Disable html-validate rule for `no-inline-style`.
 - Jest transforms `.svg`.
 
 ### Fixed
 
-- html-validator no longer throws warnings.
 - Rename assets to english words.
+
+### Removed
+
+- HTML Validator package (html-validate).
 
 ## [0.2.0] - 2021-01-28
 
@@ -61,6 +69,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Sass style loaders with autoprefixer for Webpack.
 - Stylelint for Sass.
 
-[unreleased]: https://github.com/ruljin/CodersCamp2020.Project.TypeScript.YahtzeeGame/compare/0.2.0...HEAD
+[unreleased]: https://github.com/ruljin/CodersCamp2020.Project.TypeScript.YahtzeeGame/compare/1.0.0...HEAD
+[1.0.0]: https://github.com/ruljin/CodersCamp2020.Project.TypeScript.YahtzeeGame/compare/0.2.0...1.0.0
 [0.2.0]: https://github.com/ruljin/CodersCamp2020.Project.TypeScript.YahtzeeGame/compare/0.1.0...0.2.0
 [0.1.0]: https://github.com/ruljin/CodersCamp2020.Project.TypeScript.YahtzeeGame/releases/tag/0.1.0
