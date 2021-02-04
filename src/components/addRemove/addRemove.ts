@@ -27,11 +27,12 @@ class AddElement implements WebComponent {
     return section;
   }
 
-  adding(list: string[], width: number): HTMLElement {
+  adding(name: string, list: string[], width: number): HTMLElement {
     const section = document.querySelector('section')!;
     const add = document.querySelector('.button--add') as HTMLElement;
     add.addEventListener(('click'), () => {
-      if (section.children.length < 4) {
+      if (section.children.length < 8) {
+        section.appendChild(new LabelComponent(name, width, false).render());
         section.appendChild(new SelectorComponent(list, width).render());
       }
     });
@@ -42,7 +43,7 @@ class AddElement implements WebComponent {
     const section = document.querySelector('section')!;
     const remove = document.querySelector('.button--remove') as HTMLElement;
     remove.addEventListener(('click'), () => {
-      if (section.children.length > 1) {
+      if (section.children.length > 2) {
         const last = section.lastElementChild!;
         section.removeChild(last);
       }

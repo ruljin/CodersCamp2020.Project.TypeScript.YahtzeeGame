@@ -23,7 +23,7 @@ function routePathsHandler() {
     const list: string[] = ['computer/easy', 'computer/medium', 'computer/hard', 'player'];
     router.renderComponent(addremove.layout('player 1', list, 18));
 
-    router.renderComponent(addremove.adding(list, 18));
+    router.renderComponent(addremove.adding('player', list, 18));
     router.renderComponent(addremove.removing());
 
     router.renderComponent(createElementFromString('<a href="#">Go back</a>'));
