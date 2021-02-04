@@ -4,7 +4,7 @@ import { createElementFromString } from '../../common/WebComponent';
 
 test('Check rendering intro text', () => {
   const intro = createElementFromString(`
-      <section class="container">
+      <section class="intro">
         Yahtzee is a dice game based on Poker.<br>
         You can choose to play against computer or with your friends.<br>
         Check game rules and set your settings before the game.<br>

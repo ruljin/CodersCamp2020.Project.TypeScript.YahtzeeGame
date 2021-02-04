@@ -7,7 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-Nothing new yet!
+### Added 
+
+- Screens arrangement.
 
 ## [1.0.0] - 2021-02-03
 
@@ -28,6 +30,7 @@ Nothing new yet!
 - Svg logo asset.
 - Types declaration for Typescript in `main.d.ts` file.
 - Github actions.
+
 
 ### Changed
 
