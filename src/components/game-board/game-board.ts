@@ -5,8 +5,10 @@ import Label from '../label/label';
 
 class GameBoardComponent implements WebComponent {
   private boardEl: Element;
+  private diceCanvas: Element;
   private labelPlayer: Element;
   private boardDisabledCover: Element;
+  private heldDiceNumbers: number[] = [];
 
   constructor(buttonRollAgainEvent: EventListener, buttonFinishRoundEvent: EventListener) {
     const boardEl = document.createElement('div');
@@ -17,9 +19,9 @@ class GameBoardComponent implements WebComponent {
     this.labelPlayer.classList.add('board__player');
     boardEl.appendChild(this.labelPlayer);
 
-    const diceCanvas = document.createElement('canvas');
-    diceCanvas.classList.add('board__dice-canvas');
-    boardEl.appendChild(diceCanvas);
+    this.diceCanvas = document.createElement('canvas');
+    this.diceCanvas.classList.add('board__dice-canvas');
+    boardEl.appendChild(this.diceCanvas);
 
     const buttonWrapper = document.createElement('div');
     buttonWrapper.classList.add('board__buttons');
@@ -48,8 +50,29 @@ class GameBoardComponent implements WebComponent {
     this.boardEl = boardEl;
   }
 
-  reroll(): number[] {
-    throw new Error('Method not implemented.');
+  roll(): number[] {
+    const randomNumbers: number[] = [];
+
+    for (let i = 0; i < (5 - this.heldDiceNumbers.length); i++) {
+      randomNumbers.push(Math.floor(Math.random() * 5) + 1);
+    }
+
+    randomNumbers.forEach((number) => this.drawNewDice(number));
+    this.heldDiceNumbers.forEach((number) => this.drawHeldDice(number));
+
+    return randomNumbers;
+  }
+
+  private drawNewDice(number: number): void {
+    return;
+  }
+
+  private drawHeldDice(number: number): void {
+    return;
+  }
+
+  hold(heldDiceNumbers: number[]): void {
+    this.heldDiceNumbers = heldDiceNumbers;
   }
 
   pause(): void {
