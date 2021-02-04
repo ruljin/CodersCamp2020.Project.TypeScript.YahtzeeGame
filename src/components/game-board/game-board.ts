@@ -2,6 +2,7 @@ import './game-board.scss';
 import * as BoardImage from '../../assets/table-classic.png';
 import WebComponent from '../../common/WebComponent';
 import Label from '../label/label';
+import { fabric } from 'fabric';
 
 enum DiceStyle {
   NEW,
@@ -10,11 +11,11 @@ enum DiceStyle {
 
 class GameBoardComponent implements WebComponent {
   private boardEl: Element;
-  private context: CanvasRenderingContext2D;
   private diceCanvas: HTMLCanvasElement;
   private labelPlayer: Element;
   private boardDisabledCover: Element;
   private heldDiceNumbers: number[] = [];
+  private canvas: fabric.Canvas;
 
   constructor(buttonRollAgainEvent: EventListener, buttonFinishRoundEvent: EventListener) {
     const boardEl = document.createElement('div');
@@ -26,11 +27,9 @@ class GameBoardComponent implements WebComponent {
     boardEl.appendChild(this.labelPlayer);
 
     this.diceCanvas = document.createElement('canvas');
-    this.diceCanvas.classList.add('board__dice-canvas');
-    (this.diceCanvas as HTMLCanvasElement).width = (this.diceCanvas as HTMLCanvasElement).height;
-    this.context = (this.diceCanvas as HTMLCanvasElement).getContext('2d')!;
-    this.context.clearRect(0, 0, this.context.canvas.width, this.context.canvas.height);
     boardEl.appendChild(this.diceCanvas);
+    this.canvas = new fabric.Canvas(this.diceCanvas);
+    this.canvas.setDimensions({ width: 300, height: 300 });
 
     const buttonWrapper = document.createElement('div');
     buttonWrapper.classList.add('board__buttons');
@@ -63,7 +62,7 @@ class GameBoardComponent implements WebComponent {
     const randomNumbers: number[] = [];
 
     for (let i = 0; i < (5 - this.heldDiceNumbers.length); i++) {
-      randomNumbers.push(Math.floor(Math.random() * 5) + 1);
+      randomNumbers.push(Math.floor(Math.random() * 6) + 1);
     }
 
     randomNumbers.forEach((number) => this.drawDice(number, DiceStyle.NEW));
@@ -73,8 +72,8 @@ class GameBoardComponent implements WebComponent {
   }
 
   private drawDice(number: number, style: DiceStyle): void {
-    const x = Math.floor(Math.random() * 110) + 10;
-    const y = Math.floor(Math.random() * 110) + 10;
+    const x = Math.floor(Math.random() * 270);
+    const y = Math.floor(Math.random() * 270);
 
     switch (number) {
     case 1:
@@ -99,84 +98,153 @@ class GameBoardComponent implements WebComponent {
   }
 
   private draw1Dice(x: number, y: number, style: DiceStyle): void {
-    this.context.beginPath();
-    this.context.fillStyle = style === DiceStyle.NEW ? 'lightgrey' : '#B88D8D';
-    this.context.fillRect(x, y, 20, 20);
-    this.context.beginPath();
-    this.context.fillStyle = 'black';
-    this.context.arc(x + 10, y + 10, 2, 0, 2 * Math.PI);
-    this.context.fill();
+    const dice = new fabric.Rect({
+      top: x, left: y, width: 30, height: 30, fill: `${style === DiceStyle.NEW ? '#C4C4C4' : '#B88D8D'}`
+    });
+
+    const dot1 = new fabric.Circle({
+      top: x + 11, left: y + 11, radius: 4, fill: 'black'
+    });
+
+    const group = new fabric.Group([ dice, dot1 ]);
+    group.hasControls = group.hasBorders = false;
+
+    this.canvas.add(group);
   }
 
   private draw2Dice(x: number, y: number, style: DiceStyle): void {
-    this.context.beginPath();
-    this.context.fillStyle = style === DiceStyle.NEW ? 'lightgrey' : '#B88D8D';
-    this.context.fillRect(x, y, 20, 20);
-    this.context.beginPath();
-    this.context.fillStyle = 'black';
-    this.context.arc(x + 5, y + 5, 2, 0, 2 * Math.PI);
-    this.context.arc(x + 15, y + 15, 2, 0, 2 * Math.PI);
-    this.context.fill();
+    const dice = new fabric.Rect({
+      top: x, left: y, width: 30, height: 30, fill: `${style === DiceStyle.NEW ? '#C4C4C4' : '#B88D8D'}`
+    });
+
+    const dot1 = new fabric.Circle({
+      top: x + 5, left: y + 5, radius: 4, fill: 'black'
+    });
+
+    const dot2 = new fabric.Circle({
+      top: x + 17, left: y + 17, radius: 4, fill: 'black'
+    });
+
+    const group = new fabric.Group([ dice, dot1, dot2 ]);
+    group.hasControls = group.hasBorders = false;
+
+    this.canvas.add(group);
   }
 
   private draw3Dice(x: number, y: number, style: DiceStyle): void {
-    this.context.beginPath();
-    this.context.fillStyle = style === DiceStyle.NEW ? 'lightgrey' : '#B88D8D';
-    this.context.fillRect(x, y, 20, 20);
-    this.context.beginPath();
-    this.context.fillStyle = 'black';
-    this.context.arc(x + 5, y + 5, 2, 0, 2 * Math.PI);
-    this.context.arc(x + 10, y + 10, 2, 0, 2 * Math.PI);
-    this.context.arc(x + 15, y + 15, 2, 0, 2 * Math.PI);
-    this.context.fill();
+    const dice = new fabric.Rect({
+      top: x, left: y, width: 30, height: 30, fill: `${style === DiceStyle.NEW ? '#C4C4C4' : '#B88D8D'}`
+    });
+
+    const dot1 = new fabric.Circle({
+      top: x + 3, left: y + 3, radius: 4, fill: 'black'
+    });
+
+    const dot2 = new fabric.Circle({
+      top: x + 11, left: y + 11, radius: 4, fill: 'black'
+    });
+
+    const dot3 = new fabric.Circle({
+      top: x + 19, left: y + 19, radius: 4, fill: 'black'
+    });
+
+    const group = new fabric.Group([ dice, dot1, dot2, dot3 ]);
+    group.hasControls = group.hasBorders = false;
+
+    this.canvas.add(group);
   }
 
   private draw4Dice(x: number, y: number, style: DiceStyle): void {
-    this.context.beginPath();
-    this.context.fillStyle = style === DiceStyle.NEW ? 'lightgrey' : '#B88D8D';
-    this.context.fillRect(x, y, 20, 20);
-    this.context.beginPath();
-    this.context.fillStyle = 'black';
-    this.context.arc(x + 5, y + 5, 2, 0, 2 * Math.PI);
-    this.context.arc(x + 15, y + 15, 2, 0, 2 * Math.PI);
-    this.context.fill();
-    this.context.beginPath();
-    this.context.arc(x + 15, y + 5, 2, 0, 2 * Math.PI);
-    this.context.arc(x + 5, y + 15, 2, 0, 2 * Math.PI);
-    this.context.fill();
+    const dice = new fabric.Rect({
+      top: x, left: y, width: 30, height: 30, fill: `${style === DiceStyle.NEW ? '#C4C4C4' : '#B88D8D'}`
+    });
+
+    const dot1 = new fabric.Circle({
+      top: x + 3, left: y + 3, radius: 4, fill: 'black'
+    });
+
+    const dot2 = new fabric.Circle({
+      top: x + 3, left: y + 19, radius: 4, fill: 'black'
+    });
+
+    const dot3 = new fabric.Circle({
+      top: x + 19, left: y + 3, radius: 4, fill: 'black'
+    });
+
+    const dot4 = new fabric.Circle({
+      top: x + 19, left: y + 19, radius: 4, fill: 'black'
+    });
+
+    const group = new fabric.Group([ dice, dot1, dot2, dot3, dot4 ]);
+    group.hasControls = group.hasBorders = false;
+
+    this.canvas.add(group);
   }
 
   private draw5Dice(x: number, y: number, style: DiceStyle): void {
-    this.context.beginPath();
-    this.context.fillStyle = style === DiceStyle.NEW ? 'lightgrey' : '#B88D8D';
-    this.context.fillRect(x, y, 20, 20);
-    this.context.beginPath();
-    this.context.fillStyle = 'black';
-    this.context.arc(x + 5, y + 5, 2, 0, 2 * Math.PI);
-    this.context.arc(x + 10, y + 10, 2, 0, 2 * Math.PI);
-    this.context.arc(x + 15, y + 15, 2, 0, 2 * Math.PI);
-    this.context.fill();
-    this.context.beginPath();
-    this.context.arc(x + 15, y + 5, 2, 0, 2 * Math.PI);
-    this.context.arc(x + 5, y + 15, 2, 0, 2 * Math.PI);
-    this.context.fill();
+    const dice = new fabric.Rect({
+      top: x, left: y, width: 30, height: 30, fill: `${style === DiceStyle.NEW ? '#C4C4C4' : '#B88D8D'}`
+    });
+
+    const dot1 = new fabric.Circle({
+      top: x + 3, left: y + 3, radius: 4, fill: 'black'
+    });
+
+    const dot2 = new fabric.Circle({
+      top: x + 3, left: y + 19, radius: 4, fill: 'black'
+    });
+
+    const dot3 = new fabric.Circle({
+      top: x + 19, left: y + 3, radius: 4, fill: 'black'
+    });
+
+    const dot4 = new fabric.Circle({
+      top: x + 19, left: y + 19, radius: 4, fill: 'black'
+    });
+
+    const dot5 = new fabric.Circle({
+      top: x + 11, left: y + 11, radius: 4, fill: 'black'
+    });
+
+    const group = new fabric.Group([ dice, dot1, dot2, dot3, dot4, dot5 ]);
+    group.hasControls = group.hasBorders = false;
+
+    this.canvas.add(group);
   }
 
   private draw6Dice(x: number, y: number, style: DiceStyle): void {
-    this.context.beginPath();
-    this.context.fillStyle = style === DiceStyle.NEW ? 'lightgrey' : '#B88D8D';
-    this.context.fillRect(x, y, 20, 20);
-    this.context.beginPath();
-    this.context.fillStyle = 'black';
-    this.context.arc(x + 5, y + 5, 2, 0, 2 * Math.PI);
-    this.context.arc(x + 5, y + 10, 2, 0, 2 * Math.PI);
-    this.context.arc(x + 5, y + 15, 2, 0, 2 * Math.PI);
-    this.context.fill();
-    this.context.beginPath();
-    this.context.arc(x + 15, y + 5, 2, 0, 2 * Math.PI);
-    this.context.arc(x + 15, y + 10, 2, 0, 2 * Math.PI);
-    this.context.arc(x + 15, y + 15, 2, 0, 2 * Math.PI);
-    this.context.fill();
+    const dice = new fabric.Rect({
+      top: x, left: y, width: 30, height: 30, fill: `${style === DiceStyle.NEW ? '#C4C4C4' : '#B88D8D'}`
+    });
+
+    const dot1 = new fabric.Circle({
+      top: x + 2, left: y + 2, radius: 4, fill: 'black'
+    });
+
+    const dot2 = new fabric.Circle({
+      top: x + 11, left: y + 2, radius: 4, fill: 'black'
+    });
+
+    const dot3 = new fabric.Circle({
+      top: x + 20, left: y + 2, radius: 4, fill: 'black'
+    });
+
+    const dot4 = new fabric.Circle({
+      top: x + 2, left: y + 20, radius: 4, fill: 'black'
+    });
+
+    const dot5 = new fabric.Circle({
+      top: x + 11, left: y + 20, radius: 4, fill: 'black'
+    });
+
+    const dot6 = new fabric.Circle({
+      top: x + 20, left: y + 20, radius: 4, fill: 'black'
+    });
+
+    const group = new fabric.Group([ dice, dot1, dot2, dot3, dot4, dot5, dot6 ]);
+    group.hasControls = group.hasBorders = false;
+
+    this.canvas.add(group);
   }
 
   hold(heldDiceNumbers: number[]): void {
