@@ -106,8 +106,21 @@ class GameBoardComponent implements WebComponent {
       top: x + 11, left: y + 11, radius: 4, fill: 'black'
     });
 
-    const group = new fabric.Group([ dice, dot1 ]);
+    const group = new fabric.Group([dice, dot1]);
+
     group.hasControls = group.hasBorders = false;
+    group.on('mousedown', () => {
+      if (dice.fill === '#C4C4C4') {
+        this.heldDiceNumbers.push(1);
+      } else {
+        this.heldDiceNumbers.splice(this.heldDiceNumbers.indexOf(1), 1);
+      }
+
+      dice.set('fill', dice.fill === '#C4C4C4' ? '#B88D8D' : '#C4C4C4');
+
+      this.canvas.remove(group);
+      this.canvas.add(group);
+    });
 
     this.canvas.add(group);
   }
@@ -125,8 +138,21 @@ class GameBoardComponent implements WebComponent {
       top: x + 17, left: y + 17, radius: 4, fill: 'black'
     });
 
-    const group = new fabric.Group([ dice, dot1, dot2 ]);
+    const group = new fabric.Group([dice, dot1, dot2]);
+
     group.hasControls = group.hasBorders = false;
+    group.on('mousedown', () => {
+      if (dice.fill === '#C4C4C4') {
+        this.heldDiceNumbers.push(2);
+      } else {
+        this.heldDiceNumbers.splice(this.heldDiceNumbers.indexOf(2), 1);
+      }
+
+      dice.set('fill', dice.fill === '#C4C4C4' ? '#B88D8D' : '#C4C4C4');
+
+      this.canvas.remove(group);
+      this.canvas.add(group);
+    });
 
     this.canvas.add(group);
   }
@@ -149,7 +175,20 @@ class GameBoardComponent implements WebComponent {
     });
 
     const group = new fabric.Group([ dice, dot1, dot2, dot3 ]);
+
     group.hasControls = group.hasBorders = false;
+    group.on('mousedown', () => {
+      if (dice.fill === '#C4C4C4') {
+        this.heldDiceNumbers.push(3);
+      } else {
+        this.heldDiceNumbers.splice(this.heldDiceNumbers.indexOf(3), 1);
+      }
+
+      dice.set('fill', dice.fill === '#C4C4C4' ? '#B88D8D' : '#C4C4C4');
+
+      this.canvas.remove(group);
+      this.canvas.add(group);
+    });
 
     this.canvas.add(group);
   }
@@ -176,7 +215,20 @@ class GameBoardComponent implements WebComponent {
     });
 
     const group = new fabric.Group([ dice, dot1, dot2, dot3, dot4 ]);
+
     group.hasControls = group.hasBorders = false;
+    group.on('mousedown', () => {
+      if (dice.fill === '#C4C4C4') {
+        this.heldDiceNumbers.push(4);
+      } else {
+        this.heldDiceNumbers.splice(this.heldDiceNumbers.indexOf(4), 1);
+      }
+
+      dice.set('fill', dice.fill === '#C4C4C4' ? '#B88D8D' : '#C4C4C4');
+
+      this.canvas.remove(group);
+      this.canvas.add(group);
+    });
 
     this.canvas.add(group);
   }
@@ -207,7 +259,20 @@ class GameBoardComponent implements WebComponent {
     });
 
     const group = new fabric.Group([ dice, dot1, dot2, dot3, dot4, dot5 ]);
+
     group.hasControls = group.hasBorders = false;
+    group.on('mousedown', () => {
+      if (dice.fill === '#C4C4C4') {
+        this.heldDiceNumbers.push(5);
+      } else {
+        this.heldDiceNumbers.splice(this.heldDiceNumbers.indexOf(5), 1);
+      }
+
+      dice.set('fill', dice.fill === '#C4C4C4' ? '#B88D8D' : '#C4C4C4');
+
+      this.canvas.remove(group);
+      this.canvas.add(group);
+    });
 
     this.canvas.add(group);
   }
@@ -242,7 +307,20 @@ class GameBoardComponent implements WebComponent {
     });
 
     const group = new fabric.Group([ dice, dot1, dot2, dot3, dot4, dot5, dot6 ]);
+
     group.hasControls = group.hasBorders = false;
+    group.on('mousedown', () => {
+      if (dice.fill === '#C4C4C4') {
+        this.heldDiceNumbers.push(6);
+      } else {
+        this.heldDiceNumbers.splice(this.heldDiceNumbers.indexOf(6), 1);
+      }
+
+      dice.set('fill', dice.fill === '#C4C4C4' ? '#B88D8D' : '#C4C4C4');
+
+      this.canvas.remove(group);
+      this.canvas.add(group);
+    });
 
     this.canvas.add(group);
   }
@@ -265,6 +343,10 @@ class GameBoardComponent implements WebComponent {
 
   changePlayer(name: string): void {
     this.labelPlayer.innerHTML = `${name} plays!`;
+  }
+
+  getHeldDiceNumbers(): number[] {
+    return this.heldDiceNumbers;
   }
 
   setup(): void {
