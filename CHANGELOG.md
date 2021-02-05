@@ -13,6 +13,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Game board Component.
 - Fabric.js.
 
+### Changed
+
+- Disable max-nesting-depth stylelint rule.
+- Disable max-len eslint rule.
+
 ## [1.0.0] - 2021-02-03
 
 ### Added
