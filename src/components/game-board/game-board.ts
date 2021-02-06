@@ -37,12 +37,14 @@ class GameBoardComponent implements WebComponent {
 
     const buttonRollAgain = document.createElement('button');
     buttonRollAgain.classList.add('button');
+    buttonRollAgain.setAttribute('id', 'buttonRollAgain');
     buttonRollAgain.innerHTML = 'roll again';
     buttonWrapper.appendChild(buttonRollAgain);
     buttonRollAgain.addEventListener('click', buttonRollAgainEvent);
 
     const buttonFinishRound = document.createElement('button');
     buttonFinishRound.classList.add('button');
+    buttonFinishRound.setAttribute('id', 'buttonFinishRound');
     buttonFinishRound.innerHTML = 'finish round';
     buttonWrapper.appendChild(buttonFinishRound);
     buttonFinishRound.addEventListener('click', buttonFinishRoundEvent);
@@ -67,6 +69,8 @@ class GameBoardComponent implements WebComponent {
 
     randomNumbers.forEach((number) => this.drawDice(number, DiceStyle.NEW));
     this.heldDiceNumbers.forEach((number) => this.drawDice(number, DiceStyle.OLD));
+
+    console.log(randomNumbers);
 
     return randomNumbers;
   }
@@ -350,7 +354,11 @@ class GameBoardComponent implements WebComponent {
   }
 
   setup(): void {
-    return;
+    const buttonRollAgain = document.querySelector('#buttonRollAgain');
+    const buttonFinishRound = document.querySelector('#buttonFinishRound');
+
+    buttonRollAgain?.addEventListener('click', this.roll);
+    buttonFinishRound?.addEventListener('click', this.pause);
   }
 }
 

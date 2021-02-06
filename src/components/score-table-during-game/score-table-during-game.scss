@@ -1,7 +1,8 @@
 $cell-width: 30px;
 
 .score-table {
-  background: repeating-linear-gradient(to right , #fff 0, #fff $cell-width - 0.5px, rgba(100, 100, 245, 0.05) $cell-width);
+  //background: repeating-linear-gradient(to right , #fff 0, #fff $cell-width - 0.5px, rgba(100, 100, 245, 0.05) $cell-width);
+  background: #fff;
   display: flex;
   width: fit-content;
 
@@ -14,6 +15,7 @@ $cell-width: 30px;
   &__names-item {
     align-items: center;
     border-bottom: 1px solid #00f;
+    box-sizing: border-box;
     cursor: pointer;
     display: flex;
     font-family: sans-serif;
@@ -32,21 +34,21 @@ $cell-width: 30px;
     background-color: #94d4cc;
   }
 
-  &__names-item::before,
-  &__names-item::after {
-    background-color: rgba(0, 0, 255, 0.2);
-    content: '';
-    height: 100%;
-    left: $cell-width - 0.5px;
-    position: absolute;
-    top: 0;
-    transform: translate(-50%, 0);
-    width: 0.5px;
-  }
+  // &__names-item::before,
+  // &__names-item::after {
+  //   background-color: rgba(0, 0, 255, 0.2);
+  //   content: '';
+  //   height: 100%;
+  //   left: $cell-width - 0.5px;
+  //   position: absolute;
+  //   top: 0;
+  //   transform: translate(-50%, 0);
+  //   width: 0.5px;
+  // }
 
-  &__names-item::after {
-    left: 2*$cell-width - 1px;
-  }
+  // &__names-item::after {
+  //   left: 2*$cell-width - 1px;
+  // }
 
   &__names-item--empty {
     border-bottom: 3px solid #00f;
@@ -57,27 +59,27 @@ $cell-width: 30px;
     width: 3*$cell-width;
   }
 
-  &__names-item--empty::after {
-    background-color: rgba(0, 0, 255, 0.2);
-    content: '';
-    height: 0.5px;
-    left: 0;
-    position: absolute;
-    top: 50%;
-    transform: translate(0, -50%);
-    width: 100%;
-  }
+  // &__names-item--empty::after {
+  //   background-color: rgba(0, 0, 255, 0.2);
+  //   content: '';
+  //   height: 0.5px;
+  //   left: 0;
+  //   position: absolute;
+  //   top: 50%;
+  //   transform: translate(0, -50%);
+  //   width: 100%;
+  // }
 
-  &__names-item--empty::before {
-    background-color: rgba(0, 0, 255, 0.1);
-    content: '';
-    height: 100%;
-    left: 33%;
-    position: absolute;
-    top: 0;
-    transform: translate(-50%, 0);
-    width: 0.5px;
-  }
+  // &__names-item--empty::before {
+  //   background-color: rgba(0, 0, 255, 0.1);
+  //   content: '';
+  //   height: 100%;
+  //   left: 33%;
+  //   position: absolute;
+  //   top: 0;
+  //   transform: translate(-50%, 0);
+  //   width: 0.5px;
+  // }
 
   &__players-container {
     display: flex;
@@ -92,6 +94,7 @@ $cell-width: 30px;
     align-items: center;
     border-bottom: 3px solid #00f;
     border-right: 1px solid #00f;
+    box-sizing: border-box;
     display: flex;
     font-family: sans-serif;
     font-size: 0.875rem;
@@ -101,20 +104,21 @@ $cell-width: 30px;
     width: 2*$cell-width;
   }
 
-  &__player-name::after {
-    background-color: rgba(0, 0, 255, 0.2);
-    content: '';
-    height: 0.5px;
-    left: 0;
-    position: absolute;
-    top: 50%;
-    transform: translate(0, -50%);
-    width: 100%;
-  }
+  // &__player-name::after {
+  //   background-color: rgba(0, 0, 255, 0.2);
+  //   content: '';
+  //   height: 0.5px;
+  //   left: 0;
+  //   position: absolute;
+  //   top: 50%;
+  //   transform: translate(0, -50%);
+  //   width: 100%;
+  // }
 
   &__player-field {
     border-bottom: 1px solid #00f;
     border-right: 1px solid #00f;
+    box-sizing: border-box;
     height: 30px;
     width: 2*$cell-width;
   }
@@ -128,16 +132,16 @@ $cell-width: 30px;
     position: relative;
   }
 
-  &__player-field--blue::after {
-    background-color: rgba(0, 0, 255, 0.1);
-    content: '';
-    height: 100%;
-    left: 50%;
-    position: absolute;
-    top: 0;
-    transform: translate(-50%, 0);
-    width: 0.5px;
-  }
+  // &__player-field--blue::after {
+  //   background-color: rgba(0, 0, 255, 0.1);
+  //   content: '';
+  //   height: 100%;
+  //   left: 50%;
+  //   position: absolute;
+  //   top: 0;
+  //   transform: translate(-50%, 0);
+  //   width: 0.5px;
+  // }
 }
 
 .rotate {

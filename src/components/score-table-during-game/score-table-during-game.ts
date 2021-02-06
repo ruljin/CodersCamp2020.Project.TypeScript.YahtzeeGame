@@ -2,7 +2,10 @@ import './score-table-during-game.scss';
 import WebComponent, { createElementFromString } from '../../common/WebComponent';
 
 class ScoreTableDuringGameComponent implements WebComponent {
-  constructor(private playersNames: string[]) {}
+  private playersName: string[];
+  constructor(playersName: string[]) {
+    this.playersName = playersName;
+  }
 
   render(): Element {
     let container = '<div class="score-table">';
@@ -33,27 +36,27 @@ class ScoreTableDuringGameComponent implements WebComponent {
 
     let playerColumnsContainer = '<div class="score-table__players-container">';
 
-    for (let i = 0; i < this.playersNames.length; i++) {
+    for (let i = 0; i < this.playersName.length; i++) {
       const playerColumn = `
       <div class="score-table__player">
-        <div class="score-table__player-name ${i == this.playersNames.length-1 ? 'border-right-none' : ''}"><div class="rotate">${this.playersNames[i]}</div></div>
-        <div class="score-table__player-field ${i == this.playersNames.length-1 ? 'border-right-none' : ''}"></div>
-        <div class="score-table__player-field ${i == this.playersNames.length-1 ? 'border-right-none' : ''}"></div>
-        <div class="score-table__player-field ${i == this.playersNames.length-1 ? 'border-right-none' : ''}"></div>
-        <div class="score-table__player-field ${i == this.playersNames.length-1 ? 'border-right-none' : ''}"></div>
-        <div class="score-table__player-field ${i == this.playersNames.length-1 ? 'border-right-none' : ''}"></div>
-        <div class="score-table__player-field ${i == this.playersNames.length-1 ? 'border-right-none' : ''}"></div>
-        <div class="score-table__player-field score-table__player-field--blue ${i == this.playersNames.length-1 ? 'border-right-none' : ''}"></div>
-        <div class="score-table__player-field score-table__player-field--blue ${i == this.playersNames.length-1 ? 'border-right-none' : ''}"></div>
-        <div class="score-table__player-field ${i == this.playersNames.length-1 ? 'border-right-none' : ''}"></div>
-        <div class="score-table__player-field ${i == this.playersNames.length-1 ? 'border-right-none' : ''}"></div>
-        <div class="score-table__player-field ${i == this.playersNames.length-1 ? 'border-right-none' : ''}"></div>
-        <div class="score-table__player-field ${i == this.playersNames.length-1 ? 'border-right-none' : ''}"></div>
-        <div class="score-table__player-field ${i == this.playersNames.length-1 ? 'border-right-none' : ''}"></div>
-        <div class="score-table__player-field ${i == this.playersNames.length-1 ? 'border-right-none' : ''}"></div>
-        <div class="score-table__player-field ${i == this.playersNames.length-1 ? 'border-right-none' : ''}"></div>
-        <div class="score-table__player-field score-table__player-field--blue ${i == this.playersNames.length-1 ? 'border-right-none' : ''}"></div>
-        <div class="score-table__player-field score-table__player-field--blue ${i == this.playersNames.length-1 ? 'border-right-none' : ''}"></div>
+        <div class="score-table__player-name ${i == this.playersName.length-1 ? 'border-right-none' : ''}"><div class="rotate">${this.playersName[i]}</div></div>
+        <div class="score-table__player-field ${i == this.playersName.length-1 ? 'border-right-none' : ''}"></div>
+        <div class="score-table__player-field ${i == this.playersName.length-1 ? 'border-right-none' : ''}"></div>
+        <div class="score-table__player-field ${i == this.playersName.length-1 ? 'border-right-none' : ''}"></div>
+        <div class="score-table__player-field ${i == this.playersName.length-1 ? 'border-right-none' : ''}"></div>
+        <div class="score-table__player-field ${i == this.playersName.length-1 ? 'border-right-none' : ''}"></div>
+        <div class="score-table__player-field ${i == this.playersName.length-1 ? 'border-right-none' : ''}"></div>
+        <div class="score-table__player-field score-table__player-field--blue ${i == this.playersName.length-1 ? 'border-right-none' : ''}"></div>
+        <div class="score-table__player-field score-table__player-field--blue ${i == this.playersName.length-1 ? 'border-right-none' : ''}"></div>
+        <div class="score-table__player-field ${i == this.playersName.length-1 ? 'border-right-none' : ''}"></div>
+        <div class="score-table__player-field ${i == this.playersName.length-1 ? 'border-right-none' : ''}"></div>
+        <div class="score-table__player-field ${i == this.playersName.length-1 ? 'border-right-none' : ''}"></div>
+        <div class="score-table__player-field ${i == this.playersName.length-1 ? 'border-right-none' : ''}"></div>
+        <div class="score-table__player-field ${i == this.playersName.length-1 ? 'border-right-none' : ''}"></div>
+        <div class="score-table__player-field ${i == this.playersName.length-1 ? 'border-right-none' : ''}"></div>
+        <div class="score-table__player-field ${i == this.playersName.length-1 ? 'border-right-none' : ''}"></div>
+        <div class="score-table__player-field score-table__player-field--blue ${i == this.playersName.length-1 ? 'border-right-none' : ''}"></div>
+        <div class="score-table__player-field score-table__player-field--blue ${i == this.playersName.length-1 ? 'border-right-none' : ''}"></div>
       </div>`;
       playerColumnsContainer += playerColumn;
     }
@@ -78,6 +81,7 @@ class ScoreTableDuringGameComponent implements WebComponent {
   }
 
   public someFunction(name: Element): string {
+    console.log(this.playersName);
     return name.innerHTML;
   }
 
