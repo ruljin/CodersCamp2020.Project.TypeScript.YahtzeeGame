@@ -2,5 +2,11 @@
 
 body {
   background-color: #002c1e;
-  height: 100vh;
+  height: flex;
+};
+
+.menu-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
 }

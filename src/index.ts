@@ -1,32 +1,185 @@
 import './style.scss';
 import Router from './common/Router';
-import { createElementFromString } from './common/WebComponent';
-import AddElement from './components/addRemove/addRemove';
+import ScoresComponent from './components/scores/scores';
+import DiceBackgroundComponent, { DiceTypes } from './components/dice-background/dice-background';
 import LogoComponent from './components/logo/logo';
-
+import IntroComponent from './components/intro/intro';
+import ReferenceComponent from './components/reference/reference';
+import AuthorsComponent from './components/authors/authors';
+import RulesComponent from './components/rules/rules';
+import SettingsComponent from './components/settings/settings'
 
 const router = new Router(document.querySelector('#root')!);
 function routePathsHandler() {
   if (router.checkPath('')) {
     router.clearRoot();
 
-    router.renderComponent(createElementFromString('<a href="#/sample">Go to sample component</a>'));
-  } else if (router.checkPath('sample')) {
+    const diceBackgroundComponent =
+      new DiceBackgroundComponent(DiceTypes.BG_ALT);
+    router.renderComponent(diceBackgroundComponent.render());
+    diceBackgroundComponent.setup();
+
+    const diceBackgroundComponent2 = new DiceBackgroundComponent(DiceTypes.BG);
+    router.renderComponent(diceBackgroundComponent2.render());
+    diceBackgroundComponent2.setup();
+
+    const logoComponent = new LogoComponent();
+    router.renderComponent(logoComponent.render());
+    logoComponent.setup();
+
+    const introComponent = new IntroComponent();
+    router.renderComponent(introComponent.render());
+    introComponent.setup();
+
+    const buttonWrapper = document.createElement('div');
+    buttonWrapper.setAttribute('class', 'menu-buttons');
+
+    const referenceComponentScores = new ReferenceComponent('scores', 'scores');
+    const referenceComponentRules = new ReferenceComponent('rules', 'rules');
+    const referenceComponentGame = new ReferenceComponent('game-settings', 'game');
+    const referenceComponentAuthors = new ReferenceComponent('authors', 'authors');
+
+    buttonWrapper.appendChild(referenceComponentScores.render());
+    buttonWrapper.appendChild(referenceComponentRules.render());
+    buttonWrapper.appendChild(referenceComponentGame.render());
+    buttonWrapper.appendChild(referenceComponentAuthors.render());
+
+    referenceComponentScores.setup();
+    referenceComponentRules.setup();
+    referenceComponentGame.setup();
+    referenceComponentAuthors.setup();
+    router.renderComponent(buttonWrapper);
+
+  } else if (router.checkPath('authors')) {
     router.clearRoot();
 
-    const logo = new LogoComponent();
-    router.renderComponent(logo.render());
+    const diceBackgroundComponent =
+      new DiceBackgroundComponent(DiceTypes.BG_ALT);
+    router.renderComponent(diceBackgroundComponent.render());
+    diceBackgroundComponent.setup();
 
-    const addremove = new AddElement('+', '-');
-    router.renderComponent(addremove.render());
+    const diceBackgroundComponent2 = new DiceBackgroundComponent(DiceTypes.BG);
+    router.renderComponent(diceBackgroundComponent2.render());
+    diceBackgroundComponent2.setup();
 
-    const list: string[] = ['computer/easy', 'computer/medium', 'computer/hard', 'player'];
-    router.renderComponent(addremove.layout('player 1', list, 18));
+    const logoComponent = new LogoComponent();
+    router.renderComponent(logoComponent.render());
+    logoComponent.setup();
 
-    router.renderComponent(addremove.adding('player', list, 18));
-    router.renderComponent(addremove.removing());
+    const authorsComponent = new AuthorsComponent();
+    router.renderComponent(authorsComponent.render());
+    authorsComponent.setup();
 
-    router.renderComponent(createElementFromString('<a href="#">Go back</a>'));
+    const buttonWrapper = document.createElement('div');
+    buttonWrapper.setAttribute('class', 'menu-buttons');
+
+    const referenceComponentScores = new ReferenceComponent('scores', 'scores');
+    const referenceComponentRules = new ReferenceComponent('rules', 'rules');
+    const referenceComponentGame = new ReferenceComponent('game-settings', 'game');
+    const referenceComponentAuthors = new ReferenceComponent('authors', 'authors');
+
+    buttonWrapper.appendChild(referenceComponentScores.render());
+    buttonWrapper.appendChild(referenceComponentRules.render());
+    buttonWrapper.appendChild(referenceComponentGame.render());
+    buttonWrapper.appendChild(referenceComponentAuthors.render());
+
+    referenceComponentScores.setup();
+    referenceComponentRules.setup();
+    referenceComponentGame.setup();
+    referenceComponentAuthors.setup();
+    router.renderComponent(buttonWrapper);
+  } else if (router.checkPath('rules')) {
+    router.clearRoot();
+
+    const diceBackgroundComponent =
+      new DiceBackgroundComponent(DiceTypes.BG_ALT);
+    router.renderComponent(diceBackgroundComponent.render());
+    diceBackgroundComponent.setup();
+
+    const diceBackgroundComponent2 = new DiceBackgroundComponent(DiceTypes.BG);
+    router.renderComponent(diceBackgroundComponent2.render());
+    diceBackgroundComponent2.setup();
+
+    const logoComponent = new LogoComponent();
+    router.renderComponent(logoComponent.render());
+    logoComponent.setup();
+
+    const rulesComponent = new RulesComponent();
+    router.renderComponent(rulesComponent.render());
+    rulesComponent.setup();
+
+    const buttonWrapper = document.createElement('div');
+    buttonWrapper.setAttribute('class', 'menu-buttons');
+
+    const referenceComponentScores = new ReferenceComponent('scores', 'scores');
+    const referenceComponentRules = new ReferenceComponent('rules', 'rules');
+    const referenceComponentGame = new ReferenceComponent('game-settings', 'game');
+    const referenceComponentAuthors = new ReferenceComponent('authors', 'authors');
+
+    buttonWrapper.appendChild(referenceComponentScores.render());
+    buttonWrapper.appendChild(referenceComponentRules.render());
+    buttonWrapper.appendChild(referenceComponentGame.render());
+    buttonWrapper.appendChild(referenceComponentAuthors.render());
+
+    referenceComponentScores.setup();
+    referenceComponentRules.setup();
+    referenceComponentGame.setup();
+    referenceComponentAuthors.setup();
+    router.renderComponent(buttonWrapper);
+  } else if (router.checkPath('scores')) {
+    router.clearRoot();
+
+    const diceBackgroundComponent =
+      new DiceBackgroundComponent(DiceTypes.BG_ALT);
+    router.renderComponent(diceBackgroundComponent.render());
+    diceBackgroundComponent.setup();
+
+    const diceBackgroundComponent2 = new DiceBackgroundComponent(DiceTypes.BG);
+    router.renderComponent(diceBackgroundComponent2.render());
+    diceBackgroundComponent2.setup();
+
+    const logoComponent = new LogoComponent();
+    router.renderComponent(logoComponent.render());
+    logoComponent.setup();
+
+    const scoresComponent = new ScoresComponent();
+    router.renderComponent(scoresComponent.render());
+    scoresComponent.setup();
+
+    const buttonWrapper = document.createElement('div');
+    buttonWrapper.setAttribute('class', 'menu-buttons');
+
+    const referenceComponentScores = new ReferenceComponent('scores', 'scores');
+    const referenceComponentRules = new ReferenceComponent('rules', 'rules');
+    const referenceComponentGame = new ReferenceComponent('game-settings', 'game');
+    const referenceComponentAuthors = new ReferenceComponent('authors', 'authors');
+
+    buttonWrapper.appendChild(referenceComponentScores.render());
+    buttonWrapper.appendChild(referenceComponentRules.render());
+    buttonWrapper.appendChild(referenceComponentGame.render());
+    buttonWrapper.appendChild(referenceComponentAuthors.render());
+
+    referenceComponentScores.setup();
+    referenceComponentRules.setup();
+    referenceComponentGame.setup();
+    referenceComponentAuthors.setup();
+    router.renderComponent(buttonWrapper);
+
+  } else if (router.checkPath('game-settings')) {
+    router.clearRoot();
+
+    const diceBackgroundComponent =
+      new DiceBackgroundComponent(DiceTypes.BG_ALT);
+    router.renderComponent(diceBackgroundComponent.render());
+    diceBackgroundComponent.setup();
+
+    const diceBackgroundComponent2 = new DiceBackgroundComponent(DiceTypes.BG);
+    router.renderComponent(diceBackgroundComponent2.render());
+    diceBackgroundComponent2.setup();
+
+    const logoComponent = new LogoComponent();
+    router.renderComponent(logoComponent.render());
+    logoComponent.setup();
   }
 }
 
