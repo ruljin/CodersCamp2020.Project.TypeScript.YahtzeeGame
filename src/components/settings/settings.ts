@@ -60,12 +60,14 @@ class SettingsComponent implements WebComponent {
   }
 
   private change(): void {
+    const players = [...document.querySelector('.players')!.children];
     const selectWrapper = (<NodeListOf<HTMLSelectElement>>document.querySelectorAll('.select'));
     for (const select of selectWrapper) {
       select.addEventListener('change', function (): void {
         const option = (select.options[select.selectedIndex].value);
         if (option === 'player') {
-          const newlabel = new LabelComponent('Player', 20, false).render();
+          const value = players.indexOf(select) + 1;
+          const newlabel = new LabelComponent(`Player ${value}`, 20, false).render();
           select.replaceWith(newlabel);
         }
       });
