@@ -14,6 +14,7 @@ class SettingsComponent implements WebComponent {
     this.add();
     this.change();
     this.remove();
+    this.blocked();
   }
 
   private layout(): HTMLElement {
@@ -85,6 +86,21 @@ class SettingsComponent implements WebComponent {
       } else {
         const last = players.lastElementChild!;
         players.removeChild(last);
+      }
+    });
+  }
+
+  private blocked(): void {
+    const link = document.querySelector('.button')! as HTMLElement;
+    link.addEventListener('mouseover', () => {
+      const input = (<NodeListOf<HTMLSelectElement>>document.querySelectorAll('.players .label'));
+      const players = document.querySelector('.players')!;
+      for (const one of input) {
+        if (one.value === '' || players.children.length === 1) {
+          link.removeAttribute('href');
+          link.style.cursor = 'pointer';
+          link.addEventListener('mouseleave', () => link.setAttribute('href', '#/game'));
+        }
       }
     });
   }
