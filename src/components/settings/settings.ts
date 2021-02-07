@@ -11,9 +11,9 @@ class SettingsComponent implements WebComponent {
   }
 
   setup(): void {
-    this.adding();
+    this.add();
     this.change();
-    this.removing();
+    this.remove();
   }
 
   private layout(): HTMLElement {
@@ -29,7 +29,6 @@ class SettingsComponent implements WebComponent {
     players.appendChild(new LabelComponent('Player 1', 20, false).render());
     const list = ['computer/easy', 'computer/medium', 'computer/hard', 'player'];
     players.appendChild(new SelectorComponent(list, 20).render());
-
     names.appendChild(players);
 
     names.appendChild(new AddRemoveElement('+', '-').render());
@@ -47,10 +46,10 @@ class SettingsComponent implements WebComponent {
     return settings;
   }
 
-  private adding(): void {
+  private add(): void {
     const players = document.querySelector('.players')!;
     const add = document.querySelector('.switch--add') as HTMLElement;
-    add.addEventListener(('click'), () => {
+    add.addEventListener(('click'), (): void => {
       if (players.children.length < 4) {
         const list = ['computer/easy', 'computer/medium', 'computer/hard', 'player'];
         players.appendChild(new SelectorComponent(list, 20).render());
@@ -63,7 +62,7 @@ class SettingsComponent implements WebComponent {
     const players = [...document.querySelector('.players')!.children];
     const selectWrapper = (<NodeListOf<HTMLSelectElement>>document.querySelectorAll('.select'));
     for (const select of selectWrapper) {
-      select.addEventListener('change', function (): void {
+      select.addEventListener('change', (): void => {
         const option = (select.options[select.selectedIndex].value);
         if (option === 'player') {
           const value = players.indexOf(select) + 1;
@@ -74,10 +73,10 @@ class SettingsComponent implements WebComponent {
     }
   }
 
-  private removing(): void {
+  private remove(): void {
     const players = document.querySelector('.players')!;
     const remove = document.querySelector('.switch--remove') as HTMLElement;
-    remove.addEventListener(('click'), () => {
+    remove.addEventListener(('click'), (): void => {
       if (players.children[1].nodeName === 'SELECT') {
         if (players.children.length > 2) {
           const last = players.lastElementChild!;
@@ -89,7 +88,6 @@ class SettingsComponent implements WebComponent {
       }
     });
   }
-
 }
 
 export default SettingsComponent;
