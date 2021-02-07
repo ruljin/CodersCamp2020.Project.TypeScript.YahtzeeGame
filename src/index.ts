@@ -7,7 +7,7 @@ import IntroComponent from './components/intro/intro';
 import ReferenceComponent from './components/reference/reference';
 import AuthorsComponent from './components/authors/authors';
 import RulesComponent from './components/rules/rules';
-import SettingsComponent from './components/settings/settings'
+import SettingsComponent from './components/settings/settings';
 
 const router = new Router(document.querySelector('#root')!);
 function routePathsHandler() {
@@ -180,6 +180,19 @@ function routePathsHandler() {
     const logoComponent = new LogoComponent();
     router.renderComponent(logoComponent.render());
     logoComponent.setup();
+
+    const settingsComponent = new SettingsComponent();
+    router.renderComponent(settingsComponent.render());
+    settingsComponent.setup();
+
+    const buttonWrapper = document.createElement('div');
+    buttonWrapper.setAttribute('class', 'menu-buttons');
+    buttonWrapper.appendChild(new ReferenceComponent('scores', 'scores').render());
+    buttonWrapper.appendChild(new ReferenceComponent('rules', 'rules').render());
+    buttonWrapper.appendChild(new ReferenceComponent('game-settings', 'game').render());
+    buttonWrapper.appendChild(new ReferenceComponent('authors', 'authors').render());
+    router.renderComponent(buttonWrapper);
+
   }
 }
 

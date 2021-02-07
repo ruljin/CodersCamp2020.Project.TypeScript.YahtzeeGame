@@ -1,24 +1,11 @@
-.container {
-  text-align: center;
-}
-
-.button {
+.switch {
   background-color: rgb(187, 191, 192);
   border: 3px solid rgb(255, 255, 255);
   border-radius: 50%;
+  cursor: pointer;
   font-size: 1.5rem;
   height: 3rem;
   outline: none;
-  padding: 0.1rem;
   text-align-last: center;
   width: 3rem;
-}
-
-.settings {
-  display: flex;
-  flex-wrap: wrap;
-  height: 20vh;
-  justify-content: space-around;
-  margin: 0 auto;
-  width: 40vw;
 }
