@@ -4,8 +4,10 @@ import LabelComponent from '../label/label';
 import SelectorComponent from '../selector/selector';
 import AddRemoveElement from '../add-remove/add-remove';
 import ReferenceComponent from '../reference/reference';
+import saveSettings from '../local-storage/localstorage';
 
 class SettingsComponent implements WebComponent {
+  playButton = document.querySelector('.button') as HTMLElement;
   render(): Element {
     return this.layout();
   }
@@ -87,6 +89,18 @@ class SettingsComponent implements WebComponent {
         players.removeChild(last);
       }
     });
+  }
+  private saveSettingsInLocalStorage(): void {
+    const player = document
+      .getElementsByClassName('label--alternative')[0]
+      .nodeValue!;
+    const style = document
+      .getElementsByClassName('select')[0].nodeValue!;
+    saveSettings(player, style);
+  }
+
+  private buttonSave(): void {
+    this.playButton.addEventListener('click', this.saveSettingsInLocalStorage);
   }
 }
 
