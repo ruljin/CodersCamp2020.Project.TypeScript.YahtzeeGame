@@ -5,7 +5,7 @@ class LabelComponent implements WebComponent {
   private label: HTMLElement = document.createElement('null');
 
   constructor(private text: string, private width: number,
-    private original: boolean) { }
+    private original: boolean = true) { }
 
   render(): Element {
     this.label = createElementFromString(`${this.original ?

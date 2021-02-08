@@ -23,7 +23,7 @@ class SettingsComponent implements WebComponent {
 
     const names = document.createElement('section');
     names.setAttribute('class', 'names');
-    names.appendChild(new LabelComponent('names', 15, true).render());
+    names.appendChild(new LabelComponent('names', 15).render());
 
     const players = document.createElement('div');
     players.setAttribute('class', 'players');
@@ -37,7 +37,7 @@ class SettingsComponent implements WebComponent {
 
     const styles = document.createElement('section');
     styles.setAttribute('class', 'styles');
-    styles.appendChild(new LabelComponent('styles', 15, true).render());
+    styles.appendChild(new LabelComponent('styles', 15).render());
     const listOfStyles = ['classic game', 'play with pirates', 'beat the dragon'];
     styles.appendChild(new SelectorComponent(listOfStyles, 45).render());
 
