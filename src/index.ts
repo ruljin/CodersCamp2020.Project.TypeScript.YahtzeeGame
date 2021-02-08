@@ -5,11 +5,11 @@ import GameComponent from './components/game/game';
 const router = new Router(document.querySelector('#root')!);
 
 function routePathsHandler() {
-  const playersName = ['Player 1', 'Player 2', 'Player 3', 'Player 4'];
+  const playersName = ['Player 1', 'Player 2'];
   const game = new GameComponent(playersName);
-  game.gameBoard.roll();
-  router.renderComponent(game.newGame());
+  router.renderComponent(game.render());
   game.setup();
+  game.newGame();
 }
 
 routePathsHandler();

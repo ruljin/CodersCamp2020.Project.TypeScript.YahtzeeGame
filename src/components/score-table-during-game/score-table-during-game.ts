@@ -1,10 +1,57 @@
 import './score-table-during-game.scss';
 import WebComponent, { createElementFromString } from '../../common/WebComponent';
 
+interface PlayerPoints {
+  name: string
+  ones: number | null,
+  twos: number | null,
+  threes: number | null,
+  fours: number | null,
+  fives: number | null,
+  sixes: number | null,
+  subtotal: number | null,
+  bonus: number | null,
+  threeOfKind: number | null,
+  fourOfKind: number | null,
+  fullHouse: number | null,
+  smStraight: number | null,
+  lgStraight: number | null,
+  yahtzee: number | null,
+  chance: number | null,
+  yahtzeeBonus: number | null,
+  total: number | null
+}
+
 class ScoreTableDuringGameComponent implements WebComponent {
   private playersName: string[];
+  points: PlayerPoints[] = [];
+
   constructor(playersName: string[]) {
     this.playersName = playersName;
+    for (const player of playersName) {
+      const playerPoints: PlayerPoints = {
+        name: player,
+        ones: null,
+        twos: null,
+        threes: null,
+        fours: null,
+        fives: null,
+        sixes: null,
+        subtotal: null,
+        bonus: null,
+        threeOfKind: null,
+        fourOfKind: null,
+        fullHouse: null,
+        smStraight: null,
+        lgStraight: null,
+        yahtzee: null,
+        chance: null,
+        yahtzeeBonus: null,
+        total: null
+      };
+
+      this.points.push(playerPoints);
+    }
   }
 
   render(): Element {
@@ -38,7 +85,7 @@ class ScoreTableDuringGameComponent implements WebComponent {
 
     for (let i = 0; i < this.playersName.length; i++) {
       const playerColumn = `
-      <div class="score-table__player">
+      <div id="${this.playersName[i]}Column" class="score-table__player">
         <div class="score-table__player-name ${i == this.playersName.length-1 ? 'border-right-none' : ''}"><div class="rotate">${this.playersName[i]}</div></div>
         <div class="score-table__player-field ${i == this.playersName.length-1 ? 'border-right-none' : ''}"></div>
         <div class="score-table__player-field ${i == this.playersName.length-1 ? 'border-right-none' : ''}"></div>
@@ -72,16 +119,15 @@ class ScoreTableDuringGameComponent implements WebComponent {
     const namesField = nameList.querySelectorAll('.score-table__names-item:not(.score-table__names-item--empty)')!;
 
     names.forEach((name) => {
-      name.addEventListener('click', this.someFunction.bind(null, name));
+      name.addEventListener('click', () => this.someFunction(name));
     });
 
     namesField.forEach((field) => {
-      field.addEventListener('click', this.anotherFunction.bind(null, field));
+      field.addEventListener('click', () => this.anotherFunction(field, event!));
     });
   }
 
   public someFunction(name: Element): string {
-    console.log(this.playersName);
     return name.innerHTML;
   }
 

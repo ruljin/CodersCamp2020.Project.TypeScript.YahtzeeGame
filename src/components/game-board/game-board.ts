@@ -16,8 +16,15 @@ class GameBoardComponent implements WebComponent {
   private boardDisabledCover: Element;
   private heldDiceNumbers: number[] = [];
   private canvas: fabric.Canvas;
+  remainingRolls: number;
+  currentPlayerIndex: number;
+  playerDices: number[];
 
   constructor(buttonRollAgainEvent: EventListener, buttonFinishRoundEvent: EventListener) {
+    this.remainingRolls = 3;
+    this.currentPlayerIndex = 0;
+    this.playerDices = [];
+
     const boardEl = document.createElement('div');
     boardEl.classList.add('board');
     boardEl.style.backgroundImage = `url('${BoardImage}')`;
@@ -60,8 +67,21 @@ class GameBoardComponent implements WebComponent {
     this.boardEl = boardEl;
   }
 
+  clearCanvas(): void {
+    this.canvas.clear();
+  }
+
+  decreaseRemainingRolls(): void {
+    this.remainingRolls--;
+  }
+
+  reSetRemainingRolls(): void {
+    this.remainingRolls = 3;
+  }
+
   roll(): number[] {
     const randomNumbers: number[] = [];
+    this.clearCanvas();
 
     for (let i = 0; i < (5 - this.heldDiceNumbers.length); i++) {
       randomNumbers.push(Math.floor(Math.random() * 6) + 1);
@@ -70,8 +90,9 @@ class GameBoardComponent implements WebComponent {
     randomNumbers.forEach((number) => this.drawDice(number, DiceStyle.NEW));
     this.heldDiceNumbers.forEach((number) => this.drawDice(number, DiceStyle.OLD));
 
-    console.log(randomNumbers);
-
+    this.decreaseRemainingRolls();
+    this.playerDices = randomNumbers.concat(this.getHeldDiceNumbers());
+    if (this.remainingRolls == 0) this.pause();
     return randomNumbers;
   }
 
@@ -334,6 +355,7 @@ class GameBoardComponent implements WebComponent {
   }
 
   pause(): void {
+    if (this.playerDices.length == 0) return;
     this.boardDisabledCover.classList.remove('board__pause-cover--hidden');
   }
 
@@ -357,8 +379,8 @@ class GameBoardComponent implements WebComponent {
     const buttonRollAgain = document.querySelector('#buttonRollAgain');
     const buttonFinishRound = document.querySelector('#buttonFinishRound');
 
-    buttonRollAgain?.addEventListener('click', this.roll);
-    buttonFinishRound?.addEventListener('click', this.pause);
+    buttonRollAgain?.addEventListener('click', () => this.roll());
+    buttonFinishRound?.addEventListener('click', () => this.pause());
   }
 }
 
