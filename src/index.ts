@@ -8,6 +8,7 @@ import ReferenceComponent from './components/reference/reference';
 import AuthorsComponent from './components/authors/authors';
 import RulesComponent from './components/rules/rules';
 import SettingsComponent from './components/settings/settings';
+import GameComponent from './components/game/game';
 
 const router = new Router(document.querySelector('#root')!);
 function routePathsHandler() {
@@ -194,6 +195,7 @@ function routePathsHandler() {
     router.renderComponent(buttonWrapper);
 
   } else if (router.checkPath('game')) {
+    router.clearRoot();
     const playersName = ['Player 1', 'Player 2'];
     const game = new GameComponent(playersName);
     router.renderComponent(game.render());

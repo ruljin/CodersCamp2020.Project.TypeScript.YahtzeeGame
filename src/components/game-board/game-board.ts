@@ -43,14 +43,14 @@ class GameBoardComponent implements WebComponent {
     boardEl.appendChild(buttonWrapper);
 
     const buttonRollAgain = document.createElement('button');
-    buttonRollAgain.classList.add('button');
+    buttonRollAgain.classList.add('button-game');
     buttonRollAgain.setAttribute('id', 'buttonRollAgain');
     buttonRollAgain.innerHTML = 'roll again';
     buttonWrapper.appendChild(buttonRollAgain);
     buttonRollAgain.addEventListener('click', buttonRollAgainEvent);
 
     const buttonFinishRound = document.createElement('button');
-    buttonFinishRound.classList.add('button');
+    buttonFinishRound.classList.add('button-game');
     buttonFinishRound.setAttribute('id', 'buttonFinishRound');
     buttonFinishRound.innerHTML = 'finish round';
     buttonWrapper.appendChild(buttonFinishRound);
