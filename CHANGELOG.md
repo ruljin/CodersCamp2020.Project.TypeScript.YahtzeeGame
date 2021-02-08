@@ -14,6 +14,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Screens arrangement.
 - Game board Component.
 - Fabric.js.
+- Settings Component.
+- Modal Component.
 
 ### Changed
 
@@ -39,7 +41,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Svg logo asset.
 - Types declaration for Typescript in `main.d.ts` file.
 - Github actions.
-
 
 ### Changed
 
