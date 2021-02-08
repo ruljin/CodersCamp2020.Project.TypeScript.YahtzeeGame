@@ -193,6 +193,12 @@ function routePathsHandler() {
     buttonWrapper.appendChild(new ReferenceComponent('authors', 'authors').render());
     router.renderComponent(buttonWrapper);
 
+  } else if (router.checkPath('game')) {
+    const playersName = ['Player 1', 'Player 2'];
+    const game = new GameComponent(playersName);
+    router.renderComponent(game.render());
+    game.setup();
+    game.newGame();
   }
 }
 

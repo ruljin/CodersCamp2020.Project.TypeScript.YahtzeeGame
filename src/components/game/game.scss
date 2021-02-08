@@ -1,0 +1,15 @@
+.game-container {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  margin: 0 auto;
+  padding-bottom: 50px;
+  width: 60vw;
+}
+
+.board {
+  margin-top: 50px;
+}
+
+
