@@ -195,6 +195,7 @@ function routePathsHandler() {
     router.renderComponent(buttonWrapper);
 
   } else if (router.checkPath('game')) {
+    router.clearRoot();
     const playersName = ['Player 1', 'Player 2'];
     const game = new GameComponent(playersName);
     router.renderComponent(game.render());
