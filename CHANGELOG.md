@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Screens arrangement.
 - Game board Component.
 - Fabric.js.
+- Modal Component.
 - Settings Component.
 
 ### Changed
