@@ -54,15 +54,16 @@
     justify-content: space-evenly;
     padding-bottom: 5%;
 
-    &--close, &--next {
+    &--close,
+    &--next {
       cursor: pointer;
     }
+
+    .button {
+      font-size: 1.5rem !important;
+      height: 2.7rem !important;
+      line-height: 2.5rem !important;
+      width: 11rem !important;
+    }
   }
-}
-  
-.modal__buttons .button {
-  font-size: 1.5rem !important;
-  height: 2.7rem !important;
-  line-height: 2.5rem !important;
-  width: 11rem !important;
 }

@@ -48,49 +48,48 @@ class ModalComponent implements WebComponent {
     return;
   }
 
-  private addExtraProperty(element: string | object) {
-    switch (element) {
-      case this.modalContent.subheader:
-        document.querySelector('.modal__header')!.appendChild(createElementFromString(`<p class="modal__header--subheader">${this.modalContent.subheader}</p>`));
-        break;
-      case this.modalContent.buttonClose:
-        const labelComponentClose = new LabelComponent(this.modalContent.buttonClose!['text'], this.modalContent.buttonClose!['width']);
-        const closeBtnWrapper = document.createElement('div');
-        closeBtnWrapper.classList.add('modal__buttons--close');
-        closeBtnWrapper.appendChild(labelComponentClose.render());
-        closeBtnWrapper.addEventListener('click', this.closeModal);
-        document.querySelector('.modal__buttons')!.appendChild(closeBtnWrapper);
-        break;
-      case this.modalContent.buttonLink:
-        const referenceComponent = new ReferenceComponent(this.modalContent.buttonLink!['link'], this.modalContent.buttonLink!['name']);
-        document.querySelector('.modal__buttons')!.appendChild(referenceComponent.render());
-        break;
-      case this.modalContent.buttonNext:
-        const labelComponentNext = new LabelComponent(this.modalContent.buttonNext!['text'], this.modalContent.buttonNext!['width']);
-        const nextBtnWrapper = document.createElement('div');
-        nextBtnWrapper.classList.add('modal__buttons--next');
-        nextBtnWrapper.appendChild(labelComponentNext.render());
-        nextBtnWrapper.addEventListener('click', this.changeContent);
-        document.querySelector('.modal__buttons')!.appendChild(nextBtnWrapper);
-        break;
+  private addExtraProperty(element: string | unknown) {
+    if (element === this.modalContent.subheader) {
+      document.querySelector('.modal__header')!.appendChild(createElementFromString(`<p class="modal__header--subheader">${this.modalContent.subheader}</p>`));
+    } else if (element === this.modalContent.buttonClose) {
+      const labelComponentClose = new LabelComponent(this.modalContent.buttonClose!['text'], this.modalContent.buttonClose!['width']);
+      const closeBtnWrapper = document.createElement('div');
+      closeBtnWrapper.classList.add('modal__buttons--close');
+      closeBtnWrapper.appendChild(labelComponentClose.render());
+      closeBtnWrapper.addEventListener('click', this.closeModal);
+      document.querySelector('.modal__buttons')!.appendChild(closeBtnWrapper);
+    } else if (element === this.modalContent.buttonLink) {
+      const referenceComponent = new ReferenceComponent(this.modalContent.buttonLink!['link'], this.modalContent.buttonLink!['name']);
+      document.querySelector('.modal__buttons')!.appendChild(referenceComponent.render());
+    } else if (element === this.modalContent.buttonNext) {
+      const labelComponentNext = new LabelComponent(this.modalContent.buttonNext!['text'], this.modalContent.buttonNext!['width']);
+      const nextBtnWrapper = document.createElement('div');
+      nextBtnWrapper.classList.add('modal__buttons--next');
+      nextBtnWrapper.appendChild(labelComponentNext.render());
+      nextBtnWrapper.addEventListener('click', this.changeContent);
+      document.querySelector('.modal__buttons')!.appendChild(nextBtnWrapper);
     }
     return;
   }
 
-  public closeModal() {
+  public closeModal(): void {
     document.querySelector('.modal-wrap')!.classList.remove('active');
+    return;
   }
 
-  public openModal() {
+  public openModal(): void {
     document.querySelector('.modal-wrap')!.classList.add('active');
+    return;
   }
 
-  private modalClick(e: Event) {
+  private modalClick(e: Event): void {
     e.stopPropagation();
+    return;
   }
 
-  private changeContent() {
-    document.querySelector('.modal__body')!.innerHTML = 'dont have next content yet'
+  private changeContent(): void {
+    document.querySelector('.modal__body')!.innerHTML = 'dont have next content yet';
+    return;
   }
 }
 
