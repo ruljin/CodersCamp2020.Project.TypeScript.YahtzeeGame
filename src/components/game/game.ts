@@ -55,6 +55,32 @@ class GameComponent implements WebComponent  {
     this.checkFinishRoundButton().then(() => {
       this.savePlayerScores();
     });
+
+    if (this.isCurrentPlayerComputer()) {
+      this.handleComputerClicks();
+    }
+  }
+
+  private handleComputerClicks(): void {
+    const rollButton = document.querySelector('#buttonRollAgain') as HTMLButtonElement;
+    const finishRoundButton = document.querySelector('#buttonFinishRound') as HTMLButtonElement;
+    finishRoundButton.disabled = true;
+    rollButton.disabled = true;
+    setTimeout(() => {
+      rollButton.disabled = false;
+      rollButton.click();
+      rollButton.disabled = true;
+      setTimeout(() => {
+        rollButton.disabled = false;
+        rollButton.click();
+        rollButton.disabled = true;
+        setTimeout(() => {
+          rollButton.disabled = false;
+          rollButton.click();
+          rollButton.disabled = true;
+        }, 1000);
+      }, 1000);
+    }, 1000);
   }
 
   savePlayerScores(): void {
@@ -66,14 +92,34 @@ class GameComponent implements WebComponent  {
 
   highlightFields(fields: NodeListOf<Element>): void {
     const isFieldAvailable: boolean[] = this.checkAvailableFields(fields);
-    fields.forEach((field, index) => {
-      if (isFieldAvailable[index]) {
-        field.classList.add('score-table__player-field--active');
-        field.addEventListener('click', () => this.chooseScores(index, fields, false), false);
-      } else if (!field.classList.contains('score-table__player-field--filled') && !field.classList.contains('score-table__player-field--blue')) {
-        field.addEventListener('click', () => this.chooseScores(index, fields, true), false);
-      }
-    });
+    if (!this.isCurrentPlayerComputer()) {
+      fields.forEach((field, index) => {
+        if (isFieldAvailable[index]) {
+          field.classList.add('score-table__player-field--active');
+          field.addEventListener('click', () => this.chooseScores(index, fields, false), false);
+        } else if (!field.classList.contains('score-table__player-field--filled') && !field.classList.contains('score-table__player-field--blue')) {
+          field.addEventListener('click', () => this.chooseScores(index, fields, true), false);
+        }
+      });
+    } else {
+      let availableFieldsNumbers = Array.prototype.slice.call(fields)
+        .map((field: Element, index: number) =>
+          !field.classList.contains('score-table__player-field--filled') &&
+          !field.classList.contains('score-table__player-field--blue') ? index : -1);
+      availableFieldsNumbers = availableFieldsNumbers.filter((index) => index >= 0);
+
+      const chosenFieldIndex = this.handleComputerChoose(availableFieldsNumbers);
+      this.chooseScores(chosenFieldIndex, fields, false);
+    }
+  }
+
+  // Make a smarter computer
+  private handleComputerChoose(availableFieldsNumbers: number[]): number {
+    return availableFieldsNumbers[Math.floor(Math.random() * availableFieldsNumbers.length)];
+  }
+
+  private isCurrentPlayerComputer(): boolean {
+    return true; // Later on remove this and make a proper rule using something to decide if player is computer
   }
 
   checkAvailableFields(fields: NodeListOf<Element>): boolean[] {
@@ -328,6 +374,7 @@ class GameComponent implements WebComponent  {
         this.gameBoard.currentPlayerIndex = 0;
         this.currentRoundNumber++;
       }
+      this.gameBoard.hold([]);
       this.checkPlayerFinish();
     } else {
       this.fillTotalPoints();
