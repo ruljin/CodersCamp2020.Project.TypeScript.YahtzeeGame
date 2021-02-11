@@ -20,7 +20,7 @@ class ModalComponent implements WebComponent {
 
   render(): Element {
     this.modal = createElementFromString(`
-      <section class="modal-wrap active">
+      <section class="modal-wrap">
         <div class="modal">
           <div class="modal__header">${this.modalContent.header}</div>
           <div class="modal__body">${this.modalContent.content}</div>
