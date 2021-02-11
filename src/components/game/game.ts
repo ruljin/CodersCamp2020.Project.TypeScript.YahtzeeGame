@@ -90,19 +90,44 @@ class GameComponent implements WebComponent  {
   }
 
   private handleComputerChoose(otherFields: Element[], pointedFields: Element[]): void {
+    const allFields = [...otherFields, ...pointedFields];
     if (this.checkComputerDifficulty() === COMPUTER_DIFFICULTY.EASY) {
-      const allFields = [...otherFields, ...pointedFields];
       (allFields[Math.floor(Math.random() * allFields.length)] as HTMLButtonElement).click();
       return;
     } else if (this.checkComputerDifficulty() === COMPUTER_DIFFICULTY.MEDIUM) {
-      if (pointedFields) {
+      if (pointedFields.length !== 0) {
         (pointedFields[Math.floor(Math.random() * pointedFields.length)] as HTMLButtonElement).click();
       } else {
         (otherFields[Math.floor(Math.random() * otherFields.length)] as HTMLButtonElement).click();
       }
       return;
     } else if (this.checkComputerDifficulty() === COMPUTER_DIFFICULTY.HARD) {
-      return; // TODO
+      const found = pointedFields.includes(allFields[13]) ? (allFields[13] as HTMLButtonElement).click() :
+        pointedFields.includes(allFields[12]) ? (allFields[12] as HTMLButtonElement).click() :
+          pointedFields.includes(allFields[11]) ? (allFields[11] as HTMLButtonElement).click() :
+            pointedFields.includes(allFields[10]) ? (allFields[10] as HTMLButtonElement).click() :
+              pointedFields.includes(allFields[9]) ? (allFields[9] as HTMLButtonElement).click() :
+                pointedFields.includes(allFields[8]) ? (allFields[8] as HTMLButtonElement).click() : '';
+      if (found !== '') return;
+
+      const playerDices = this.gameBoard.playerDices;
+      const points: number[] = [];
+
+      pointedFields.includes(allFields[0]) ? points.push((playerDices.filter((dice) => dice == 1).length) * 1) : '';
+      pointedFields.includes(allFields[1]) ? points.push((playerDices.filter((dice) => dice == 2).length) * 2) : '';
+      pointedFields.includes(allFields[2]) ? points.push((playerDices.filter((dice) => dice == 3).length) * 3) : '';
+      pointedFields.includes(allFields[3]) ? points.push((playerDices.filter((dice) => dice == 4).length) * 4) : '';
+      pointedFields.includes(allFields[4]) ? points.push((playerDices.filter((dice) => dice == 5).length) * 5) : '';
+      pointedFields.includes(allFields[5]) ? points.push((playerDices.filter((dice) => dice == 6).length) * 6) : '';
+
+      if (points.length !== 0) {
+        const maxPoints = Math.max(...points);
+        (allFields[points.indexOf(maxPoints)] as HTMLButtonElement).click();
+      } else {
+        (otherFields[Math.floor(Math.random() * otherFields.length)] as HTMLButtonElement).click();
+      }
+
+      return;
     }
     throw new Error('Unexpected computer difficulty');
   }
@@ -112,15 +137,13 @@ class GameComponent implements WebComponent  {
     const finishRoundButton = document.querySelector('#buttonFinishRound') as HTMLButtonElement;
     finishRoundButton.disabled = true;
     rollButton.disabled = true;
-    if (this.checkComputerDifficulty() === COMPUTER_DIFFICULTY.EASY || this.checkComputerDifficulty() === COMPUTER_DIFFICULTY.MEDIUM) {
-      const rerolls = Math.floor(Math.random() * 3 + 1);
-      for (let i = 0; i < rerolls; i++) {
+    const rerolls = Math.floor(Math.random() * 3 + 1);
+    for (let i = 0; i < rerolls; i++) {
+      await this.timeout(1500);
+      this.computerClick(rollButton);
+      if (i + 1 === rerolls && i !== 2) {
         await this.timeout(1500);
-        this.computerClick(rollButton);
-        if (i + 1 === rerolls && i !== 2) {
-          await this.timeout(1500);
-          this.computerClick(finishRoundButton);
-        }
+        this.computerClick(finishRoundButton);
       }
     }
     finishRoundButton.disabled = false;
@@ -138,7 +161,7 @@ class GameComponent implements WebComponent  {
   }
 
   private checkComputerDifficulty(): COMPUTER_DIFFICULTY {
-    return COMPUTER_DIFFICULTY.EASY; // Later on remove this and make a proper rule using something to decide of computer's difficulty
+    return COMPUTER_DIFFICULTY.HARD; // Later on remove this and make a proper rule using something to decide of computer's difficulty
   }
 
   private isCurrentPlayerComputer(): boolean {
@@ -313,14 +336,14 @@ class GameComponent implements WebComponent  {
     }
 
     case 8: {
-      if (zeroPoints == false) score = playerDices.reduce((a, b ) => a + b, 0);
+      if (zeroPoints == false) score = playerDices.reduce((a, b) => a + b, 0);
       category = 'threeOfKind';
       this.scoreTable.points[this.gameBoard.currentPlayerIndex].threeOfKind = score;
       break;
     }
 
     case 9: {
-      if (zeroPoints == false) score = playerDices.reduce((a, b ) => a + b, 0);
+      if (zeroPoints == false) score = playerDices.reduce((a, b) => a + b, 0);
       category = 'fourOfKind';
       this.scoreTable.points[this.gameBoard.currentPlayerIndex].fourOfKind = score;
       break;
@@ -355,7 +378,7 @@ class GameComponent implements WebComponent  {
     }
 
     case 14: {
-      if (zeroPoints == false) score = playerDices.reduce((a, b ) => a + b, 0);
+      if (zeroPoints == false) score = playerDices.reduce((a, b) => a + b, 0);
       category = 'chance';
       this.scoreTable.points[this.gameBoard.currentPlayerIndex].chance = score;
       break;
