@@ -12,6 +12,12 @@ interface GameHistory {
   roundNumber: number
 }
 
+enum COMPUTER_DIFFICULTY {
+  EASY,
+  MEDIUM,
+  HARD
+}
+
 class GameComponent implements WebComponent  {
   gameBoard: GameBoardComponent;
   scoreTable: ScoreTableComponent;
@@ -57,30 +63,8 @@ class GameComponent implements WebComponent  {
     });
 
     if (this.isCurrentPlayerComputer()) {
-      this.handleComputerClicks();
+      this.handleComputerRolls();
     }
-  }
-
-  private handleComputerClicks(): void {
-    const rollButton = document.querySelector('#buttonRollAgain') as HTMLButtonElement;
-    const finishRoundButton = document.querySelector('#buttonFinishRound') as HTMLButtonElement;
-    finishRoundButton.disabled = true;
-    rollButton.disabled = true;
-    setTimeout(() => {
-      rollButton.disabled = false;
-      rollButton.click();
-      rollButton.disabled = true;
-      setTimeout(() => {
-        rollButton.disabled = false;
-        rollButton.click();
-        rollButton.disabled = true;
-        setTimeout(() => {
-          rollButton.disabled = false;
-          rollButton.click();
-          rollButton.disabled = true;
-        }, 1000);
-      }, 1000);
-    }, 1000);
   }
 
   savePlayerScores(): void {
@@ -92,34 +76,71 @@ class GameComponent implements WebComponent  {
 
   highlightFields(fields: NodeListOf<Element>): void {
     const isFieldAvailable: boolean[] = this.checkAvailableFields(fields);
-    if (!this.isCurrentPlayerComputer()) {
-      fields.forEach((field, index) => {
-        if (isFieldAvailable[index]) {
-          field.classList.add('score-table__player-field--active');
-          field.addEventListener('click', () => this.chooseScores(index, fields, false), false);
-        } else if (!field.classList.contains('score-table__player-field--filled') && !field.classList.contains('score-table__player-field--blue')) {
-          field.addEventListener('click', () => this.chooseScores(index, fields, true), false);
-        }
-      });
-    } else {
-      let availableFieldsNumbers = Array.prototype.slice.call(fields)
-        .map((field: Element, index: number) =>
-          !field.classList.contains('score-table__player-field--filled') &&
-          !field.classList.contains('score-table__player-field--blue') ? index : -1);
-      availableFieldsNumbers = availableFieldsNumbers.filter((index) => index >= 0);
-
-      const chosenFieldIndex = this.handleComputerChoose(availableFieldsNumbers);
-      this.chooseScores(chosenFieldIndex, fields, false);
+    const otherFields: Element[] = [];
+    const pointedFields: Element[] = [];
+    fields.forEach((field, index) => {
+      if (isFieldAvailable[index]) {
+        pointedFields.push(field);
+        field.classList.add('score-table__player-field--active');
+        field.addEventListener('click', () => this.chooseScores(index, fields, false), false);
+      } else if (!field.classList.contains('score-table__player-field--filled') && !field.classList.contains('score-table__player-field--blue')) {
+        otherFields.push(field);
+        field.addEventListener('click', () => this.chooseScores(index, fields, true), false);
+      }
+    });
+    if (this.isCurrentPlayerComputer()) {
+      this.handleComputerChoose(otherFields, pointedFields);
     }
   }
 
-  // Make a smarter computer
-  private handleComputerChoose(availableFieldsNumbers: number[]): number {
-    return availableFieldsNumbers[Math.floor(Math.random() * availableFieldsNumbers.length)];
+  private handleComputerChoose(otherFields: Element[], pointedFields: Element[]): void {
+    if (this.checkComputerDifficulty() === COMPUTER_DIFFICULTY.EASY) {
+      (otherFields[Math.floor(Math.random() * otherFields.length)] as HTMLButtonElement).click();
+      return;
+    } else if (this.checkComputerDifficulty() === COMPUTER_DIFFICULTY.MEDIUM) {
+      return; // TODO
+    } else if (this.checkComputerDifficulty() === COMPUTER_DIFFICULTY.HARD) {
+      return; // TODO
+    }
+    throw new Error('Unexpected computer difficulty');
+  }
+
+  private async handleComputerRolls(): Promise<void> {
+    const rollButton = document.querySelector('#buttonRollAgain') as HTMLButtonElement;
+    const finishRoundButton = document.querySelector('#buttonFinishRound') as HTMLButtonElement;
+    finishRoundButton.disabled = true;
+    rollButton.disabled = true;
+    if (this.checkComputerDifficulty() === COMPUTER_DIFFICULTY.EASY || this.checkComputerDifficulty() === COMPUTER_DIFFICULTY.MEDIUM) {
+      const rerolls = Math.floor(Math.random() * 3 + 1);
+      for (let i = 0; i < rerolls; i++) {
+        await this.timeout(1500);
+        this.computerClick(rollButton);
+        if (i + 1 === rerolls && i !== 2) {
+          await this.timeout(1500);
+          this.computerClick(finishRoundButton);
+        }
+      }
+    }
+    finishRoundButton.disabled = false;
+    rollButton.disabled = false;
+  }
+
+  private timeout(ms: number): Promise<NodeJS.Timeout> {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
+  private computerClick(button: HTMLButtonElement): void {
+    button.disabled = false;
+    button.click();
+    button.disabled = true;
+  }
+
+  private checkComputerDifficulty(): COMPUTER_DIFFICULTY {
+    return COMPUTER_DIFFICULTY.EASY; // Later on remove this and make a proper rule using something to decide of computer's difficulty
   }
 
   private isCurrentPlayerComputer(): boolean {
-    return true; // Later on remove this and make a proper rule using something to decide if player is computer
+    return true; // Later on remove this and make a proper rule using something to decide if a player is computer
   }
 
   checkAvailableFields(fields: NodeListOf<Element>): boolean[] {
