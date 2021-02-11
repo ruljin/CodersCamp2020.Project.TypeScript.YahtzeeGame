@@ -54,11 +54,7 @@ class GameComponent implements WebComponent  {
   }
 
   checkPlayerFinish(): void {
-    this.checkRemainingRolls().then(() => {
-      this.savePlayerScores();
-    });
-
-    this.checkFinishRoundButton().then(() => {
+    this.checkPlayerFinishRound().then(() => {
       this.savePlayerScores();
     });
 
@@ -66,6 +62,19 @@ class GameComponent implements WebComponent  {
       this.handleComputerRolls();
     }
   }
+  // checkPlayerFinish(): void {
+  //   this.checkRemainingRolls().then(() => {
+  //     this.savePlayerScores();
+  //   });
+
+  //   this.checkFinishRoundButton().then(() => {
+  //     this.savePlayerScores();
+  //   });
+
+  //   if (this.isCurrentPlayerComputer()) {
+  //     this.handleComputerRolls();
+  //   }
+  // }
 
   savePlayerScores(): void {
     const playerName = this.scoreTable.points[this.gameBoard.currentPlayerIndex].name;
@@ -95,9 +104,15 @@ class GameComponent implements WebComponent  {
 
   private handleComputerChoose(otherFields: Element[], pointedFields: Element[]): void {
     if (this.checkComputerDifficulty() === COMPUTER_DIFFICULTY.EASY) {
-      (otherFields[Math.floor(Math.random() * otherFields.length)] as HTMLButtonElement).click();
+      const allFields = [...otherFields, ...pointedFields];
+      (allFields[Math.floor(Math.random() * allFields.length)] as HTMLButtonElement).click();
       return;
     } else if (this.checkComputerDifficulty() === COMPUTER_DIFFICULTY.MEDIUM) {
+      if (pointedFields) {
+        (pointedFields[Math.floor(Math.random() * pointedFields.length)] as HTMLButtonElement).click();
+      } else {
+        (otherFields[Math.floor(Math.random() * otherFields.length)] as HTMLButtonElement).click();
+      }
       return; // TODO
     } else if (this.checkComputerDifficulty() === COMPUTER_DIFFICULTY.HARD) {
       return; // TODO
@@ -383,7 +398,6 @@ class GameComponent implements WebComponent  {
     if (!this.checkFinish()) {
       this.gameBoard.resume();
 
-      this.gameBoard.changePlayer(this.playersName[this.gameBoard.currentPlayerIndex]);
       this.gameBoard.clearCanvas();
       this.gameBoard.reSetRemainingRolls();
       this.gameBoard.playerDices = [];
@@ -395,6 +409,7 @@ class GameComponent implements WebComponent  {
         this.gameBoard.currentPlayerIndex = 0;
         this.currentRoundNumber++;
       }
+      this.gameBoard.changePlayer(this.playersName[this.gameBoard.currentPlayerIndex]);
       this.gameBoard.hold([]);
       this.checkPlayerFinish();
     } else {
@@ -462,18 +477,31 @@ class GameComponent implements WebComponent  {
     return false;
   }
 
-  checkRemainingRolls = async (): Promise<void> => {
+  // checkRemainingRolls = async (): Promise<void> => {
+  //   const rollButton = document.querySelector('#buttonRollAgain');
+  //   return new Promise<void>((resolve) => {
+  //     rollButton!.addEventListener('click', () => {
+  //       if (this.gameBoard.remainingRolls == 0) resolve();
+  //     });
+  //   });
+  // }
+
+  // checkFinishRoundButton = async (): Promise<void> => {
+  //   const finishRoundButton = document.querySelector('#buttonFinishRound');
+  //   return new Promise<void>((resolve) => {
+  //     finishRoundButton!.addEventListener('click', () => {
+  //       if (this.gameBoard.playerDices.length != 0) resolve();
+  //     });
+  //   });
+  // }
+  checkPlayerFinishRound = async (): Promise<void> => {
     const rollButton = document.querySelector('#buttonRollAgain');
+    const finishRoundButton = document.querySelector('#buttonFinishRound');
+
     return new Promise<void>((resolve) => {
       rollButton!.addEventListener('click', () => {
         if (this.gameBoard.remainingRolls == 0) resolve();
       });
-    });
-  }
-
-  checkFinishRoundButton = async (): Promise<void> => {
-    const finishRoundButton = document.querySelector('#buttonFinishRound');
-    return new Promise<void>((resolve) => {
       finishRoundButton!.addEventListener('click', () => {
         if (this.gameBoard.playerDices.length != 0) resolve();
       });
