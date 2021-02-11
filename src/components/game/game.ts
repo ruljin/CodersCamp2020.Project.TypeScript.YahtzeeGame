@@ -62,19 +62,6 @@ class GameComponent implements WebComponent  {
       this.handleComputerRolls();
     }
   }
-  // checkPlayerFinish(): void {
-  //   this.checkRemainingRolls().then(() => {
-  //     this.savePlayerScores();
-  //   });
-
-  //   this.checkFinishRoundButton().then(() => {
-  //     this.savePlayerScores();
-  //   });
-
-  //   if (this.isCurrentPlayerComputer()) {
-  //     this.handleComputerRolls();
-  //   }
-  // }
 
   savePlayerScores(): void {
     const playerName = this.scoreTable.points[this.gameBoard.currentPlayerIndex].name;
@@ -113,7 +100,7 @@ class GameComponent implements WebComponent  {
       } else {
         (otherFields[Math.floor(Math.random() * otherFields.length)] as HTMLButtonElement).click();
       }
-      return; // TODO
+      return;
     } else if (this.checkComputerDifficulty() === COMPUTER_DIFFICULTY.HARD) {
       return; // TODO
     }
@@ -477,23 +464,6 @@ class GameComponent implements WebComponent  {
     return false;
   }
 
-  // checkRemainingRolls = async (): Promise<void> => {
-  //   const rollButton = document.querySelector('#buttonRollAgain');
-  //   return new Promise<void>((resolve) => {
-  //     rollButton!.addEventListener('click', () => {
-  //       if (this.gameBoard.remainingRolls == 0) resolve();
-  //     });
-  //   });
-  // }
-
-  // checkFinishRoundButton = async (): Promise<void> => {
-  //   const finishRoundButton = document.querySelector('#buttonFinishRound');
-  //   return new Promise<void>((resolve) => {
-  //     finishRoundButton!.addEventListener('click', () => {
-  //       if (this.gameBoard.playerDices.length != 0) resolve();
-  //     });
-  //   });
-  // }
   checkPlayerFinishRound = async (): Promise<void> => {
     const rollButton = document.querySelector('#buttonRollAgain');
     const finishRoundButton = document.querySelector('#buttonFinishRound');
