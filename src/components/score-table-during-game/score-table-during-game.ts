@@ -1,7 +1,7 @@
 import './score-table-during-game.scss';
 import WebComponent, { createElementFromString } from '../../common/WebComponent';
 import ModalComponent from '../modal/modal';
-import * as ones from '../../assets/ones.png';
+import Router from '../../common/Router';
 
 interface PlayerPoints {
   name: string
@@ -62,23 +62,23 @@ class ScoreTableDuringGameComponent implements WebComponent {
     const rowNames = `
     <div id="scoreTableNames" class="score-table__names">
       <div class="score-table__names-item score-table__names-item--empty"></div>
-      <div class="score-table__names-item"><p id="ones">ones</p></div>
-      <div class="score-table__names-item"><p id="twos">twos</p></div>
-      <div class="score-table__names-item"><p id="threes">threes</p></div>
-      <div class="score-table__names-item"><p id="fours">fours</p></div>
-      <div class="score-table__names-item"><p id="fives">fives</p></div>
-      <div class="score-table__names-item"><p id="sixes">sixes</p></div>
-      <div class="score-table__names-item score-table__names-item--blue"><p id="subtotal">subtotal</p></div>
-      <div class="score-table__names-item score-table__names-item--blue"><p id="bonus">bonus</p></div>
-      <div class="score-table__names-item"><p id="threeOfaKind">3 of a kind</p></div>
-      <div class="score-table__names-item"><p id="fourOfaKind">4 of a kind</p></div>
-      <div class="score-table__names-item"><p id="fullHouse">full house</p></div>
-      <div class="score-table__names-item"><p id="smStraight">sm.straight</p></div>
-      <div class="score-table__names-item"><p id="lgStraight">lg.straight</p></div>
-      <div class="score-table__names-item"><p id="yahtzee">yahtzee</p></div>
-      <div class="score-table__names-item"><p id="chance">chance</p></div>
-      <div class="score-table__names-item score-table__names-item--blue"><p id="yahtzeeBonus">yahtzee bonus</p></div>
-      <div class="score-table__names-item score-table__names-item--blue"><p id="total">total</p></div>
+      <div id="ones" class="score-table__names-item"><p>ones</p></div>
+      <div id="twos" class="score-table__names-item"><p>twos</p></div>
+      <div id="threes" class="score-table__names-item"><p>threes</p></div>
+      <div id="fours" class="score-table__names-item"><p>fours</p></div>
+      <div id="fives" class="score-table__names-item"><p>fives</p></div>
+      <div id="sixes" class="score-table__names-item"><p>sixes</p></div>
+      <div id="subtotal" class="score-table__names-item score-table__names-item--blue"><p>subtotal</p></div>
+      <div id="bonus" class="score-table__names-item score-table__names-item--blue"><p>bonus</p></div>
+      <div id="threeOfaKind" class="score-table__names-item"><p>3 of a kind</p></div>
+      <div id="fourOfaKind" class="score-table__names-item"><p>4 of a kind</p></div>
+      <div id="fullHouse" class="score-table__names-item"><p>full house</p></div>
+      <div id="smStraight" class="score-table__names-item"><p>sm.straight</p></div>
+      <div id="lgStraight" class="score-table__names-item"><p>lg.straight</p></div>
+      <div id="yahtzee" class="score-table__names-item"><p>yahtzee</p></div>
+      <div id="chance" class="score-table__names-item"><p>chance</p></div>
+      <div id="yahtzeeBonus" class="score-table__names-item score-table__names-item--blue"><p>yahtzee bonus</p></div>
+      <div id="total" class="score-table__names-item score-table__names-item--blue"><p>total</p></div>
     </div>`;
 
     container += rowNames;
@@ -117,33 +117,145 @@ class ScoreTableDuringGameComponent implements WebComponent {
 
   setup(): void {
     const nameList = document.querySelector('#scoreTableNames')!;
-    const names = nameList.querySelectorAll('.score-table__names-item:not(.score-table__names-item--empty) p')!;
     const namesField = nameList.querySelectorAll('.score-table__names-item:not(.score-table__names-item--empty)')!;
 
-    names.forEach((name) => {
-      name.addEventListener('click', () => this.someFunction(name));
-    });
-
     namesField.forEach((field) => {
-      field.addEventListener('click', () => this.anotherFunction(field, event!));
+      field.addEventListener('click', () => this.showExplanationModal(field));
     });
+  }
 
-    const modalComponent = new ModalComponent({ subheader: 'How to score', header: 'Ones', content: `Dice with side 1.
-    <p>1 * the number of dice 1 obtained.</p><img class="modal__image" />`, picture: ones, buttonClose: { text: 'close', width: 10 }});
-    modalComponent.render();
+  public showExplanationModal(field: Element): void {
+    let header, content, picture;
+    const subheader = 'How to score';
+    const buttonClose = {text: 'close', width: 10};
+
+    switch (field.id) {
+    case 'ones' : {
+      header = 'Ones';
+      content = 'Dice with side 1.<p>1 * the number of dice 1 obtained.</p><img class="modal__image" />';
+      picture = 'ones';
+      break;
+    }
+
+    case 'twos' : {
+      header = 'Twos';
+      content = 'Dice with side 2.<p>2 * the number of dice 2 obtained.</p><img class="modal__image" />';
+      picture = 'twos';
+      break;
+    }
+
+    case 'threes' : {
+      header = 'Threes';
+      content = 'Dice with side 3. <p>3 * the number of dice 3 obtained.</p><img class="modal__image" />';
+      picture = 'threes';
+      break;
+    }
+
+    case 'fours' : {
+      header = 'Fours';
+      content = 'Dice with side 4.<p>4 * the number of dice 4 obtained.</p><img class="modal__image" />';
+      picture = 'fours';
+      break;
+    }
+
+    case 'fives' : {
+      header = 'Fives';
+      content = 'Dice with side 5.<p>5 * the number of dice 5 obtained.</p><img class="modal__image" />';
+      picture = 'fives';
+      break;
+    }
+
+    case 'sixes' : {
+      header = 'Sixes';
+      content = 'Dice with side 6.<p>6 * the number of dice 6 obtained.</p><img class="modal__image" />';
+      picture = 'sixes';
+      break;
+    }
+
+    case 'subtotal' : {
+      header = 'Subtotal';
+      content = 'Subtotal upper section.<p>Sum of points obtained.</p><img class="modal__image" />';
+      break;
+    }
+
+    case 'bonus' : {
+      header = 'Bonus';
+      content = 'When subtotal is greater than or equal to 63 points.<p>35 points.</p><img class="modal__image" />';
+      break;
+    }
+
+    case 'threeOfaKind' : {
+      header = '3 of a Kind';
+      content = 'At least three dice the same.<p>Sum of all dice.</p><img class="modal__image" />';
+      picture = 'threeOfKind';
+      break;
+    }
+
+    case 'fourOfaKind' : {
+      header = '4 of a Kind';
+      content = 'At least four dice the same.<p>Sum of all dice.</p><img class="modal__image" />';
+      picture = 'fourOfKind';
+      break;
+    }
+
+    case 'fullHouse' : {
+      header = 'Full House';
+      content = 'Three of one number and two of another.<p>25 points.</p><img class="modal__image" />';
+      picture = 'fullHouse';
+      break;
+    }
+
+    case 'smStraight' : {
+      header = 'Small Straight';
+      content = 'Four sequential dice (1-2-3-4, 2-3-4-5 or 3-4-5-6).<p>30 points.</p><img class="modal__image" />';
+      picture = 'smStraight';
+      break;
+    }
+
+    case 'lgStraight' : {
+      header = 'Large Straight';
+      content = 'Five sequential dice (1-2-3-4-5 or 2-3-4-5-6).<p>40 points.</p><img class="modal__image" />';
+      picture = 'lgStraight';
+      break;
+    }
+
+    case 'yahtzee' : {
+      header = 'Yahtzee';
+      content = 'All five dice the same.<p>50 points.</p><img class="modal__image" />';
+      picture = 'Yahtzee';
+      break;
+    }
+
+    case 'chance' : {
+      header = 'Chance';
+      content = 'Any combination.<p>Sum of all dice.</p><img class="modal__image" />';
+      picture = 'chance';
+      break;
+    }
+
+    case 'yahtzeeBonus' : {
+      header = 'Yahtzee bonus';
+      content = 'For each new Yahtzee.<p>100 points for each additional Yahtzee.</p><img class="modal__image" />';
+      break;
+    }
+
+    case 'total' : {
+      header = 'Total';
+      content = 'Grand total.<p>Sum of points obtained on the whole grid.</p><img class="modal__image" />';
+      break;
+    }
+
+    default : {
+      header = '';
+      content = '';
+    }
+    }
+
+    const modalComponent = new ModalComponent({ subheader: subheader, header: header, content: content, picture: picture, buttonClose: buttonClose});
+    const router = new Router(document.querySelector('#root')!);
+    router.renderComponent(modalComponent.render());
     modalComponent.setup();
-    document.querySelector('#ones')!.addEventListener('click', modalComponent.openModal);
-  }
-
-  public someFunction(name: Element): string {
-    return name.innerHTML;
-  }
-
-  public anotherFunction(field: Element, e: Event): string {
-    if (!e.target) return '';
-    const target = e.target as HTMLElement;
-    if (!target.classList.contains('score-table__names-item')) return '';
-    return field.innerHTML;
+    modalComponent.openModal();
   }
 }
 
