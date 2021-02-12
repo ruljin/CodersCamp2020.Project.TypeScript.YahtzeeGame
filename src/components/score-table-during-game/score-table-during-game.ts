@@ -1,5 +1,7 @@
 import './score-table-during-game.scss';
 import WebComponent, { createElementFromString } from '../../common/WebComponent';
+import ModalComponent from '../modal/modal';
+import * as ones from '../../assets/ones.png';
 
 interface PlayerPoints {
   name: string
@@ -125,6 +127,12 @@ class ScoreTableDuringGameComponent implements WebComponent {
     namesField.forEach((field) => {
       field.addEventListener('click', () => this.anotherFunction(field, event!));
     });
+
+    const modalComponent = new ModalComponent({ subheader: 'How to score', header: 'Ones', content: `Dice with side 1.
+    <p>1 * the number of dice 1 obtained.</p><img class="modal__image" />`, picture: ones, buttonClose: { text: 'close', width: 10 }});
+    modalComponent.render();
+    modalComponent.setup();
+    document.querySelector('#ones')!.addEventListener('click', modalComponent.openModal);
   }
 
   public someFunction(name: Element): string {

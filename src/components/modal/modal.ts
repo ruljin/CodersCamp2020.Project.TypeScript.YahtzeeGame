@@ -7,6 +7,7 @@ interface Modal {
   subheader?: string;
   header: string;
   content: string;
+  picture?: unknown;
   buttonClose?: { text: string, width: number };
   buttonLink?: { link: string, name: string };
   buttonNext?: { text: string, width: number };
@@ -45,6 +46,9 @@ class ModalComponent implements WebComponent {
     }
     document.querySelector('.modal')!.addEventListener('click', this.modalClick);
     document.querySelector('.modal-wrap')!.addEventListener('click', this.closeModal);
+    if (this.modalContent.picture) {
+      document.querySelector('.modal__image')!.setAttribute('src', `${this.modalContent.picture}`);
+    }
     return;
   }
 
