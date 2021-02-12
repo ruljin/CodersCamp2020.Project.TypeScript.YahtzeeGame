@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fabric.js.
 - Settings Component.
 - Modal Component.
+- Modal content for each category in game.
 
 ### Changed
 
