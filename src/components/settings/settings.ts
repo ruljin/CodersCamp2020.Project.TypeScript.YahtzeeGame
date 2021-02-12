@@ -4,7 +4,7 @@ import LabelComponent from '../label/label';
 import SelectorComponent from '../selector/selector';
 import AddRemoveElement from '../add-remove/add-remove';
 import ReferenceComponent from '../reference/reference';
-import saveSettings from '../local-storage/localstorage';
+import saveSettings from '../../local-storage/localstorage';
 
 class SettingsComponent implements WebComponent {
   playButton = document.querySelector('.button') as HTMLElement;
