@@ -132,116 +132,116 @@ class ScoreTableDuringGameComponent implements WebComponent {
     switch (field.id) {
     case 'ones' : {
       header = 'Ones';
-      content = 'Dice with side 1.<p>1 * the number of dice 1 obtained.</p><img class="modal__image" />';
+      content = 'Dice with side 1.<p class="modal__body__points">1 * the number of dice 1 obtained.</p><img class="modal__image" />';
       picture = 'ones';
       break;
     }
 
     case 'twos' : {
       header = 'Twos';
-      content = 'Dice with side 2.<p>2 * the number of dice 2 obtained.</p><img class="modal__image" />';
+      content = 'Dice with side 2.<p class="modal__body__points">2 * the number of dice 2 obtained.</p><img class="modal__image" />';
       picture = 'twos';
       break;
     }
 
     case 'threes' : {
       header = 'Threes';
-      content = 'Dice with side 3. <p>3 * the number of dice 3 obtained.</p><img class="modal__image" />';
+      content = 'Dice with side 3. <p class="modal__body__points">3 * the number of dice 3 obtained.</p><img class="modal__image" />';
       picture = 'threes';
       break;
     }
 
     case 'fours' : {
       header = 'Fours';
-      content = 'Dice with side 4.<p>4 * the number of dice 4 obtained.</p><img class="modal__image" />';
+      content = 'Dice with side 4.<p class="modal__body__points">4 * the number of dice 4 obtained.</p><img class="modal__image" />';
       picture = 'fours';
       break;
     }
 
     case 'fives' : {
       header = 'Fives';
-      content = 'Dice with side 5.<p>5 * the number of dice 5 obtained.</p><img class="modal__image" />';
+      content = 'Dice with side 5.<p class="modal__body__points">5 * the number of dice 5 obtained.</p><img class="modal__image" />';
       picture = 'fives';
       break;
     }
 
     case 'sixes' : {
       header = 'Sixes';
-      content = 'Dice with side 6.<p>6 * the number of dice 6 obtained.</p><img class="modal__image" />';
+      content = 'Dice with side 6.<p class="modal__body__points">6 * the number of dice 6 obtained.</p><img class="modal__image" />';
       picture = 'sixes';
       break;
     }
 
     case 'subtotal' : {
       header = 'Subtotal';
-      content = 'Subtotal upper section.<p>Sum of points obtained.</p><img class="modal__image" />';
+      content = 'Subtotal upper section.<p class="modal__body__points">Sum of points obtained.</p><img class="modal__image" />';
       break;
     }
 
     case 'bonus' : {
       header = 'Bonus';
-      content = 'When subtotal is greater than or equal to 63 points.<p>35 points.</p><img class="modal__image" />';
+      content = 'When subtotal is greater than or equal to 63 points.<p class="modal__body__points">35 points.</p><img class="modal__image" />';
       break;
     }
 
     case 'threeOfaKind' : {
       header = '3 of a Kind';
-      content = 'At least three dice the same.<p>Sum of all dice.</p><img class="modal__image" />';
+      content = 'At least three dice the same.<p class="modal__body__points">Sum of all dice.</p><img class="modal__image" />';
       picture = 'threeOfKind';
       break;
     }
 
     case 'fourOfaKind' : {
       header = '4 of a Kind';
-      content = 'At least four dice the same.<p>Sum of all dice.</p><img class="modal__image" />';
+      content = 'At least four dice the same.<p class="modal__body__points">Sum of all dice.</p><img class="modal__image" />';
       picture = 'fourOfKind';
       break;
     }
 
     case 'fullHouse' : {
       header = 'Full House';
-      content = 'Three of one number and two of another.<p>25 points.</p><img class="modal__image" />';
+      content = 'Three of one number and two of another.<p class="modal__body__points">25 points.</p><img class="modal__image" />';
       picture = 'fullHouse';
       break;
     }
 
     case 'smStraight' : {
       header = 'Small Straight';
-      content = 'Four sequential dice (1-2-3-4, 2-3-4-5 or 3-4-5-6).<p>30 points.</p><img class="modal__image" />';
+      content = 'Four sequential dice (1-2-3-4, 2-3-4-5 or 3-4-5-6).<p class="modal__body__points">30 points.</p><img class="modal__image" />';
       picture = 'smStraight';
       break;
     }
 
     case 'lgStraight' : {
       header = 'Large Straight';
-      content = 'Five sequential dice (1-2-3-4-5 or 2-3-4-5-6).<p>40 points.</p><img class="modal__image" />';
+      content = 'Five sequential dice (1-2-3-4-5 or 2-3-4-5-6).<p class="modal__body__points">40 points.</p><img class="modal__image" />';
       picture = 'lgStraight';
       break;
     }
 
     case 'yahtzee' : {
       header = 'Yahtzee';
-      content = 'All five dice the same.<p>50 points.</p><img class="modal__image" />';
+      content = 'All five dice the same.<p class="modal__body__points">50 points.</p><img class="modal__image" />';
       picture = 'Yahtzee';
       break;
     }
 
     case 'chance' : {
       header = 'Chance';
-      content = 'Any combination.<p>Sum of all dice.</p><img class="modal__image" />';
+      content = 'Any combination.<p class="modal__body__points">Sum of all dice.</p><img class="modal__image" />';
       picture = 'chance';
       break;
     }
 
     case 'yahtzeeBonus' : {
       header = 'Yahtzee bonus';
-      content = 'For each new Yahtzee.<p>100 points for each additional Yahtzee.</p><img class="modal__image" />';
+      content = 'For each new Yahtzee.<p class="modal__body__points">100 points for each additional Yahtzee.</p><img class="modal__image" />';
       break;
     }
 
     case 'total' : {
       header = 'Total';
-      content = 'Grand total.<p>Sum of points obtained on the whole grid.</p><img class="modal__image" />';
+      content = 'Grand total.<p class="modal__body__points">Sum of points obtained on the whole grid.</p><img class="modal__image" />';
       break;
     }
 
