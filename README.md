@@ -27,7 +27,7 @@ Authors of this project are course participants who worked under the supervision
 Our project is an application to play dice game Yahtzee. This is a browser based web application, so no installation is required. 
 
 <img src="https://res.cloudinary.com/ded5al291/image/upload/v1613255903/CodersCamp%20projekt%201%2C%20wizytowka/screen1_nbgwoc.jpg">
-<img src="https://res.cloudinary.com/ded5al291/image/upload/v1613255903/CodersCamp%20projekt%201%2C%20wizytowka/screen2_zagmvc.jpg">
+<img src="https://res.cloudinary.com/ded5al291/image/upload/v1613256346/CodersCamp%20projekt%201%2C%20wizytowka/screen2_wbntmo.jpg">
 
 ## Features
 -	The main page contains short introdution to a game and menu panel directing to Scores, Rules, Game and Authors.
