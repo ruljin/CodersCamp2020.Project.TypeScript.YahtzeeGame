@@ -15,14 +15,35 @@ function routePathsHandler() {
   if (router.checkPath('')) {
     router.clearRoot();
 
-    const diceBackgroundComponent =
-      new DiceBackgroundComponent(DiceTypes.BG_ALT);
-    router.renderComponent(diceBackgroundComponent.render());
-    diceBackgroundComponent.setup();
+    const width = window.innerWidth;
+    if (width <= 576) {
+      const diceBackgroundComponent =
+      new DiceBackgroundComponent(DiceTypes.BG_MOB_ALT);
+      router.renderComponent(diceBackgroundComponent.render());
+      diceBackgroundComponent.setup();
 
-    const diceBackgroundComponent2 = new DiceBackgroundComponent(DiceTypes.BG);
-    router.renderComponent(diceBackgroundComponent2.render());
-    diceBackgroundComponent2.setup();
+      const diceBackgroundComponent2 = new DiceBackgroundComponent(DiceTypes.BG_MOB);
+      router.renderComponent(diceBackgroundComponent2.render());
+      diceBackgroundComponent2.setup();
+    } else if (width > 576 && width <= 768) {
+      const diceBackgroundComponent =
+      new DiceBackgroundComponent(DiceTypes.BG_MOB_ALT);
+      router.renderComponent(diceBackgroundComponent.render());
+      diceBackgroundComponent.setup();
+
+      const diceBackgroundComponent2 = new DiceBackgroundComponent(DiceTypes.BG_MOB);
+      router.renderComponent(diceBackgroundComponent2.render());
+      diceBackgroundComponent2.setup();
+    } else {
+      const diceBackgroundComponent =
+      new DiceBackgroundComponent(DiceTypes.BG_ALT);
+      router.renderComponent(diceBackgroundComponent.render());
+      diceBackgroundComponent.setup();
+
+      const diceBackgroundComponent2 = new DiceBackgroundComponent(DiceTypes.BG);
+      router.renderComponent(diceBackgroundComponent2.render());
+      diceBackgroundComponent2.setup();
+    }
 
     const logoComponent = new LogoComponent();
     router.renderComponent(logoComponent.render());
@@ -35,10 +56,10 @@ function routePathsHandler() {
     const buttonWrapper = document.createElement('div');
     buttonWrapper.setAttribute('class', 'menu-buttons');
 
-    const referenceComponentScores = new ReferenceComponent('scores', 'scores');
-    const referenceComponentRules = new ReferenceComponent('rules', 'rules');
-    const referenceComponentGame = new ReferenceComponent('game-settings', 'game');
-    const referenceComponentAuthors = new ReferenceComponent('authors', 'authors');
+    const referenceComponentScores = new ReferenceComponent('scores', 'Scores');
+    const referenceComponentRules = new ReferenceComponent('rules', 'Rules');
+    const referenceComponentGame = new ReferenceComponent('game-settings', 'Game');
+    const referenceComponentAuthors = new ReferenceComponent('authors', 'Authors');
 
     buttonWrapper.appendChild(referenceComponentScores.render());
     buttonWrapper.appendChild(referenceComponentRules.render());
@@ -54,14 +75,35 @@ function routePathsHandler() {
   } else if (router.checkPath('authors')) {
     router.clearRoot();
 
-    const diceBackgroundComponent =
-      new DiceBackgroundComponent(DiceTypes.BG_ALT);
-    router.renderComponent(diceBackgroundComponent.render());
-    diceBackgroundComponent.setup();
+    const width = window.innerWidth;
+    if (width <= 576) {
+      const diceBackgroundComponent =
+      new DiceBackgroundComponent(DiceTypes.BG_MOB_ALT);
+      router.renderComponent(diceBackgroundComponent.render());
+      diceBackgroundComponent.setup();
 
-    const diceBackgroundComponent2 = new DiceBackgroundComponent(DiceTypes.BG);
-    router.renderComponent(diceBackgroundComponent2.render());
-    diceBackgroundComponent2.setup();
+      const diceBackgroundComponent2 = new DiceBackgroundComponent(DiceTypes.BG_MOB);
+      router.renderComponent(diceBackgroundComponent2.render());
+      diceBackgroundComponent2.setup();
+    } else if (width > 576 && width <= 768) {
+      const diceBackgroundComponent =
+      new DiceBackgroundComponent(DiceTypes.BG_MOB_ALT);
+      router.renderComponent(diceBackgroundComponent.render());
+      diceBackgroundComponent.setup();
+
+      const diceBackgroundComponent2 = new DiceBackgroundComponent(DiceTypes.BG_MOB);
+      router.renderComponent(diceBackgroundComponent2.render());
+      diceBackgroundComponent2.setup();
+    } else {
+      const diceBackgroundComponent =
+      new DiceBackgroundComponent(DiceTypes.BG_ALT);
+      router.renderComponent(diceBackgroundComponent.render());
+      diceBackgroundComponent.setup();
+
+      const diceBackgroundComponent2 = new DiceBackgroundComponent(DiceTypes.BG);
+      router.renderComponent(diceBackgroundComponent2.render());
+      diceBackgroundComponent2.setup();
+    }
 
     const logoComponent = new LogoComponent();
     router.renderComponent(logoComponent.render());
@@ -74,10 +116,10 @@ function routePathsHandler() {
     const buttonWrapper = document.createElement('div');
     buttonWrapper.setAttribute('class', 'menu-buttons');
 
-    const referenceComponentScores = new ReferenceComponent('scores', 'scores');
-    const referenceComponentRules = new ReferenceComponent('rules', 'rules');
-    const referenceComponentGame = new ReferenceComponent('game-settings', 'game');
-    const referenceComponentAuthors = new ReferenceComponent('authors', 'authors');
+    const referenceComponentScores = new ReferenceComponent('scores', 'Scores');
+    const referenceComponentRules = new ReferenceComponent('rules', 'Rules');
+    const referenceComponentGame = new ReferenceComponent('game-settings', 'Game');
+    const referenceComponentAuthors = new ReferenceComponent('authors', 'Authors');
 
     buttonWrapper.appendChild(referenceComponentScores.render());
     buttonWrapper.appendChild(referenceComponentRules.render());
@@ -92,14 +134,35 @@ function routePathsHandler() {
   } else if (router.checkPath('rules')) {
     router.clearRoot();
 
-    const diceBackgroundComponent =
-      new DiceBackgroundComponent(DiceTypes.BG_ALT);
-    router.renderComponent(diceBackgroundComponent.render());
-    diceBackgroundComponent.setup();
+    const width = window.innerWidth;
+    if (width <= 576) {
+      const diceBackgroundComponent =
+      new DiceBackgroundComponent(DiceTypes.BG_MOB_ALT);
+      router.renderComponent(diceBackgroundComponent.render());
+      diceBackgroundComponent.setup();
 
-    const diceBackgroundComponent2 = new DiceBackgroundComponent(DiceTypes.BG);
-    router.renderComponent(diceBackgroundComponent2.render());
-    diceBackgroundComponent2.setup();
+      const diceBackgroundComponent2 = new DiceBackgroundComponent(DiceTypes.BG_MOB);
+      router.renderComponent(diceBackgroundComponent2.render());
+      diceBackgroundComponent2.setup();
+    } else if (width > 576 && width <= 768) {
+      const diceBackgroundComponent =
+      new DiceBackgroundComponent(DiceTypes.BG_MOB_ALT);
+      router.renderComponent(diceBackgroundComponent.render());
+      diceBackgroundComponent.setup();
+
+      const diceBackgroundComponent2 = new DiceBackgroundComponent(DiceTypes.BG_MOB);
+      router.renderComponent(diceBackgroundComponent2.render());
+      diceBackgroundComponent2.setup();
+    } else {
+      const diceBackgroundComponent =
+      new DiceBackgroundComponent(DiceTypes.BG_ALT);
+      router.renderComponent(diceBackgroundComponent.render());
+      diceBackgroundComponent.setup();
+
+      const diceBackgroundComponent2 = new DiceBackgroundComponent(DiceTypes.BG);
+      router.renderComponent(diceBackgroundComponent2.render());
+      diceBackgroundComponent2.setup();
+    }
 
     const logoComponent = new LogoComponent();
     router.renderComponent(logoComponent.render());
@@ -112,10 +175,10 @@ function routePathsHandler() {
     const buttonWrapper = document.createElement('div');
     buttonWrapper.setAttribute('class', 'menu-buttons');
 
-    const referenceComponentScores = new ReferenceComponent('scores', 'scores');
-    const referenceComponentRules = new ReferenceComponent('rules', 'rules');
-    const referenceComponentGame = new ReferenceComponent('game-settings', 'game');
-    const referenceComponentAuthors = new ReferenceComponent('authors', 'authors');
+    const referenceComponentScores = new ReferenceComponent('scores', 'Scores');
+    const referenceComponentRules = new ReferenceComponent('rules', 'Rules');
+    const referenceComponentGame = new ReferenceComponent('game-settings', 'Game');
+    const referenceComponentAuthors = new ReferenceComponent('authors', 'Authors');
 
     buttonWrapper.appendChild(referenceComponentScores.render());
     buttonWrapper.appendChild(referenceComponentRules.render());
@@ -130,14 +193,35 @@ function routePathsHandler() {
   } else if (router.checkPath('scores')) {
     router.clearRoot();
 
-    const diceBackgroundComponent =
-      new DiceBackgroundComponent(DiceTypes.BG_ALT);
-    router.renderComponent(diceBackgroundComponent.render());
-    diceBackgroundComponent.setup();
+    const width = window.innerWidth;
+    if (width <= 576) {
+      const diceBackgroundComponent =
+      new DiceBackgroundComponent(DiceTypes.BG_MOB_ALT);
+      router.renderComponent(diceBackgroundComponent.render());
+      diceBackgroundComponent.setup();
 
-    const diceBackgroundComponent2 = new DiceBackgroundComponent(DiceTypes.BG);
-    router.renderComponent(diceBackgroundComponent2.render());
-    diceBackgroundComponent2.setup();
+      const diceBackgroundComponent2 = new DiceBackgroundComponent(DiceTypes.BG_MOB);
+      router.renderComponent(diceBackgroundComponent2.render());
+      diceBackgroundComponent2.setup();
+    } else if (width > 576 && width <= 768) {
+      const diceBackgroundComponent =
+      new DiceBackgroundComponent(DiceTypes.BG_MOB_ALT);
+      router.renderComponent(diceBackgroundComponent.render());
+      diceBackgroundComponent.setup();
+
+      const diceBackgroundComponent2 = new DiceBackgroundComponent(DiceTypes.BG_MOB);
+      router.renderComponent(diceBackgroundComponent2.render());
+      diceBackgroundComponent2.setup();
+    } else {
+      const diceBackgroundComponent =
+      new DiceBackgroundComponent(DiceTypes.BG_ALT);
+      router.renderComponent(diceBackgroundComponent.render());
+      diceBackgroundComponent.setup();
+
+      const diceBackgroundComponent2 = new DiceBackgroundComponent(DiceTypes.BG);
+      router.renderComponent(diceBackgroundComponent2.render());
+      diceBackgroundComponent2.setup();
+    }
 
     const logoComponent = new LogoComponent();
     router.renderComponent(logoComponent.render());
@@ -150,10 +234,10 @@ function routePathsHandler() {
     const buttonWrapper = document.createElement('div');
     buttonWrapper.setAttribute('class', 'menu-buttons');
 
-    const referenceComponentScores = new ReferenceComponent('scores', 'scores');
-    const referenceComponentRules = new ReferenceComponent('rules', 'rules');
-    const referenceComponentGame = new ReferenceComponent('game-settings', 'game');
-    const referenceComponentAuthors = new ReferenceComponent('authors', 'authors');
+    const referenceComponentScores = new ReferenceComponent('scores', 'Scores');
+    const referenceComponentRules = new ReferenceComponent('rules', 'Rules');
+    const referenceComponentGame = new ReferenceComponent('game-settings', 'Game');
+    const referenceComponentAuthors = new ReferenceComponent('authors', 'Authors');
 
     buttonWrapper.appendChild(referenceComponentScores.render());
     buttonWrapper.appendChild(referenceComponentRules.render());
@@ -169,14 +253,35 @@ function routePathsHandler() {
   } else if (router.checkPath('game-settings')) {
     router.clearRoot();
 
-    const diceBackgroundComponent =
-      new DiceBackgroundComponent(DiceTypes.BG_ALT);
-    router.renderComponent(diceBackgroundComponent.render());
-    diceBackgroundComponent.setup();
+    const width = window.innerWidth;
+    if (width <= 576) {
+      const diceBackgroundComponent =
+      new DiceBackgroundComponent(DiceTypes.BG_MOB_ALT);
+      router.renderComponent(diceBackgroundComponent.render());
+      diceBackgroundComponent.setup();
 
-    const diceBackgroundComponent2 = new DiceBackgroundComponent(DiceTypes.BG);
-    router.renderComponent(diceBackgroundComponent2.render());
-    diceBackgroundComponent2.setup();
+      const diceBackgroundComponent2 = new DiceBackgroundComponent(DiceTypes.BG_MOB);
+      router.renderComponent(diceBackgroundComponent2.render());
+      diceBackgroundComponent2.setup();
+    } else if (width > 576 && width <= 768) {
+      const diceBackgroundComponent =
+      new DiceBackgroundComponent(DiceTypes.BG_MOB_ALT);
+      router.renderComponent(diceBackgroundComponent.render());
+      diceBackgroundComponent.setup();
+
+      const diceBackgroundComponent2 = new DiceBackgroundComponent(DiceTypes.BG_MOB);
+      router.renderComponent(diceBackgroundComponent2.render());
+      diceBackgroundComponent2.setup();
+    } else {
+      const diceBackgroundComponent =
+      new DiceBackgroundComponent(DiceTypes.BG_ALT);
+      router.renderComponent(diceBackgroundComponent.render());
+      diceBackgroundComponent.setup();
+
+      const diceBackgroundComponent2 = new DiceBackgroundComponent(DiceTypes.BG);
+      router.renderComponent(diceBackgroundComponent2.render());
+      diceBackgroundComponent2.setup();
+    }
 
     const logoComponent = new LogoComponent();
     router.renderComponent(logoComponent.render());
@@ -188,16 +293,45 @@ function routePathsHandler() {
 
     const buttonWrapper = document.createElement('div');
     buttonWrapper.setAttribute('class', 'menu-buttons');
-    buttonWrapper.appendChild(new ReferenceComponent('scores', 'scores').render());
-    buttonWrapper.appendChild(new ReferenceComponent('rules', 'rules').render());
-    buttonWrapper.appendChild(new ReferenceComponent('game-settings', 'game').render());
-    buttonWrapper.appendChild(new ReferenceComponent('authors', 'authors').render());
+    buttonWrapper.appendChild(new ReferenceComponent('scores', 'Scores').render());
+    buttonWrapper.appendChild(new ReferenceComponent('rules', 'Rules').render());
+    buttonWrapper.appendChild(new ReferenceComponent('game-settings', 'Game').render());
+    buttonWrapper.appendChild(new ReferenceComponent('authors', 'Authors').render());
     router.renderComponent(buttonWrapper);
 
   } else if (router.checkPath('game')) {
     router.clearRoot();
-    const playersName = ['Player 1', 'Player 2'];
+    const playersName = ['Player 1', 'Player 2', 'computer1'];
     const game = new GameComponent(playersName);
+    const width = window.innerWidth;
+    if (width <= 576) {
+      const diceBackgroundComponent =
+      new DiceBackgroundComponent(DiceTypes.BG_MOB_ALT);
+      router.renderComponent(diceBackgroundComponent.render());
+      diceBackgroundComponent.setup();
+
+      const diceBackgroundComponent2 = new DiceBackgroundComponent(DiceTypes.BG_MOB);
+      router.renderComponent(diceBackgroundComponent2.render());
+      diceBackgroundComponent2.setup();
+    } else if (width > 576 && width <= 768) {
+      const diceBackgroundComponent =
+      new DiceBackgroundComponent(DiceTypes.BG_MOB_ALT);
+      router.renderComponent(diceBackgroundComponent.render());
+      diceBackgroundComponent.setup();
+
+      const diceBackgroundComponent2 = new DiceBackgroundComponent(DiceTypes.BG_MOB);
+      router.renderComponent(diceBackgroundComponent2.render());
+      diceBackgroundComponent2.setup();
+    } else {
+      const diceBackgroundComponent =
+      new DiceBackgroundComponent(DiceTypes.BG_ALT);
+      router.renderComponent(diceBackgroundComponent.render());
+      diceBackgroundComponent.setup();
+
+      const diceBackgroundComponent2 = new DiceBackgroundComponent(DiceTypes.BG);
+      router.renderComponent(diceBackgroundComponent2.render());
+      diceBackgroundComponent2.setup();
+    }
     router.renderComponent(game.render());
     game.setup();
     game.newGame();

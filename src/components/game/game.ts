@@ -3,7 +3,7 @@ import GameBoardComponent from '../game-board/game-board';
 import LogoComponent from '../logo/logo';
 import ScoreTableComponent from '../score-table-during-game/score-table-during-game';
 import WebComponent, {createElementFromElements} from '../../common/WebComponent';
-import DiceBackgroundComponent, { DiceTypes } from '../dice-background/dice-background';
+
 
 interface GameHistory {
   playerName: string,
@@ -30,10 +30,7 @@ class GameComponent implements WebComponent  {
   render(): Element {
     const container = document.createElement('div');
     container.append(new LogoComponent().render());
-    container.append(new DiceBackgroundComponent(DiceTypes.BG).render());
     container.append(createElementFromElements('game-container', this.gameBoard.render(), this.scoreTable.render()));
-    container.append(new DiceBackgroundComponent(DiceTypes.BG_ALT).render());
-
     return container;
   }
 

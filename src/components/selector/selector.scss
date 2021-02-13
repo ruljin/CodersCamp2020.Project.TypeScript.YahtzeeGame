@@ -7,4 +7,14 @@
   line-height: 3.5rem;
   outline: none;
   text-align-last: center;
+
+  @media (max-width: 576px) {
+    font-size: 1rem;
+    height: 7vh;
+  }
+
+  @media (max-width: 768px) and (min-width: 577px) {
+    font-size: 1rem;
+    height: 7vh;
+  }
 }

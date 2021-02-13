@@ -1,6 +1,6 @@
 import ScoresComponent from './scores';
 import { createElementFromString } from '../../common/WebComponent';
-document.body.innerHTML = `<section class="container">
+document.body.innerHTML = `<section class="container-scores">
 <h1 class="scores">Best Yahtzee players</h1>
 <table class="table">
   <thead>
@@ -16,7 +16,7 @@ document.body.innerHTML = `<section class="container">
 </section>`;
 
 test('Check rendering scores table', () => {
-  const scores = createElementFromString(`<section class="container">
+  const scores = createElementFromString(`<section class="container-scores">
       <h1 class="scores">Best Yahtzee players</h1>
       <table class="table">
         <thead>
@@ -55,11 +55,11 @@ test('putting rows to the table when no scores', () => {
   scoresComponent.scores = [];
   scoresComponent.setup();
   expect(tableBody.innerHTML).toMatch(`
-    <tr class="table__row">
-      <td class="table__data table__data--wide">
-        no scores
-      </td>
-    </tr>`
+  <tr class="table__row">
+    <td class="table__data"></td>
+    <td class="table__data">no scores yet</td>
+    <td class="table__data"></td>
+  </tr>`
   );
 });
 
@@ -76,10 +76,10 @@ test('check creating row with scores', () => {
 test('check creating empty row when no scores', () => {
   const scoresComponent = new ScoresComponent();
   expect(scoresComponent.tableEmpty()).toMatch(`
-    <tr class="table__row">
-      <td class="table__data table__data--wide">
-        no scores
-      </td>
-    </tr>`
+  <tr class="table__row">
+    <td class="table__data"></td>
+    <td class="table__data">no scores yet</td>
+    <td class="table__data"></td>
+  </tr>`
   );
 });

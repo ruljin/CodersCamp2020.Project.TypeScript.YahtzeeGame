@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Alata&display=swap');
 
-.container {
+.container-scores {
   color: #fff;
   font-family: 'Alata', sans-serif;
   font-size: 3em;
@@ -13,6 +13,37 @@
   text-align: center;
   text-shadow: 10px 20px 10px rgba(70, 6, 15, 0.62);
   width: 880px;
+
+  @media (max-width: 576px) {
+    font-size: 1.4rem;
+    height: 55vh;
+    margin-bottom: 10vh;
+    margin-top: 5vh;
+    width: 80vw;
+  }
+
+  @media (max-width: 768px) and (min-width: 577px) {
+    font-size: 1.7em;
+    height: 55vh;
+    margin-bottom: 10vh;
+    margin-top: 5vh;
+    width: 80vw;
+  }
+
+  @media (max-width: 992px) and (min-width: 769px) {
+    font-size: 1.7em;
+    height: 55vh;
+    margin-bottom: 10vh;
+    margin-top: 5vh;
+    width: 80vw;
+  }
+
+  @media (max-width: 1200px) and (min-width: 993px) {
+    height: 55vh;
+    margin-bottom: 7vh;
+    margin-top: 5vh;
+    width: 60vw;
+  }
   
   &::-webkit-scrollbar {
     width: 15px;
@@ -34,6 +65,18 @@
   font-size: 3rem;
   margin-bottom: 1.5rem;
   text-shadow: 10px 20px 10px rgba(70, 6, 15, 0.62);
+
+  @media (max-width: 600px) {
+    font-size: 1.7rem;
+  }
+
+  @media (max-width: 768px) and (min-width: 577px) {
+    font-size: 1.7rem;
+  }
+
+  @media (max-width: 992px) and (min-width: 769px) {
+    font-size: 1.7rem;
+  }
 };
 
 .table {
@@ -41,6 +84,26 @@
   margin: 0 auto;
   text-align: center;
   width: 866px;
+
+  @media (max-width: 576px) {
+    font-size: 1.2rem;
+    width: 80vw;
+  }
+
+  @media (max-width: 768px) and (min-width: 577px) {
+    font-size: 1.2rem;
+    width: 80vw;
+  }
+
+  @media (max-width: 992px) and (min-width: 769px) {
+    font-size: 1.3rem;
+    width: 60vw;
+  }
+
+  @media (max-width: 1200px) and (min-width: 993px) {
+    font-size: 1.5rem;
+    width: 60vw;
+  }
 }
 
 

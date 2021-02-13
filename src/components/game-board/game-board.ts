@@ -29,14 +29,51 @@ class GameBoardComponent implements WebComponent {
     boardEl.classList.add('board');
     boardEl.style.backgroundImage = `url('${BoardImage}')`;
 
-    this.labelPlayer = new Label('None plays!', 15).render();
-    this.labelPlayer.classList.add('board__player');
-    boardEl.appendChild(this.labelPlayer);
+    const width = window.innerWidth;
+    if (width <= 576) {
+      this.labelPlayer = new Label('None plays!', 40).render();
+      this.labelPlayer.classList.add('board__player');
+      boardEl.appendChild(this.labelPlayer);
+    } else if (width > 576 && width <= 768) {
+      this.labelPlayer = new Label('None plays!', 40).render();
+      this.labelPlayer.classList.add('board__player');
+      boardEl.appendChild(this.labelPlayer);
+    } else {
+      this.labelPlayer = new Label('None plays!', 15).render();
+      this.labelPlayer.classList.add('board__player');
+      boardEl.appendChild(this.labelPlayer);
+    }
 
-    this.diceCanvas = document.createElement('canvas');
-    boardEl.appendChild(this.diceCanvas);
-    this.canvas = new fabric.Canvas(this.diceCanvas);
-    this.canvas.setDimensions({ width: 300, height: 300 });
+    if (width <= 576) {
+      this.diceCanvas = document.createElement('canvas');
+      boardEl.appendChild(this.diceCanvas);
+      this.canvas = new fabric.Canvas(this.diceCanvas);
+      this.canvas.setDimensions({ width: 200, height: 200 });
+    } else if (width > 576 && width <= 768) {
+      this.diceCanvas = document.createElement('canvas');
+      boardEl.appendChild(this.diceCanvas);
+      this.canvas = new fabric.Canvas(this.diceCanvas);
+      this.canvas.setDimensions({ width: 300, height: 300 });
+    } else if (width > 769 && width <= 992) {
+      this.diceCanvas = document.createElement('canvas');
+      boardEl.appendChild(this.diceCanvas);
+      this.canvas = new fabric.Canvas(this.diceCanvas);
+      this.canvas.setDimensions({ width: 300, height: 150 });
+    } else if (width > 993 && width <= 1200) {
+      this.diceCanvas = document.createElement('canvas');
+      boardEl.appendChild(this.diceCanvas);
+      this.canvas = new fabric.Canvas(this.diceCanvas);
+      this.canvas.setDimensions({ width: 300, height: 150 });
+    } else {
+      this.diceCanvas = document.createElement('canvas');
+      boardEl.appendChild(this.diceCanvas);
+      this.canvas = new fabric.Canvas(this.diceCanvas);
+      this.canvas.setDimensions({ width: 300, height: 300 });
+    }
+    // this.diceCanvas = document.createElement('canvas');
+    // boardEl.appendChild(this.diceCanvas);
+    // this.canvas = new fabric.Canvas(this.diceCanvas);
+    // this.canvas.setDimensions({ width: 300, height: 300 });
 
     const buttonWrapper = document.createElement('div');
     buttonWrapper.classList.add('board__buttons');
@@ -61,8 +98,22 @@ class GameBoardComponent implements WebComponent {
     this.boardDisabledCover.classList.add('board__pause-cover--hidden');
     boardEl.appendChild(this.boardDisabledCover);
 
-    const labelPause = new Label('choose category', 10).render();
-    this.boardDisabledCover.appendChild(labelPause);
+    if (width <= 576) {
+      const labelPause = new Label('choose category', 40).render();
+      this.boardDisabledCover.appendChild(labelPause);
+    } else if (width > 576 && width <= 768) {
+      const labelPause = new Label('choose category', 40).render();
+      this.boardDisabledCover.appendChild(labelPause);
+    } else if (width > 769 && width <= 992) {
+      const labelPause = new Label('choose category', 20).render();
+      this.boardDisabledCover.appendChild(labelPause);
+    } else if (width > 993 && width <= 1200) {
+      const labelPause = new Label('choose category', 20).render();
+      this.boardDisabledCover.appendChild(labelPause);
+    } else {
+      const labelPause = new Label('choose category', 20).render();
+      this.boardDisabledCover.appendChild(labelPause);
+    }
 
     this.boardEl = boardEl;
   }

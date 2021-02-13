@@ -1,12 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Alata&display=swap');
+
 .container {
   color: #fff;
+  font-family: 'Alata', sans-serif;
   font-size: 1.3rem;
   height: 55vh;
   line-height: 1.5;
   margin: 0 auto;
   margin-bottom: 2rem;
   overflow: auto;
-  padding-right: 3%;
+  padding-right: 1%;
   text-align: center;
   text-shadow: 10px 20px 10px rgba(70, 6, 15, 0.62);
   width: 60vw;
@@ -22,6 +25,42 @@
   &::-webkit-scrollbar-thumb {
     background-color: #46060f;
     border-radius: 70%;
+  }
+
+  @media (max-width: 576px) {
+    font-size: 1em;
+    height: 55vh;
+    margin-bottom: 10vh;
+    margin-top: 5vh;
+    width: 80vw;
+
+    &::-webkit-scrollbar {
+      width: 10px;
+    }
+  }
+
+  @media (max-width: 768px) and (min-width: 577px) {
+    font-size: 1em;
+    height: 55vh;
+    margin-bottom: 10vh;
+    margin-top: 5vh;
+    width: 80vw;
+  }
+
+  @media (max-width: 992px) and (min-width: 769px) {
+    font-size: 1em;
+    height: 55vh;
+    margin-bottom: 10vh;
+    margin-top: 5vh;
+    width: 60vw;
+  }
+
+  @media (max-width: 1200px) and (min-width: 993px) {
+    font-size: 1em;
+    height: 55vh;
+    margin-bottom: 7vh;
+    margin-top: 5vh;
+    width: 60vw;
   }
 }
 

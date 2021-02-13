@@ -18,32 +18,78 @@ class SettingsComponent implements WebComponent {
   }
 
   private layout(): HTMLElement {
+
     const settings = document.createElement('section');
     settings.setAttribute('class', 'settings');
 
     const names = document.createElement('section');
     names.setAttribute('class', 'settings__names');
-    names.appendChild(new LabelComponent('names', 15).render());
 
-    const players = document.createElement('div');
-    players.setAttribute('class', 'players');
-    players.appendChild(new LabelComponent('Player 1', 20, false).render());
-    const list = ['computer/easy', 'computer/medium', 'computer/hard', 'player'];
-    players.appendChild(new SelectorComponent(list, 20).render());
-    names.appendChild(players);
+    const width = window.innerWidth;
+    if (width <= 576) {
+      names.appendChild(new LabelComponent('Players', 40).render());
+      names.appendChild(new AddRemoveElement('+', '-').render());
 
-    names.appendChild(new AddRemoveElement('+', '-').render());
-    settings.appendChild(names);
+      const players = document.createElement('div');
+      players.setAttribute('class', 'players');
+      players.appendChild(new LabelComponent('Player 1', 38.5, false).render());
+      const list = ['computer/easy', 'computer/medium', 'computer/hard', 'player'];
+      players.appendChild(new SelectorComponent(list, 38.5).render());
+      names.appendChild(players);
 
-    const styles = document.createElement('section');
-    styles.setAttribute('class', 'settings__styles');
-    styles.appendChild(new LabelComponent('styles', 15).render());
-    const listOfStyles = ['classic game', 'play with pirates', 'beat the dragon'];
-    styles.appendChild(new SelectorComponent(listOfStyles, 45).render());
+      settings.appendChild(names);
 
-    settings.appendChild(styles);
-    settings.appendChild(new ReferenceComponent('game', 'play!').render());
+      const styles = document.createElement('section');
+      styles.setAttribute('class', 'settings__styles');
+      styles.appendChild(new LabelComponent('Styles', 40).render());
+      const listOfStyles = ['classic game', 'play with pirates', 'beat the dragon'];
+      styles.appendChild(new SelectorComponent(listOfStyles, 80).render());
 
+      settings.appendChild(styles);
+      settings.appendChild(new ReferenceComponent('game', 'Play!').render());
+    } else if (width > 576 && width <= 768) {
+      names.appendChild(new LabelComponent('Players', 40).render());
+      names.appendChild(new AddRemoveElement('+', '-').render());
+
+      const players = document.createElement('div');
+      players.setAttribute('class', 'players');
+      players.appendChild(new LabelComponent('Player 1', 38.5, false).render());
+      const list = ['computer/easy', 'computer/medium', 'computer/hard', 'player'];
+      players.appendChild(new SelectorComponent(list, 38.5).render());
+      names.appendChild(players);
+
+      settings.appendChild(names);
+
+      const styles = document.createElement('section');
+      styles.setAttribute('class', 'settings__styles');
+      styles.appendChild(new LabelComponent('Styles', 40).render());
+      const listOfStyles = ['classic game', 'play with pirates', 'beat the dragon'];
+      styles.appendChild(new SelectorComponent(listOfStyles, 80).render());
+
+      settings.appendChild(styles);
+      settings.appendChild(new ReferenceComponent('game', 'Play!').render());
+    } else {
+      names.appendChild(new LabelComponent('Players', 15).render());
+
+      const players = document.createElement('div');
+      players.setAttribute('class', 'players');
+      players.appendChild(new LabelComponent('Player 1', 22, false).render());
+      const list = ['computer/easy', 'computer/medium', 'computer/hard', 'player'];
+      players.appendChild(new SelectorComponent(list, 22).render());
+      names.appendChild(players);
+
+      names.appendChild(new AddRemoveElement('+', '-').render());
+      settings.appendChild(names);
+
+      const styles = document.createElement('section');
+      styles.setAttribute('class', 'settings__styles');
+      styles.appendChild(new LabelComponent('Styles', 15).render());
+      const listOfStyles = ['classic game', 'play with pirates', 'beat the dragon'];
+      styles.appendChild(new SelectorComponent(listOfStyles, 45).render());
+
+      settings.appendChild(styles);
+      settings.appendChild(new ReferenceComponent('game', 'Play!').render());
+    }
     return settings;
   }
 
@@ -53,7 +99,14 @@ class SettingsComponent implements WebComponent {
     add.addEventListener(('click'), (): void => {
       if (players.children.length < 4) {
         const list = ['computer/easy', 'computer/medium', 'computer/hard', 'player'];
-        players.appendChild(new SelectorComponent(list, 20).render());
+        const width = window.innerWidth;
+        if (width <= 600) {
+          players.appendChild(new SelectorComponent(list, 38.5).render());
+        } else if (width > 600 && width <= 992) {
+          players.appendChild(new SelectorComponent(list, 22).render());
+        } else {
+          players.appendChild(new SelectorComponent(list, 22).render());
+        }
       }
       this.change();
     });
@@ -67,8 +120,17 @@ class SettingsComponent implements WebComponent {
         const option = (select.options[select.selectedIndex].value);
         if (option === 'player') {
           const value = players.indexOf(select) + 1;
-          const newlabel = new LabelComponent(`Player ${value}`, 20, false).render();
-          select.replaceWith(newlabel);
+          const width = window.innerWidth;
+          if (width <= 600) {
+            const newlabel = new LabelComponent(`Player ${value}`, 38.5, false).render();
+            select.replaceWith(newlabel);
+          } else if (width > 600 && width <= 992) {
+            const newlabel = new LabelComponent(`Player ${value}`, 22, false).render();
+            select.replaceWith(newlabel);
+          } else {
+            const newlabel = new LabelComponent(`Player ${value}`, 22, false).render();
+            select.replaceWith(newlabel);
+          }
         }
       });
     }
