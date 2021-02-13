@@ -45,11 +45,7 @@ class GameComponent implements WebComponent  {
   }
 
   checkPlayerFinish(): void {
-    this.checkRemainingRolls().then(() => {
-      this.savePlayerScores();
-    });
-
-    this.checkFinishRoundButton().then(() => {
+    this.checkPlayerFinishRound().then(() => {
       this.savePlayerScores();
     });
   }
@@ -312,8 +308,6 @@ class GameComponent implements WebComponent  {
 
     if (!this.checkFinish()) {
       this.gameBoard.resume();
-
-      this.gameBoard.changePlayer(this.playersName[this.gameBoard.currentPlayerIndex]);
       this.gameBoard.clearCanvas();
       this.gameBoard.reSetRemainingRolls();
       this.gameBoard.playerDices = [];
@@ -321,10 +315,11 @@ class GameComponent implements WebComponent  {
 
       if (this.gameBoard.currentPlayerIndex < this.playersName.length-1) {
         this.gameBoard.currentPlayerIndex++;
+        this.currentRoundNumber++;
       } else {
         this.gameBoard.currentPlayerIndex = 0;
-        this.currentRoundNumber++;
       }
+      this.gameBoard.changePlayer(this.playersName[this.gameBoard.currentPlayerIndex]);
       this.checkPlayerFinish();
     } else {
       this.fillTotalPoints();
@@ -387,22 +382,19 @@ class GameComponent implements WebComponent  {
   }
 
   checkFinish(): boolean {
+    console.log(this.currentRoundNumber);
     if (this.currentRoundNumber == 12 && this.gameBoard.currentPlayerIndex == this.playersName.length-1) return true;
     return false;
   }
 
-  checkRemainingRolls = async (): Promise<void> => {
+  checkPlayerFinishRound = async (): Promise<void> => {
     const rollButton = document.querySelector('#buttonRollAgain');
+    const finishRoundButton = document.querySelector('#buttonFinishRound');
+
     return new Promise<void>((resolve) => {
       rollButton!.addEventListener('click', () => {
         if (this.gameBoard.remainingRolls == 0) resolve();
       });
-    });
-  }
-
-  checkFinishRoundButton = async (): Promise<void> => {
-    const finishRoundButton = document.querySelector('#buttonFinishRound');
-    return new Promise<void>((resolve) => {
       finishRoundButton!.addEventListener('click', () => {
         if (this.gameBoard.playerDices.length != 0) resolve();
       });

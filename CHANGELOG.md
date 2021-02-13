@@ -17,12 +17,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Settings Component.
 - Modal Component.
 - Responsive view.
+- Modal content for each category in game.
 
 ### Changed
 
 - Disable max-nesting-depth stylelint rule.
 - Disable max-len eslint rule.
-- Styles corrected.
+- Styles correct.
+- Make the modal in the foreground.
+
+### Fixed
+
+- Remove the transparent space in modals.
+- Make the modal buttons the same size.
 
 ## [1.0.0] - 2021-02-03
 
