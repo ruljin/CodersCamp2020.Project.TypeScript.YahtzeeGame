@@ -29,7 +29,6 @@ class SettingsComponent implements WebComponent {
     players.setAttribute('class', 'players');
 
     const div1 = document.createElement('div');
-    div1.setAttribute('class', 'players__option');
     div1.appendChild(new LabelComponent('Player 1', 20, false).render());
     const error1 = document.createElement('div');
     error1.setAttribute('class', 'error');
@@ -37,7 +36,6 @@ class SettingsComponent implements WebComponent {
     players.appendChild(div1);
 
     const div2 = document.createElement('div');
-    div2.setAttribute('class', 'players__option');
     const list = ['computer/easy', 'computer/medium', 'computer/hard', 'player'];
     div2.appendChild(new SelectorComponent(list, 20).render());
     const error2 = document.createElement('div');
@@ -68,7 +66,6 @@ class SettingsComponent implements WebComponent {
       if (players.children.length < 4) {
         const list = ['computer/easy', 'computer/medium', 'computer/hard', 'player'];
         const div = document.createElement('div');
-        div.setAttribute('class', 'players__option');
         div.appendChild(new SelectorComponent(list, 20).render());
         const error = document.createElement('div');
         error.setAttribute('class', 'error');
@@ -141,6 +138,7 @@ class SettingsComponent implements WebComponent {
     }
 
     const link = document.querySelector('.button')! as Element;
+
     link.addEventListener('click', (e): void => {
       const inputs = document.querySelectorAll('input');
       for (const input of inputs) {
@@ -153,6 +151,8 @@ class SettingsComponent implements WebComponent {
         }
       }
     });
+
+    this.theSameName();
   }
 
   private showError(input: HTMLInputElement): void {
@@ -169,6 +169,31 @@ class SettingsComponent implements WebComponent {
     const error = input.nextElementSibling!;
     error.innerHTML = '';
     input.style.border = '3px solid rgb(255, 255, 255)';
+  }
+
+  private theSameName() {
+    const link = document.querySelector('.button')! as Element;
+
+    link.addEventListener('click', (e): void => {
+      const inputs = document.getElementsByTagName('input');
+
+      const result = [];
+      for (let i = 0; i < inputs.length; i++) {
+        result.push({ name: inputs[i].value, place: +inputs[i].placeholder.slice(-1) });
+      }
+
+      if (inputs.length > 1) {
+        for (let i = 0; i < result.length - 1; i++) {
+          for (let j = i + 1; j < result.length; j++) {
+            if (result[i].name !== '' && (result[i].name === result[j].name)) {
+              e.preventDefault();
+              document.querySelectorAll('input')[j].style.border = '3px solid rgb(255, 0, 0)';
+              document.querySelectorAll('.error')[j].textContent = 'You used this player name before.';
+            }
+          }
+        }
+      }
+    });
   }
 }
 
