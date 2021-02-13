@@ -3,6 +3,7 @@
 }
 
 .modal-wrap.active {
+  background-color: rgba(0, 0, 0, 0.5);
   display: block;
   height: 100%;
   left: 0;
@@ -12,8 +13,7 @@
 }
     
 .modal {
-  background: linear-gradient(#46060f 25%, #f9efef 25%);
-  background-clip: content-box;
+  background: linear-gradient(#46060f 25%, #f9efef 25%) border-box;
   border: 0.3rem solid #46060f;
   border-radius: 3rem;
   display: flex;
@@ -44,6 +44,7 @@
     align-items: center;
     display: flex;
     justify-content: center;
+    padding: 1rem;
     pointer-events: none;
     user-select: none;
   }
@@ -59,11 +60,13 @@
       cursor: pointer;
     }
 
-    .button {
-      font-size: 1.5rem !important;
-      height: 2.7rem !important;
-      line-height: 2.5rem !important;
-      width: 11rem !important;
+    .button,
+    .label {
+      font-size: 1.5rem;
+      height: 2.7rem;
+      line-height: 2.2rem;
+      margin: 0;
+      width: 11rem;
     }
   }
 }
