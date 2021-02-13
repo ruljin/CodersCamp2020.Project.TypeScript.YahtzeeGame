@@ -464,11 +464,16 @@ class GameComponent implements WebComponent  {
         }
 
         case 11: {
-          const playerDicesSorted = playerDices.sort();
+          const playerDicesSorted = Array.from(new Set(playerDices)).sort();
+          if (playerDicesSorted.length < 4) {
+            isAvailable.push(false);
+            break;
+          }
+          console.log(playerDices, playerDicesSorted);
           if (playerDicesSorted[0] == playerDicesSorted[1] - 1 && playerDicesSorted[1] == playerDicesSorted[2] - 1 &&
               playerDicesSorted[2] == playerDicesSorted[3] - 1) {
             isAvailable.push(true);
-          } else if (playerDicesSorted[1] == playerDicesSorted[2] - 1 && playerDicesSorted[2] == playerDicesSorted[3] - 1 &&
+          } else if (playerDicesSorted.length == 5 && playerDicesSorted[1] == playerDicesSorted[2] - 1 && playerDicesSorted[2] == playerDicesSorted[3] - 1 &&
             playerDicesSorted[3] == playerDicesSorted[4] - 1) {
             isAvailable.push(true);
           } else {
