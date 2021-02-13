@@ -2,7 +2,8 @@ import './score-table-during-game.scss';
 import WebComponent, { createElementFromString } from '../../common/WebComponent';
 
 interface PlayerPoints {
-  name: string
+  name: string,
+  leave: boolean,
   ones: number | null,
   twos: number | null,
   threes: number | null,
@@ -31,6 +32,7 @@ class ScoreTableDuringGameComponent implements WebComponent {
     for (const player of playersName) {
       const playerPoints: PlayerPoints = {
         name: player,
+        leave: false,
         ones: null,
         twos: null,
         threes: null,

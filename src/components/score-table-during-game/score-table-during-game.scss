@@ -63,6 +63,10 @@ $cell-width: 30px;
     width: 2*$cell-width;
   }
 
+  &__player-name--inactive {
+    background-color: #f00;
+  }
+
   &__player-field {
     border-bottom: 1px solid #00f;
     border-right: 1px solid #00f;
@@ -72,6 +76,11 @@ $cell-width: 30px;
 
   &__player-field:last-child {
     border-bottom: 0;
+  }
+
+  &__player-field--red {
+    background-color: #f00;
+    cursor: pointer;
   }
 
   &__player-field--blue {

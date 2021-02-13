@@ -21,8 +21,8 @@
   &__pause-cover {
     background-color: rgba(196, 196, 196, 0.5);
     display: grid;
-    height: 103%;
-    place-items: center;
+    height: 106%;
+    place-items: flex-start;
     position: absolute;
     width: 100%;
 
@@ -39,6 +39,7 @@
   color: #fff;
   cursor: pointer;
   font-size: 1.3rem;
+  min-width: 150px;
   outline: none;
   padding: 0.5em 1em;
   text-align: center;

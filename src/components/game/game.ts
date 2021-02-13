@@ -2,14 +2,15 @@ import './game.scss';
 import GameBoardComponent from '../game-board/game-board';
 import LogoComponent from '../logo/logo';
 import ScoreTableComponent from '../score-table-during-game/score-table-during-game';
-import WebComponent, {createElementFromElements} from '../../common/WebComponent';
+import WebComponent, {createElementFromElements, createElementFromString} from '../../common/WebComponent';
 import DiceBackgroundComponent, { DiceTypes } from '../dice-background/dice-background';
 
 interface GameHistory {
   playerName: string,
   points: number,
   chooseCategory: string,
-  roundNumber: number
+  roundNumber: number,
+  isAnotherYahtzee: boolean
 }
 
 enum COMPUTER_DIFFICULTY {
@@ -24,6 +25,7 @@ class GameComponent implements WebComponent  {
   playersName: string[];
   gameHistory: GameHistory[];
   currentRoundNumber: number;
+  isGameFinished: boolean;
 
   constructor(playersName: string[]) {
     this.gameBoard = new GameBoardComponent(() => null, () => null);
@@ -31,6 +33,7 @@ class GameComponent implements WebComponent  {
     this.playersName = playersName;
     this.gameHistory = [];
     this.currentRoundNumber = 0;
+    this.isGameFinished = false;
   }
 
   render(): Element {
@@ -39,6 +42,15 @@ class GameComponent implements WebComponent  {
     container.append(new DiceBackgroundComponent(DiceTypes.BG).render());
     container.append(createElementFromElements('game-container', this.gameBoard.render(), this.scoreTable.render()));
     container.append(new DiceBackgroundComponent(DiceTypes.BG_ALT).render());
+    let buttonsContainer = '<div class="buttons-container"><button id="gameButtonLeave" class="button button-leave">Leave</button>';
+
+    if (this.checkIfOnlyOnePlayerPlay()) {
+      buttonsContainer += '<button id="gameButtonCancel" class="button button-cancel">Cancel Round</button></div>';
+    } else {
+      buttonsContainer += '</div>';
+    }
+
+    container.appendChild(createElementFromString(buttonsContainer));
 
     return container;
   }
@@ -46,6 +58,9 @@ class GameComponent implements WebComponent  {
   setup(): void {
     this.gameBoard.setup();
     this.scoreTable.setup();
+    if (this.checkIfOnlyOnePlayerPlay()) {
+      document.getElementById('gameButtonCancel')!.addEventListener('click', () => this.cancelRound(), false);
+    }
   }
 
   newGame(): void {
@@ -53,27 +68,214 @@ class GameComponent implements WebComponent  {
     this.checkPlayerFinish();
   }
 
-  checkPlayerFinish(): void {
+  private leaveGame(): void {
+    this.scoreTable.points[this.gameBoard.currentPlayerIndex].leave = true;
+    const playerColumn = document.getElementById(`${this.playersName[this.gameBoard.currentPlayerIndex]}Column`)!;
+    playerColumn.querySelector('.score-table__player-name')!.classList.add('score-table__player-name--inactive');
+    if (this.checkIfOnlyComputerLeftInGame()) {
+      this.gameBoard.changeLabel('All players has left');
+      this.finishGame();
+    }
+    this.switchToNextPlayer();
+  }
+
+  private checkIfOnlyComputerLeftInGame(): boolean {
+    const quantityOfComputerPlayers = this.playersName.filter((name, index) => this.isCurrentPlayerComputer(index)).length;
+    let quantityOfPlayersLeave = 0;
+    for (const player of this.scoreTable.points) {
+      if (player.leave == true) quantityOfPlayersLeave++;
+    }
+
+    if (quantityOfComputerPlayers + quantityOfPlayersLeave == this.playersName.length) return true;
+    return false;
+  }
+
+  private checkIfOnlyOnePlayerPlay(): boolean {
+    let quantityOfComputerPlayers = 0;
+    for (let i = 0; i < this.playersName.length; i++) {
+      if (this.isCurrentPlayerComputer(i)) quantityOfComputerPlayers++;
+    }
+
+    return quantityOfComputerPlayers == this.playersName.length - 1;
+  }
+
+  private manageCancelRoundButton(forceClose = false): void {
+    if (!this.checkIfOnlyOnePlayerPlay()) return;
+    if (forceClose == false && !this.isCurrentPlayerComputer(this.gameBoard.currentPlayerIndex)) {
+      document.getElementById('gameButtonCancel')!.addEventListener('click', () => this.cancelRound(), false);
+    } else {
+      const oldButton = document.getElementById('gameButtonCancel')!;
+      const newButton = oldButton.cloneNode(true);
+      oldButton?.parentNode?.replaceChild(newButton, oldButton);
+    }
+  }
+
+  private resetLeaveGameButton(): void {
+    const oldButton = document.getElementById('gameButtonLeave')!;
+    const newButton = oldButton.cloneNode(true);
+    oldButton?.parentNode?.replaceChild(newButton, oldButton);
+  }
+
+  private checkPlayerFinish(): void {
+    this.manageCancelRoundButton();
+    this.resetLeaveGameButton();
+
     this.checkPlayerFinishRound().then(() => {
       this.savePlayerScores();
+    }).catch(() => {
+      this.leaveGame();
+      if (this.checkIfOnlyComputerLeftInGame()) this.finishGame();
     });
 
-    if (this.isCurrentPlayerComputer()) {
+    if (this.isCurrentPlayerComputer(this.gameBoard.currentPlayerIndex)) {
+      this.gameBoard.changeLabel(`Waiting for ${this.playersName[this.gameBoard.currentPlayerIndex]}`);
+      this.gameBoard.pause(true);
       this.handleComputerRolls();
     }
   }
 
-  savePlayerScores(): void {
+  private cancelRound() {
+    if (this.currentRoundNumber === 0) return;
+
+    for (let i = 1; i <= this.playersName.length; i++) {
+
+      const playerIndex = this.playersName.length - i;
+      const playerColumn = document.getElementById(`${this.playersName[playerIndex]}Column`)!;
+      const category: string = this.gameHistory[this.gameHistory.length - 1].chooseCategory;
+
+      switch (category) {
+      case 'ones' : {
+        this.scoreTable.points[playerIndex].ones = null;
+        playerColumn.querySelectorAll('.score-table__player-field')[0]!.innerHTML = '';
+        playerColumn.querySelectorAll('.score-table__player-field')[0]!.classList.remove('score-table__player-field--filled');
+        this.deleteSubTotal(playerIndex);
+        break;
+      }
+
+      case 'twos' : {
+        this.scoreTable.points[playerIndex].twos = null;
+        playerColumn.querySelectorAll('.score-table__player-field')[1]!.innerHTML = '';
+        playerColumn.querySelectorAll('.score-table__player-field')[1]!.classList.remove('score-table__player-field--filled');
+        this.deleteSubTotal(playerIndex);
+        break;
+      }
+
+      case 'threes' : {
+        this.scoreTable.points[playerIndex].threes = null;
+        playerColumn.querySelectorAll('.score-table__player-field')[2]!.innerHTML = '';
+        playerColumn.querySelectorAll('.score-table__player-field')[2]!.classList.remove('score-table__player-field--filled');
+        this.deleteSubTotal(playerIndex);
+        break;
+      }
+
+      case 'fours' : {
+        this.scoreTable.points[playerIndex].fours = null;
+        playerColumn.querySelectorAll('.score-table__player-field')[3]!.innerHTML = '';
+        playerColumn.querySelectorAll('.score-table__player-field')[3]!.classList.remove('score-table__player-field--filled');
+        this.deleteSubTotal(playerIndex);
+        break;
+      }
+
+      case 'fives' : {
+        this.scoreTable.points[playerIndex].fives = null;
+        playerColumn.querySelectorAll('.score-table__player-field')[4]!.innerHTML = '';
+        playerColumn.querySelectorAll('.score-table__player-field')[4]!.classList.remove('score-table__player-field--filled');
+        this.deleteSubTotal(playerIndex);
+        break;
+      }
+
+      case 'sixes' : {
+        this.scoreTable.points[playerIndex].sixes = null;
+        playerColumn.querySelectorAll('.score-table__player-field')[5]!.innerHTML = '';
+        playerColumn.querySelectorAll('.score-table__player-field')[5]!.classList.remove('score-table__player-field--filled');
+        this.deleteSubTotal(playerIndex);
+        break;
+      }
+
+      case 'threeOfKind' : {
+        this.scoreTable.points[playerIndex].threeOfKind = null;
+        playerColumn.querySelectorAll('.score-table__player-field')[8]!.innerHTML = '';
+        playerColumn.querySelectorAll('.score-table__player-field')[8]!.classList.remove('score-table__player-field--filled');
+        break;
+      }
+
+      case 'fourOfKind' : {
+        this.scoreTable.points[playerIndex].fourOfKind = null;
+        playerColumn.querySelectorAll('.score-table__player-field')[9]!.innerHTML = '';
+        playerColumn.querySelectorAll('.score-table__player-field')[9]!.classList.remove('score-table__player-field--filled');
+        break;
+      }
+
+      case 'fullHouse' : {
+        this.scoreTable.points[playerIndex].fullHouse = null;
+        playerColumn.querySelectorAll('.score-table__player-field')[10]!.innerHTML = '';
+        playerColumn.querySelectorAll('.score-table__player-field')[10]!.classList.remove('score-table__player-field--filled');
+        break;
+      }
+
+      case 'smStraight' : {
+        this.scoreTable.points[playerIndex].smStraight = null;
+        playerColumn.querySelectorAll('.score-table__player-field')[11]!.innerHTML = '';
+        playerColumn.querySelectorAll('.score-table__player-field')[11]!.classList.remove('score-table__player-field--filled');
+        break;
+      }
+
+      case 'lgStraight' : {
+        this.scoreTable.points[playerIndex].lgStraight = null;
+        playerColumn.querySelectorAll('.score-table__player-field')[12]!.innerHTML = '';
+        playerColumn.querySelectorAll('.score-table__player-field')[12]!.classList.remove('score-table__player-field--filled');
+        break;
+      }
+
+      case 'yahtzee' : {
+        this.scoreTable.points[playerIndex].yahtzee = null;
+        playerColumn.querySelectorAll('.score-table__player-field')[13]!.innerHTML = '';
+        playerColumn.querySelectorAll('.score-table__player-field')[13]!.classList.remove('score-table__player-field--filled');
+        break;
+      }
+
+      case 'chance' : {
+        this.scoreTable.points[playerIndex].chance = null;
+        playerColumn.querySelectorAll('.score-table__player-field')[14]!.innerHTML = '';
+        playerColumn.querySelectorAll('.score-table__player-field')[14]!.classList.remove('score-table__player-field--filled');
+        break;
+      }
+      }
+
+      if (this.gameHistory[this.gameHistory.length - 1].isAnotherYahtzee) {
+        if (this.scoreTable.points[playerIndex].yahtzeeBonus! > 100) {
+          this.scoreTable.points[playerIndex].yahtzeeBonus! -= 100;
+          playerColumn.querySelectorAll('.score-table__player-field--blue')![2].innerHTML = this.scoreTable.points[playerIndex].yahtzeeBonus!.toString();
+        }
+      }
+
+      this.gameHistory = this.gameHistory.splice(0, this.gameHistory.length - 1);
+    }
+
+    this.currentRoundNumber--;
+  }
+
+  private deleteSubTotal(playerIndex: number): void {
+    if (this.scoreTable.points[playerIndex].subtotal == null) return;
+    this.scoreTable.points[playerIndex].subtotal = null;
+    this.scoreTable.points[playerIndex].bonus = null;
+    const playerColumn = document.getElementById(`${this.playersName[playerIndex]}Column`)!;
+    playerColumn.querySelectorAll('.score-table__player-field')[6].innerHTML = '';
+    playerColumn.querySelectorAll('.score-table__player-field')[7].innerHTML = '';
+  }
+
+  private savePlayerScores(): void {
     const playerName = this.scoreTable.points[this.gameBoard.currentPlayerIndex].name;
     const playerColumn = document.getElementById(`${playerName}Column`)!;
     const playerScoreFields = playerColumn.querySelectorAll('.score-table__player-field');
     this.highlightFields(playerScoreFields);
   }
 
-  highlightFields(fields: NodeListOf<Element>): void {
+  private highlightFields(fields: NodeListOf<Element>): void {
     const isFieldAvailable: boolean[] = this.checkAvailableFields(fields);
     const otherFields: Element[] = [];
     const pointedFields: Element[] = [];
+    this.manageCancelRoundButton(true);
     fields.forEach((field, index) => {
       if (isFieldAvailable[index]) {
         pointedFields.push(field);
@@ -81,10 +283,12 @@ class GameComponent implements WebComponent  {
         field.addEventListener('click', () => this.chooseScores(index, fields, false), false);
       } else if (!field.classList.contains('score-table__player-field--filled') && !field.classList.contains('score-table__player-field--blue')) {
         otherFields.push(field);
+        field.classList.add('score-table__player-field--red');
         field.addEventListener('click', () => this.chooseScores(index, fields, true), false);
       }
     });
-    if (this.isCurrentPlayerComputer()) {
+
+    if (this.isCurrentPlayerComputer(this.gameBoard.currentPlayerIndex)) {
       this.handleComputerChoose(otherFields, pointedFields);
     }
   }
@@ -143,6 +347,7 @@ class GameComponent implements WebComponent  {
       this.computerClick(rollButton);
       if (i + 1 === rerolls && i !== 2) {
         await this.timeout(1500);
+        this.gameBoard.changeLabel('choose category');
         this.computerClick(finishRoundButton);
       }
     }
@@ -164,11 +369,12 @@ class GameComponent implements WebComponent  {
     return COMPUTER_DIFFICULTY.HARD; // Later on remove this and make a proper rule using something to decide of computer's difficulty
   }
 
-  private isCurrentPlayerComputer(): boolean {
-    return true; // Later on remove this and make a proper rule using something to decide if a player is computer
+  private isCurrentPlayerComputer(index: number): boolean {
+    if (this.playersName[index].toLowerCase().includes('computer')) return true;
+    return false;
   }
 
-  checkAvailableFields(fields: NodeListOf<Element>): boolean[] {
+  private checkAvailableFields(fields: NodeListOf<Element>): boolean[] {
     const isAvailable: boolean[] = [];
 
     fields.forEach((field, index) => {
@@ -244,11 +450,11 @@ class GameComponent implements WebComponent  {
 
         case 11: {
           const playerDicesSorted = playerDices.sort();
-          if (playerDicesSorted[0] == playerDicesSorted[1] + 1 && playerDicesSorted[1] == playerDicesSorted[2] + 1 &&
-              playerDicesSorted[2] == playerDicesSorted[3] + 1) {
+          if (playerDicesSorted[0] == playerDicesSorted[1] - 1 && playerDicesSorted[1] == playerDicesSorted[2] - 1 &&
+              playerDicesSorted[2] == playerDicesSorted[3] - 1) {
             isAvailable.push(true);
-          } else if (playerDicesSorted[1] == playerDicesSorted[2] + 1 && playerDicesSorted[2] == playerDicesSorted[3] + 1 &&
-            playerDicesSorted[3] == playerDicesSorted[4] + 1) {
+          } else if (playerDicesSorted[1] == playerDicesSorted[2] - 1 && playerDicesSorted[2] == playerDicesSorted[3] - 1 &&
+            playerDicesSorted[3] == playerDicesSorted[4] - 1) {
             isAvailable.push(true);
           } else {
             isAvailable.push(false);
@@ -258,8 +464,8 @@ class GameComponent implements WebComponent  {
 
         case 12: {
           const playerDicesSorted = playerDices.sort();
-          if (playerDicesSorted[0] == playerDicesSorted[1] + 1 && playerDicesSorted[1] == playerDicesSorted[2] + 1 &&
-              playerDicesSorted[2] == playerDicesSorted[3] + 1 && playerDicesSorted[3] == playerDicesSorted[4] + 1) {
+          if (playerDicesSorted[0] == playerDicesSorted[1] - 1 && playerDicesSorted[1] == playerDicesSorted[2] - 1 &&
+              playerDicesSorted[2] == playerDicesSorted[3] - 1 && playerDicesSorted[3] == playerDicesSorted[4] - 1) {
             isAvailable.push(true);
           } else {
             isAvailable.push(false);
@@ -287,10 +493,27 @@ class GameComponent implements WebComponent  {
     return isAvailable;
   }
 
-  chooseScores(index: number, fields: NodeListOf<Element>, zeroPoints: boolean): void {
+  private checkAnotherYahtzee(playerDices: number[]): boolean {
+    if (this.scoreTable.points[this.gameBoard.currentPlayerIndex].yahtzee !== 50) return false;
+    if (new Set(playerDices).size === 1) {
+      let yahtzeeBonus = this.scoreTable.points[this.gameBoard.currentPlayerIndex].yahtzeeBonus;
+      yahtzeeBonus ? yahtzeeBonus += 100 : yahtzeeBonus = 100;
+      const playerColumn = document.getElementById(`${this.playersName[this.gameBoard.currentPlayerIndex]}Column`)!;
+      const yahtzeeBonusElement = playerColumn.querySelectorAll('.score-table__player-field--blue')[2]!;
+      yahtzeeBonusElement.innerHTML = yahtzeeBonus.toString();
+      this.scoreTable.points[this.gameBoard.currentPlayerIndex].yahtzeeBonus = yahtzeeBonus;
+      return true;
+    }
+
+    return false;
+  }
+
+  private chooseScores(index: number, fields: NodeListOf<Element>, zeroPoints: boolean): void {
     const playerDices = this.gameBoard.playerDices;
     let score = 0;
     let category = '';
+
+    const anotherYahtzee = this.checkAnotherYahtzee(playerDices);
 
     switch (index) {
     case 0: {
@@ -393,6 +616,7 @@ class GameComponent implements WebComponent  {
 
     fields.forEach((field, i) => {
       field.classList.remove('score-table__player-field--active');
+      field.classList.remove('score-table__player-field--red');
       if (i == index) field.classList.add('score-table__player-field--filled');
     });
 
@@ -402,37 +626,56 @@ class GameComponent implements WebComponent  {
       playerName: this.playersName[this.gameBoard.currentPlayerIndex],
       points: score,
       chooseCategory: category,
-      roundNumber: this.currentRoundNumber
+      roundNumber: this.currentRoundNumber,
+      isAnotherYahtzee: anotherYahtzee
     });
 
     if (!this.checkFinish()) {
-      this.gameBoard.resume();
+      this.switchToNextPlayer();
+    } else {
+      this.fillTotalPoints();
+      this.finishGame();
+    }
+  }
 
-      this.gameBoard.clearCanvas();
-      this.gameBoard.reSetRemainingRolls();
-      this.gameBoard.playerDices = [];
-      this.checkSubTotal(this.gameBoard.currentPlayerIndex);
+  private finishGame(): void {
+    this.isGameFinished = true;
+    this.gameBoard.pause(true);
+  }
 
-      if (this.gameBoard.currentPlayerIndex < this.playersName.length-1) {
+  private switchToNextPlayer(): void {
+    if (this.isGameFinished) return;
+    this.gameBoard.clearCanvas();
+    this.gameBoard.reSetRemainingRolls();
+    this.gameBoard.playerDices = [];
+    this.checkSubTotal(this.gameBoard.currentPlayerIndex);
+
+    do {
+      if (this.gameBoard.currentPlayerIndex < this.playersName.length - 1) {
         this.gameBoard.currentPlayerIndex++;
       } else {
         this.gameBoard.currentPlayerIndex = 0;
         this.currentRoundNumber++;
       }
-      this.gameBoard.changePlayer(this.playersName[this.gameBoard.currentPlayerIndex]);
-      this.gameBoard.hold([]);
-      this.checkPlayerFinish();
-    } else {
-      this.fillTotalPoints();
-    }
+
+      if (this.checkFinish()) {
+        this.finishGame();
+        break;
+      }
+    } while (this.scoreTable.points[this.gameBoard.currentPlayerIndex].leave == true);
+
+    this.gameBoard.resume();
+    this.gameBoard.changePlayer(this.playersName[this.gameBoard.currentPlayerIndex]);
+    this.gameBoard.hold([]);
+    this.checkPlayerFinish();
   }
 
-  fillTotalPoints(): void {
+  private fillTotalPoints(): void {
     let index = 0;
     for (const scores of this.scoreTable.points) {
       const playerName = this.scoreTable.points[index].name;
       const playerColumn = document.getElementById(`${playerName}Column`)!;
-      const sumOfScores = scores.subtotal! + scores.threeOfKind! + scores.fourOfKind! + scores.fullHouse! + scores.smStraight! + scores.lgStraight! + scores.yahtzee! + scores.chance!;
+      const sumOfScores = scores.subtotal! + scores.threeOfKind! + scores.fourOfKind! + scores.fullHouse! + scores.smStraight! + scores.lgStraight! + scores.yahtzee! + scores.chance! + scores.yahtzeeBonus!;
       const playerTotalRow = playerColumn.querySelectorAll('.score-table__player-field--blue')[3];
 
       playerTotalRow.innerHTML = sumOfScores.toString();
@@ -441,7 +684,7 @@ class GameComponent implements WebComponent  {
     }
   }
 
-  checkSubTotal(playerIndex: number): void {
+  private checkSubTotal(playerIndex: number): void {
     const playerScores = this.scoreTable.points[playerIndex];
     let sumOfScores = 0;
     if (playerScores.ones == null) return;
@@ -451,7 +694,7 @@ class GameComponent implements WebComponent  {
     if (playerScores.fives == null) return;
     if (playerScores.sixes == null) return;
 
-    sumOfScores += playerScores.ones + playerScores.ones + playerScores.twos + playerScores.threes + playerScores.fours + playerScores.fives + playerScores.sixes;
+    sumOfScores += playerScores.ones + playerScores.twos + playerScores.threes + playerScores.fours + playerScores.fives + playerScores.sixes;
 
     const playerName = this.scoreTable.points[this.gameBoard.currentPlayerIndex].name;
     const playerColumn = document.getElementById(`${playerName}Column`)!;
@@ -470,7 +713,7 @@ class GameComponent implements WebComponent  {
     playerSubTotalRow.innerHTML = sumOfScores.toString();
   }
 
-  removeEventListeners(): void {
+  private removeEventListeners(): void {
     const playerName = this.scoreTable.points[this.gameBoard.currentPlayerIndex].name;
     const playerColumn = document.getElementById(`${playerName}Column`)!;
     const playerScoreFields = playerColumn.querySelectorAll('.score-table__player-field');
@@ -482,22 +725,28 @@ class GameComponent implements WebComponent  {
     });
   }
 
-  checkFinish(): boolean {
+  private checkFinish(): boolean {
     if (this.currentRoundNumber == 12 && this.gameBoard.currentPlayerIndex == this.playersName.length-1) return true;
     return false;
   }
 
-  checkPlayerFinishRound = async (): Promise<void> => {
+  private checkPlayerFinishRound = async (): Promise<void> => {
     const rollButton = document.querySelector('#buttonRollAgain');
     const finishRoundButton = document.querySelector('#buttonFinishRound');
+    const gameButtonLeave = document.querySelector('#gameButtonLeave');
 
-    return new Promise<void>((resolve) => {
+    return new Promise<void>((resolve, reject) => {
       rollButton!.addEventListener('click', () => {
         if (this.gameBoard.remainingRolls == 0) resolve();
       });
       finishRoundButton!.addEventListener('click', () => {
         if (this.gameBoard.playerDices.length != 0) resolve();
       });
+      if (!this.isCurrentPlayerComputer(this.gameBoard.currentPlayerIndex)) {
+        gameButtonLeave!.addEventListener('click', () => {
+          reject();
+        });
+      }
     });
   }
 }
