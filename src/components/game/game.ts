@@ -131,6 +131,8 @@ class GameComponent implements WebComponent  {
       this.gameBoard.changeLabel(`Waiting for ${this.playersName[this.gameBoard.currentPlayerIndex]}`);
       this.gameBoard.pause(true);
       this.handleComputerRolls();
+    } else {
+      this.gameBoard.changeLabel('choose category');
     }
   }
 
@@ -414,7 +416,20 @@ class GameComponent implements WebComponent  {
         }
 
         case 8: {
-          new Set(playerDices).size <= 3 ? isAvailable.push(true) : isAvailable.push(false);
+          if (new Set(playerDices).size > 3) isAvailable.push(false);
+          else {
+            const counter: number[] = [0, 0, 0, 0, 0, 0];
+            playerDices.map((dice) => {
+              counter[dice-1]++;
+            });
+
+            let isThreeOfKind = false;
+            counter.map((count) => {
+              if (count == 3) isThreeOfKind = true;
+            });
+
+            isThreeOfKind ? isAvailable.push(true) : isAvailable.push(false);
+          }
           break;
         }
 
