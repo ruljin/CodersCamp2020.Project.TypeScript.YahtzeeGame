@@ -7,7 +7,9 @@ import ReferenceComponent from '../reference/reference';
 
 class SettingsComponent implements WebComponent {
   render(): Element {
-    return this.layout();
+    // return this.layout();
+    const settings = document.createElement('section');
+    return settings;
   }
 
   setup(): void {
