@@ -33,7 +33,7 @@ test('Check modal setup', () => {
         <div class="modal">
           <div class="modal__header"><p class="modal__header--subheader">subheader</p></div>
           <div class="modal__body"></div>
-          <div class="modal__buttons"><div class="modal__buttons--close"><div class="label" style="width: 8rem;">close</div></div><a href="#/link" class="button ">name</a></div>
+          <div class="modal__buttons"><div class="modal__buttons--close"><div class="label" style="width: 8vw;">close</div></div><a href="#/link" class="button ">name</a></div>
         </div>
       </section>`
   );
