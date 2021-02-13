@@ -16,6 +16,7 @@ class SettingsComponent implements WebComponent {
     this.add();
     this.change();
     this.remove();
+    this.saveAndPlay();
   }
 
   private layout(): HTMLElement {
@@ -90,17 +91,21 @@ class SettingsComponent implements WebComponent {
       }
     });
   }
-  private saveSettingsInLocalStorage(): void {
-    const player = document
-      .getElementsByClassName('label--alternative')[0]
-      .nodeValue!;
-    const style = document
-      .getElementsByClassName('select')[0].nodeValue!;
-    saveSettings(player, style);
+
+  private saveAndPlay(): void {
+    const playBtn = document.querySelector('.button')!;
+    playBtn.addEventListener('click', this.saveSettingsInLocalStorage);
   }
 
-  private buttonSave(): void {
-    this.playButton.addEventListener('click', this.saveSettingsInLocalStorage);
+  private saveSettingsInLocalStorage(): void {
+    const players: string[] = [];
+    const selectWrapper = (<NodeListOf<HTMLSelectElement>>document.querySelectorAll('.select'));
+    for (const select of selectWrapper) {
+      const option = (select.options[select.selectedIndex].value);
+      players.push(option);
+    }
+    const style = (<HTMLSelectElement>document.querySelector('.select:last-of-type')).value;
+    saveSettings(players, style);
   }
 }
 
