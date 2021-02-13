@@ -99,12 +99,18 @@ class SettingsComponent implements WebComponent {
 
   private saveSettingsInLocalStorage(): void {
     const players: string[] = [];
-    const selectWrapper = (<NodeListOf<HTMLSelectElement>>document.querySelectorAll('.select'));
-    for (const select of selectWrapper) {
-      const option = (select.options[select.selectedIndex].value);
-      players.push(option);
+    const playersDiv = [...document.querySelector('.players')!.children];
+    for (const children of playersDiv) {
+      const child = children.textContent()!;
+      players.push(child);
     }
-    const style = (<HTMLSelectElement>document.querySelector('.select:last-of-type')).value;
+
+    let style = '';
+    const styleWrapper = (<NodeListOf<HTMLSelectElement>>document.querySelectorAll('.select'));
+    for (const select of styleWrapper) {
+      const option = (select.options[select.selectedIndex].value);
+      style = option;
+    }
     saveSettings(players, style);
   }
 }
