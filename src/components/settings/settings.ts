@@ -7,9 +7,7 @@ import ReferenceComponent from '../reference/reference';
 
 class SettingsComponent implements WebComponent {
   render(): Element {
-    // return this.layout();
-    const settings = document.createElement('section');
-    return settings;
+    return this.layout();
   }
 
   setup(): void {
@@ -31,7 +29,9 @@ class SettingsComponent implements WebComponent {
     players.setAttribute('class', 'players');
 
     const div1 = document.createElement('div');
-    div1.appendChild(new LabelComponent('Player 1', 20, false).render());
+    const label = new LabelComponent('Player 1', 20, false).render();
+    label.setAttribute('id', 'id1');
+    div1.appendChild(label);
     const error1 = document.createElement('div');
     error1.setAttribute('class', 'error');
     div1.appendChild(error1);
@@ -92,6 +92,7 @@ class SettingsComponent implements WebComponent {
         if (option === 'player') {
           const value = players.indexOf((select.parentElement)!) + 1;
           const newlabel = new LabelComponent(`Player ${value}`, 20, false).render();
+          newlabel.setAttribute('id', `id${value}`);
           select.replaceWith(newlabel);
           this.walidate();
         }
@@ -181,7 +182,7 @@ class SettingsComponent implements WebComponent {
 
       const result = [];
       for (let i = 0; i < inputs.length; i++) {
-        result.push({ name: inputs[i].value, place: +inputs[i].placeholder.slice(-1) });
+        result.push({ name: inputs[i].value, id: inputs[i].id });
       }
 
       if (inputs.length > 1) {
@@ -189,8 +190,10 @@ class SettingsComponent implements WebComponent {
           for (let j = i + 1; j < result.length; j++) {
             if (result[i].name !== '' && (result[i].name === result[j].name)) {
               e.preventDefault();
-              document.querySelectorAll('input')[j].style.border = '3px solid rgb(255, 0, 0)';
-              document.querySelectorAll('.error')[j].textContent = 'You used this player name before.';
+              const id = '#' + result[j].id;
+              const input = document.querySelector(id)! as HTMLElement;
+              input.style.border = '3px solid rgb(255, 0, 0)';
+              input.nextElementSibling!.textContent = 'You used this player name before.';
             }
           }
         }
