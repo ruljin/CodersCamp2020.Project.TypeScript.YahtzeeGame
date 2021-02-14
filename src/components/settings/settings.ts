@@ -15,7 +15,7 @@ class SettingsComponent implements WebComponent {
     this.add();
     this.change();
     this.remove();
-    this.walidate();
+    this.validate();
     this.saveAndPlay();
   }
 
@@ -99,7 +99,7 @@ class SettingsComponent implements WebComponent {
           const newlabel = new LabelComponent(`Player ${value}`, 20, false).render();
           newlabel.setAttribute('id', `id${value}`);
           select.replaceWith(newlabel);
-          this.walidate();
+          this.validate();
         }
       });
     }
@@ -121,7 +121,7 @@ class SettingsComponent implements WebComponent {
     });
   }
 
-  private walidate(): void {
+  private validate(): void {
     const inputs = document.querySelectorAll('input');
 
     for (const input of inputs) {
