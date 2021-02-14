@@ -12,7 +12,8 @@ class LabelComponent implements WebComponent {
       `<div class="label">${this.text}</div>` :
       `<input type="text" class="label label--alternative" placeholder="${this.text}" 
       required maxlength="9" pattern="[A-Za-z0-9]+">`}`) as HTMLElement;
-    this.label.style.width = `${this.width}rem`;
+    this.label.style.width = `${this.width}vw`;
+
     return this.label as Element;
   }
 

@@ -10,7 +10,7 @@ class SelectorComponent implements WebComponent {
     this.selector = createElementFromString(`
        <select class="select">
        </select>`) as HTMLElement;
-    this.selector.style.width = `${this.width}rem`;
+    this.selector.style.width = `${this.width}vw`;
     const arr = this.list;
     for (let i = 0; i <= arr.length - 1; i++) {
       const option = document.createElement('option'),

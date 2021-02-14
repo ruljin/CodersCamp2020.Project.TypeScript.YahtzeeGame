@@ -13,7 +13,7 @@ class ScoresComponent implements WebComponent {
   }
 
   render(): Element {
-    return createElementFromString(`<section class="container">
+    return createElementFromString(`<section class="container-scores">
       <h1 class="scores">Best Yahtzee players</h1>
       <table class="table">
         <thead>
@@ -55,9 +55,9 @@ class ScoresComponent implements WebComponent {
   public tableEmpty = (): string => {
     return `
     <tr class="table__row">
-      <td class="table__data table__data--wide">
-        no scores
-      </td>
+      <td class="table__data"></td>
+      <td class="table__data">no scores yet</td>
+      <td class="table__data"></td>
     </tr>`;
   }
 

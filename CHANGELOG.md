@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fabric.js.
 - Settings Component.
 - Modal Component.
+- Responsive view.
 - Modal content for each category in game.
 - Validation functions for settings.
 - Readme file.
@@ -24,6 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Disable max-nesting-depth stylelint rule.
 - Disable max-len eslint rule.
+- Styles correct.
 - Make the modal in the foreground.
 
 ### Fixed

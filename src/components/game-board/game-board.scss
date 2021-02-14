@@ -1,12 +1,64 @@
 .board {
   background-size: cover;
   display: grid;
-  grid-template-rows: min-content 1fr min-content;
+  grid-template-rows: min-content 280px min-content;
   height: 25rem;
   justify-items: center;
   padding: 0.5em;
   position: relative;
   width: 25rem;
+
+  @media (max-width: 576px) {
+    grid-template-columns: 75vw;
+    grid-template-rows: min-content 50vw 20vh;
+    height: 80vw;
+    margin-bottom: 8vh;
+    width: 80vw;
+    
+    .label {
+      font-size: 1rem;
+      width: 20vw;
+    }
+  }
+
+  @media (max-width: 768px) and (min-width: 577px) {
+    grid-template-columns: 75vw;
+    grid-template-rows: min-content 60vw 13vh;
+    height: 80vw;
+    margin-bottom: 8vh;
+    width: 80vw;
+
+    .label {
+      font-size: 1rem;
+      width: 20vw;
+    }
+  }
+
+  @media (max-width: 992px) and (min-width: 769px) {
+    grid-template-columns: 35vw;
+    grid-template-rows: min-content 23vw min-content;
+    height: 35vw;
+    width: 35vw;
+
+    .label {
+      font-size: 1rem;
+      height: 5vw;
+      width: 20vw;
+    }
+  }
+
+  @media (max-width: 1200px) and (min-width: 993px) {
+    grid-template-columns: 35vw;
+    grid-template-rows: min-content 23vw min-content;
+    height: 35vw;
+    width: 35vw;
+
+    .label {
+      font-size: 1rem;
+      height: 5vw;
+      width: 20vw;
+    }
+  }
   
   &__player {
     justify-self: center;
@@ -21,7 +73,7 @@
   &__pause-cover {
     background-color: rgba(196, 196, 196, 0.5);
     display: grid;
-    height: 103%;
+    height: 100%;
     place-items: flex-start;
     position: absolute;
     width: 100%;
@@ -42,4 +94,30 @@
   outline: none;
   padding: 0.5em 1em;
   text-align: center;
+
+  @media (max-width: 576px) {
+    font-size: 1rem;
+    height: 10vw;
+    width: 40vw;
+  }
+
+  @media (max-width: 768px) and (min-width: 577px) {
+    font-size: 1rem;
+    height: 8vw;
+    width: 30vw;
+  }
+
+  @media (max-width: 992px) and (min-width: 769px) {
+    font-size: 1rem;
+    height: 5vw;
+    width: 15vw;
+  }
+
+  @media (max-width: 1200px) and (min-width: 993px) {
+    font-size: 1rem;
+    height: 5vw;
+    width: 15vw;
+  }
 }
+
+

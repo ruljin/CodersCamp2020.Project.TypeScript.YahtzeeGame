@@ -6,14 +6,39 @@
   display: inline-block;
   font-size: 2rem;
   height: 3.5rem;
-  line-height: 3.5rem;
+  line-height: 3rem;
   outline: none;
   text-align: center;
   text-decoration: none;
-  text-transform: lowercase;
   width: 17rem;
+
+  &:hover {
+    box-shadow: -10px -10px 40px rgba(41, 231, 162, 0.6), 10px 10px 40px rgba(41, 231, 162, 0.6);
+  }
 
   &--disabled {
     box-shadow: -10px -10px 40px rgba(41, 231, 162, 0.6), 10px 10px 40px rgba(41, 231, 162, 0.6);
+  }
+
+  @media (max-width: 576px) {
+    font-size: 1.5rem;
+    height: 7vh;
+    line-height: 6vh;
+    width: 40vw;
+  }
+
+  @media (max-width: 768px) and (min-width: 577px) {
+    font-size: 1.5rem;
+    height: 7vh;
+    line-height: 6vh;
+    width: 20vw;
+  }
+
+  @media (max-width: 992px) and (min-width: 769px) {
+    width: 20vw;
+  }
+
+  @media (max-width: 1200px) and (min-width: 993px) {
+    width: 20vw;
   }
 }

@@ -29,14 +29,47 @@ class GameBoardComponent implements WebComponent {
     boardEl.classList.add('board');
     boardEl.style.backgroundImage = `url('${BoardImage}')`;
 
-    this.labelPlayer = new Label('None plays!', 15).render();
-    this.labelPlayer.classList.add('board__player');
-    boardEl.appendChild(this.labelPlayer);
+    const width = window.innerWidth;
+    if (width <= 576) {
+      this.labelPlayer = new Label('None plays!', 40).render();
+      this.labelPlayer.classList.add('board__player');
+      boardEl.appendChild(this.labelPlayer);
+    } else if (width > 576 && width <= 768) {
+      this.labelPlayer = new Label('None plays!', 40).render();
+      this.labelPlayer.classList.add('board__player');
+      boardEl.appendChild(this.labelPlayer);
+    } else {
+      this.labelPlayer = new Label('None plays!', 15).render();
+      this.labelPlayer.classList.add('board__player');
+      boardEl.appendChild(this.labelPlayer);
+    }
 
-    this.diceCanvas = document.createElement('canvas');
-    boardEl.appendChild(this.diceCanvas);
-    this.canvas = new fabric.Canvas(this.diceCanvas);
-    this.canvas.setDimensions({ width: 300, height: 300 });
+    if (width <= 576) {
+      this.diceCanvas = document.createElement('canvas');
+      boardEl.appendChild(this.diceCanvas);
+      this.canvas = new fabric.Canvas(this.diceCanvas);
+      this.canvas.setDimensions({ width: 250, height: 200 });
+    } else if (width > 576 && width <= 768) {
+      this.diceCanvas = document.createElement('canvas');
+      boardEl.appendChild(this.diceCanvas);
+      this.canvas = new fabric.Canvas(this.diceCanvas);
+      this.canvas.setDimensions({ width: 400, height: 360 });
+    } else if (width > 769 && width <= 992) {
+      this.diceCanvas = document.createElement('canvas');
+      boardEl.appendChild(this.diceCanvas);
+      this.canvas = new fabric.Canvas(this.diceCanvas);
+      this.canvas.setDimensions({ width: 280, height: 200 });
+    } else if (width > 993 && width <= 1200) {
+      this.diceCanvas = document.createElement('canvas');
+      boardEl.appendChild(this.diceCanvas);
+      this.canvas = new fabric.Canvas(this.diceCanvas);
+      this.canvas.setDimensions({ width: 300, height: 220 });
+    } else {
+      this.diceCanvas = document.createElement('canvas');
+      boardEl.appendChild(this.diceCanvas);
+      this.canvas = new fabric.Canvas(this.diceCanvas);
+      this.canvas.setDimensions({ width: 300, height: 300 });
+    }
 
     const buttonWrapper = document.createElement('div');
     buttonWrapper.classList.add('board__buttons');
@@ -61,8 +94,22 @@ class GameBoardComponent implements WebComponent {
     this.boardDisabledCover.classList.add('board__pause-cover--hidden');
     boardEl.appendChild(this.boardDisabledCover);
 
-    const labelPause = new Label('choose category', 10).render();
-    this.boardDisabledCover.appendChild(labelPause);
+    if (width <= 576) {
+      const labelPause = new Label('choose category', 40).render();
+      this.boardDisabledCover.appendChild(labelPause);
+    } else if (width > 576 && width <= 768) {
+      const labelPause = new Label('choose category', 40).render();
+      this.boardDisabledCover.appendChild(labelPause);
+    } else if (width > 769 && width <= 992) {
+      const labelPause = new Label('choose category', 20).render();
+      this.boardDisabledCover.appendChild(labelPause);
+    } else if (width > 993 && width <= 1200) {
+      const labelPause = new Label('choose category', 20).render();
+      this.boardDisabledCover.appendChild(labelPause);
+    } else {
+      const labelPause = new Label('choose category', 20).render();
+      this.boardDisabledCover.appendChild(labelPause);
+    }
 
     this.boardEl = boardEl;
   }
@@ -97,28 +144,122 @@ class GameBoardComponent implements WebComponent {
   }
 
   private drawDice(number: number, style: DiceStyle): void {
-    const x = Math.floor(Math.random() * 270);
-    const y = Math.floor(Math.random() * 270);
-
-    switch (number) {
-    case 1:
-      this.draw1Dice(x, y, style);
-      break;
-    case 2:
-      this.draw2Dice(x, y, style);
-      break;
-    case 3:
-      this.draw3Dice(x, y, style);
-      break;
-    case 4:
-      this.draw4Dice(x, y, style);
-      break;
-    case 5:
-      this.draw5Dice(x, y, style);
-      break;
-    case 6:
-      this.draw6Dice(x, y, style);
-      break;
+    const width = window.innerWidth;
+    if (width <= 576) {
+      const x = Math.floor(Math.random() * 170);
+      const y = Math.floor(Math.random() * 220);
+      switch (number) {
+      case 1:
+        this.draw1Dice(x, y, style);
+        break;
+      case 2:
+        this.draw2Dice(x, y, style);
+        break;
+      case 3:
+        this.draw3Dice(x, y, style);
+        break;
+      case 4:
+        this.draw4Dice(x, y, style);
+        break;
+      case 5:
+        this.draw5Dice(x, y, style);
+        break;
+      case 6:
+        this.draw6Dice(x, y, style);
+        break;
+      }
+    } else if (width > 576 && width <= 768) {
+      const x = Math.floor(Math.random() * 330);
+      const y = Math.floor(Math.random() * 370);
+      switch (number) {
+      case 1:
+        this.draw1Dice(x, y, style);
+        break;
+      case 2:
+        this.draw2Dice(x, y, style);
+        break;
+      case 3:
+        this.draw3Dice(x, y, style);
+        break;
+      case 4:
+        this.draw4Dice(x, y, style);
+        break;
+      case 5:
+        this.draw5Dice(x, y, style);
+        break;
+      case 6:
+        this.draw6Dice(x, y, style);
+        break;
+      }
+    } else if (width > 769 && width <= 992) {
+      const x = Math.floor(Math.random() * 170);
+      const y = Math.floor(Math.random() * 250);
+      switch (number) {
+      case 1:
+        this.draw1Dice(x, y, style);
+        break;
+      case 2:
+        this.draw2Dice(x, y, style);
+        break;
+      case 3:
+        this.draw3Dice(x, y, style);
+        break;
+      case 4:
+        this.draw4Dice(x, y, style);
+        break;
+      case 5:
+        this.draw5Dice(x, y, style);
+        break;
+      case 6:
+        this.draw6Dice(x, y, style);
+        break;
+      }
+    } else if (width > 993 && width <= 1200) {
+      const x = Math.floor(Math.random() * 190);
+      const y = Math.floor(Math.random() * 270);
+      switch (number) {
+      case 1:
+        this.draw1Dice(x, y, style);
+        break;
+      case 2:
+        this.draw2Dice(x, y, style);
+        break;
+      case 3:
+        this.draw3Dice(x, y, style);
+        break;
+      case 4:
+        this.draw4Dice(x, y, style);
+        break;
+      case 5:
+        this.draw5Dice(x, y, style);
+        break;
+      case 6:
+        this.draw6Dice(x, y, style);
+        break;
+      }
+    } else {
+      const x = Math.floor(Math.random() * 270);
+      const y = Math.floor(Math.random() * 270);
+      switch (number) {
+      case 1:
+        this.draw1Dice(x, y, style);
+        break;
+      case 2:
+        this.draw2Dice(x, y, style);
+        break;
+      case 3:
+        this.draw3Dice(x, y, style);
+        break;
+      case 4:
+        this.draw4Dice(x, y, style);
+        break;
+      case 5:
+        this.draw5Dice(x, y, style);
+        break;
+      case 6:
+        this.draw6Dice(x, y, style);
+        break;
+      }
     }
   }
 
