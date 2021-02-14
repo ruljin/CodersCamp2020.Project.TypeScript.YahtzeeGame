@@ -47,7 +47,9 @@ Our project is an application to play dice game Yahtzee. This is a browser based
 -   Webpack
 -   BEM methodology
 -   Jest
--   Lint
+-   ESLint
+-   StyleLint
+-   HTML-validate
 -   Scrum
 -   Figma
 -   Jira
