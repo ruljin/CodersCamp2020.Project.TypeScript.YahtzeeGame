@@ -4,8 +4,10 @@ import LabelComponent from '../label/label';
 import SelectorComponent from '../selector/selector';
 import AddRemoveElement from '../add-remove/add-remove';
 import ReferenceComponent from '../reference/reference';
+import saveSettings from '../../local-storage/localstorage';
 
 class SettingsComponent implements WebComponent {
+  playButton = document.querySelector('.button') as HTMLElement;
   render(): Element {
     return this.layout();
   }
@@ -15,6 +17,7 @@ class SettingsComponent implements WebComponent {
     this.change();
     this.remove();
     this.blocked();
+    this.saveAndPlay();
   }
 
   private layout(): HTMLElement {
@@ -103,6 +106,28 @@ class SettingsComponent implements WebComponent {
         }
       }
     });
+  }
+
+  private saveAndPlay(): void {
+    const playBtn = document.querySelector('.button')!;
+    playBtn.addEventListener('click', this.saveSettingsInLocalStorage);
+  }
+
+  private saveSettingsInLocalStorage(): void {
+    const players: string[] = [];
+    const playersDiv = document.querySelector('.players')!.children!;
+    for (const children of playersDiv) {
+      const child = children.textContent!;
+      players.push(child);
+    }
+
+    let style = '';
+    const styleWrapper = (<NodeListOf<HTMLSelectElement>>document.querySelectorAll('.select'));
+    for (const select of styleWrapper) {
+      const option = (select.options[select.selectedIndex].value);
+      style = option;
+    }
+    saveSettings(players, style);
   }
 }
 
