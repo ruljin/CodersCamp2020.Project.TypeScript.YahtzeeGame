@@ -17,7 +17,7 @@ function createElementFromString(elementString: string): Element {
 
 function createElementFromElements(containerName = '', ...elements: Element[]): Element {
   const div = document.createElement('div');
-  div.classList.add(containerName);
+  if (containerName != '') div.classList.add(containerName);
 
   for (const element of elements) {
     div.append(element);

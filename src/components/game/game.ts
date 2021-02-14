@@ -4,6 +4,12 @@ import LogoComponent from '../logo/logo';
 import ScoreTableComponent from '../score-table-during-game/score-table-during-game';
 import WebComponent, {createElementFromElements, createElementFromString} from '../../common/WebComponent';
 import DiceBackgroundComponent, { DiceTypes } from '../dice-background/dice-background';
+import ls from '../../local-storage/localstorage';
+
+interface Scores {
+  nickname: string,
+  points: number
+}
 
 interface GameHistory {
   playerName: string,
@@ -27,10 +33,11 @@ class GameComponent implements WebComponent  {
   currentRoundNumber: number;
   isGameFinished: boolean;
 
-  constructor(playersName: string[]) {
+  constructor() {
+    if (ls.getSettingsFromLocalStorage() === null) window.location.href = '../#/rules';
+    this.playersName = ls.getSettingsFromLocalStorage()!.players;
     this.gameBoard = new GameBoardComponent(() => null, () => null);
-    this.scoreTable = new ScoreTableComponent(playersName);
-    this.playersName = playersName;
+    this.scoreTable = new ScoreTableComponent(this.playersName);
     this.gameHistory = [];
     this.currentRoundNumber = 0;
     this.isGameFinished = false;
@@ -469,7 +476,6 @@ class GameComponent implements WebComponent  {
             isAvailable.push(false);
             break;
           }
-          console.log(playerDices, playerDicesSorted);
           if (playerDicesSorted[0] == playerDicesSorted[1] - 1 && playerDicesSorted[1] == playerDicesSorted[2] - 1 &&
               playerDicesSorted[2] == playerDicesSorted[3] - 1) {
             isAvailable.push(true);
@@ -653,14 +659,47 @@ class GameComponent implements WebComponent  {
     if (!this.checkFinish()) {
       this.switchToNextPlayer();
     } else {
-      this.fillTotalPoints();
       this.finishGame();
     }
   }
 
   private finishGame(): void {
+    this.playersName.map((name, index) => this.checkSubTotal(index));
+    this.gameBoard.changeLabel('The game has finished!');
+    this.fillTotalPoints();
     this.isGameFinished = true;
     this.gameBoard.pause(true);
+    this.saveDataToLocalStorage();
+    this.redirectToScoresSubpage();
+  }
+
+  private redirectToScoresSubpage() {
+    ls.removeSettingsFromLocalStorage();
+    let timeToRedirect = 5;
+
+    const interval = setInterval(() => {
+      this.gameBoard.changeLabel('The game has finished! You will be redirected to scores in: ' + timeToRedirect);
+      if (timeToRedirect <= 0) {
+        clearInterval(interval);
+        window.location.href = '../#/scores';
+      }
+      timeToRedirect--;
+    }, 1000);
+  }
+
+  private saveDataToLocalStorage(): void {
+    const scores: Scores[] = ls.getScoresFromLocalStorage();
+    let index = 0;
+    for (const player of this.scoreTable.points) {
+      if (player.leave !== true && !this.isCurrentPlayerComputer(index)) {
+        scores.push({
+          nickname: player.name,
+          points: player.total!
+        });
+      }
+      index++;
+    }
+    ls.saveScores(scores);
   }
 
   private switchToNextPlayer(): void {
@@ -700,6 +739,11 @@ class GameComponent implements WebComponent  {
 
       playerTotalRow.innerHTML = sumOfScores.toString();
       this.scoreTable.points[index].total = sumOfScores;
+
+      if (scores.yahtzeeBonus === null) {
+        this.scoreTable.points[index].yahtzeeBonus = 0;
+        playerColumn.querySelectorAll('.score-table__player-field--blue')[2].innerHTML = '0';
+      }
       index++;
     }
   }
@@ -746,8 +790,7 @@ class GameComponent implements WebComponent  {
   }
 
   private checkFinish(): boolean {
-    if (this.currentRoundNumber == 12 && this.gameBoard.currentPlayerIndex == this.playersName.length-1) return true;
-    return false;
+    return this.currentRoundNumber == 13;
   }
 
   private checkPlayerFinishRound = async (): Promise<void> => {

@@ -1,8 +1,16 @@
 import './game-board.scss';
-import * as BoardImage from '../../assets/table-classic.png';
+import * as ClassicBoard from '../../assets/table-classic.png';
+import * as DragonBoard from '../../assets/table-dragon.png';
+import * as PiratBoard from '../../assets/table-pirat.png';
 import WebComponent from '../../common/WebComponent';
 import Label from '../label/label';
 import { fabric } from 'fabric';
+import ls from '../../local-storage/localstorage';
+
+interface Settings {
+  players: string[],
+  style: string
+}
 
 enum DiceStyle {
   NEW,
@@ -27,7 +35,7 @@ class GameBoardComponent implements WebComponent {
 
     const boardEl = document.createElement('div');
     boardEl.classList.add('board');
-    boardEl.style.backgroundImage = `url('${BoardImage}')`;
+    this.manageTableBackground(boardEl);
 
     this.labelPlayer = new Label('None plays!', 15).render();
     this.labelPlayer.classList.add('board__player');
@@ -65,6 +73,27 @@ class GameBoardComponent implements WebComponent {
     this.boardDisabledCover.appendChild(labelPause);
 
     this.boardEl = boardEl;
+  }
+
+  private manageTableBackground(board: HTMLElement): void {
+    const settings: Settings = ls.getSettingsFromLocalStorage()!;
+
+    switch (settings.style) {
+    case 'classic game': {
+      board.style.backgroundImage = `url('${ClassicBoard}')`;
+      break;
+    }
+
+    case 'play with pirates': {
+      board.style.backgroundImage = `url('${PiratBoard}')`;
+      break;
+    }
+
+    case 'beat the dragon': {
+      board.style.backgroundImage = `url('${DragonBoard}')`;
+      break;
+    }
+    }
   }
 
   changeLabel(text: string): void {
