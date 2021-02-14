@@ -179,7 +179,7 @@ class SettingsComponent implements WebComponent {
     input.style.border = '3px solid rgb(255, 255, 255)';
   }
 
-  private theSameName() {
+  private theSameName(): void {
     const link = document.querySelector('.button')! as Element;
 
     link.addEventListener('click', (e): void => {
