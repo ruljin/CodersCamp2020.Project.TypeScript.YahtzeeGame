@@ -4,6 +4,7 @@ import LabelComponent from '../label/label';
 import SelectorComponent from '../selector/selector';
 import AddRemoveElement from '../add-remove/add-remove';
 import ReferenceComponent from '../reference/reference';
+import saveSettings from '../../local-storage/localstorage';
 
 class SettingsComponent implements WebComponent {
   render(): Element {
@@ -15,6 +16,7 @@ class SettingsComponent implements WebComponent {
     this.change();
     this.remove();
     this.walidate();
+    this.saveAndPlay();
   }
 
   private layout(): HTMLElement {
@@ -29,6 +31,7 @@ class SettingsComponent implements WebComponent {
     players.setAttribute('class', 'players');
 
     const div1 = document.createElement('div');
+    div1.setAttribute('class', 'players__option');
     const label = new LabelComponent('Player 1', 20, false).render();
     label.setAttribute('id', 'id1');
     div1.appendChild(label);
@@ -38,6 +41,7 @@ class SettingsComponent implements WebComponent {
     players.appendChild(div1);
 
     const div2 = document.createElement('div');
+    div2.setAttribute('class', 'players__option');
     const list = ['computer/easy', 'computer/medium', 'computer/hard', 'player'];
     div2.appendChild(new SelectorComponent(list, 20).render());
     const error2 = document.createElement('div');
@@ -69,6 +73,7 @@ class SettingsComponent implements WebComponent {
         const list = ['computer/easy', 'computer/medium', 'computer/hard', 'player'];
         const div = document.createElement('div');
         div.appendChild(new SelectorComponent(list, 20).render());
+        div.setAttribute('class', 'players__option');
         const error = document.createElement('div');
         error.setAttribute('class', 'error');
         div.appendChild(error);
@@ -199,6 +204,33 @@ class SettingsComponent implements WebComponent {
         }
       }
     });
+  }
+
+  private saveAndPlay(): void {
+    const playBtn = document.querySelector('.button')!;
+    playBtn.addEventListener('click', this.saveSettingsInLocalStorage);
+  }
+
+  private saveSettingsInLocalStorage(): void {
+    const players: string[] = [];
+
+    const playersDiv = document.querySelectorAll('.players__option > :first-child');
+
+    for (let i = 0; i < playersDiv.length; i++) {
+      if (playersDiv[i].classList.contains('label')) {
+        players.push((playersDiv[i] as HTMLInputElement).value);
+      } else {
+        players.push((playersDiv[i] as HTMLSelectElement).options[(playersDiv[i] as HTMLSelectElement).selectedIndex].value);
+      }
+    }
+
+    let style = '';
+    const styleWrapper = (<NodeListOf<HTMLSelectElement>>document.querySelectorAll('.select'));
+    for (const select of styleWrapper) {
+      const option = (select.options[select.selectedIndex].value);
+      style = option;
+    }
+    saveSettings(players, style);
   }
 }
 
