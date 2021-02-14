@@ -18,6 +18,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Modal Component.
 - Responsive view.
 - Modal content for each category in game.
+- Validation functions for settings.
+- Readme file.
 
 ### Changed
 
