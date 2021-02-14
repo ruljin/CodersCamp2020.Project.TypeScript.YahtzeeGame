@@ -13,9 +13,10 @@
     grid-template-rows: 1;
 
     .players {
+      align-content: space-between;
       display: flex;
       flex-wrap: wrap;
-      height: 15vh;
+      height: 20vh;
       justify-content: space-around;
       margin: 0 auto;
       width: 40vw;
@@ -44,3 +45,12 @@
 .button {
   margin: 0 auto;
 }
+
+.error {
+  color: rgb(255, 0, 0);
+  font-size: 1.3rem;
+  margin: 0;
+  padding: 0.5em 0 1.5em;
+  text-align: center;
+}
+
