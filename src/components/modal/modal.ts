@@ -50,7 +50,7 @@ class ModalComponent implements WebComponent {
     document.querySelector('.modal')!.addEventListener('click', this.modalClick);
     document.querySelector('.modal-wrap')!.addEventListener('click', this.closeModal);
     if (this.modalContent.picture) {
-      document.querySelector('.modal__image')!.setAttribute('src', `src/assets/${this.modalContent.picture}.PNG`);
+      document.querySelector('.modal__image')!.setAttribute('src', `./assets/${this.modalContent.picture}.PNG`);
     }
     return;
   }
