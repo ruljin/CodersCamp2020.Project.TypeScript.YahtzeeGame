@@ -26,43 +26,116 @@ class SettingsComponent implements WebComponent {
 
     const names = document.createElement('section');
     names.setAttribute('class', 'settings__names');
-    names.appendChild(new LabelComponent('names', 15).render());
 
-    const players = document.createElement('div');
-    players.setAttribute('class', 'players');
+    const width = window.innerWidth;
+    if (width <= 576) {
+      names.appendChild(new LabelComponent('Players', 40).render());
+      names.appendChild(new AddRemoveElement('+', '-').render());
 
-    const div1 = document.createElement('div');
-    div1.setAttribute('class', 'players__option');
-    const label = new LabelComponent('Player 1', 20, false).render();
-    label.setAttribute('id', 'id1');
-    div1.appendChild(label);
-    const error1 = document.createElement('div');
-    error1.setAttribute('class', 'error');
-    div1.appendChild(error1);
-    players.appendChild(div1);
+      const players = document.createElement('div');
+      players.setAttribute('class', 'players');
+      const div1 = document.createElement('div');
+      div1.setAttribute('class', 'players__option');
+      const label = new LabelComponent('Player 1', 38.5, false).render();
+      label.setAttribute('id', 'id1');
+      div1.appendChild(label);
+      const error1 = document.createElement('div');
+      error1.setAttribute('class', 'error');
+      div1.appendChild(error1);
+      players.appendChild(div1);
+      const div2 = document.createElement('div');
+      div2.setAttribute('class', 'players__option');
+      const list = ['computer/easy', 'computer/medium', 'computer/hard', 'player'];
+      div2.appendChild(new SelectorComponent(list, 38.5).render());
+      const error2 = document.createElement('div');
+      error2.setAttribute('class', 'error');
+      div2.appendChild(error2);
+      players.appendChild(div2);
+      names.appendChild(players);
 
-    const div2 = document.createElement('div');
-    div2.setAttribute('class', 'players__option');
-    const list = ['computer/easy', 'computer/medium', 'computer/hard', 'player'];
-    div2.appendChild(new SelectorComponent(list, 20).render());
-    const error2 = document.createElement('div');
-    error2.setAttribute('class', 'error');
-    div2.appendChild(error2);
-    players.appendChild(div2);
-    names.appendChild(players);
+      settings.appendChild(names);
 
-    names.appendChild(new AddRemoveElement('+', '-').render());
-    settings.appendChild(names);
+      const styles = document.createElement('section');
+      styles.setAttribute('class', 'settings__styles');
+      styles.appendChild(new LabelComponent('Styles', 40).render());
+      const listOfStyles = ['classic game', 'play with pirates', 'beat the dragon'];
+      styles.appendChild(new SelectorComponent(listOfStyles, 80).render());
 
-    const styles = document.createElement('section');
-    styles.setAttribute('class', 'settings__styles');
-    styles.appendChild(new LabelComponent('styles', 15).render());
-    const listOfStyles = ['classic game', 'play with pirates', 'beat the dragon'];
-    styles.appendChild(new SelectorComponent(listOfStyles, 45).render());
+      settings.appendChild(styles);
+      settings.appendChild(new ReferenceComponent('game', 'Play!').render());
+    } else if (width > 576 && width <= 768) {
+      names.appendChild(new LabelComponent('Players', 40).render());
+      names.appendChild(new AddRemoveElement('+', '-').render());
 
-    settings.appendChild(styles);
-    settings.appendChild(new ReferenceComponent('game', 'play!').render());
+      const players = document.createElement('div');
+      players.setAttribute('class', 'players');
+      const div1 = document.createElement('div');
+      div1.setAttribute('class', 'players__option');
+      const label = new LabelComponent('Player 1', 38.5, false).render();
+      label.setAttribute('id', 'id1');
+      div1.appendChild(label);
+      const error1 = document.createElement('div');
+      error1.setAttribute('class', 'error');
+      div1.appendChild(error1);
+      players.appendChild(div1);
+      const div2 = document.createElement('div');
+      div2.setAttribute('class', 'players__option');
+      const list = ['computer/easy', 'computer/medium', 'computer/hard', 'player'];
+      div2.appendChild(new SelectorComponent(list, 38.5).render());
+      const error2 = document.createElement('div');
+      error2.setAttribute('class', 'error');
+      div2.appendChild(error2);
+      players.appendChild(div2);
+      names.appendChild(players);
 
+      settings.appendChild(names);
+
+      const styles = document.createElement('section');
+      styles.setAttribute('class', 'settings__styles');
+      styles.appendChild(new LabelComponent('Styles', 40).render());
+      const listOfStyles = ['classic game', 'play with pirates', 'beat the dragon'];
+      styles.appendChild(new SelectorComponent(listOfStyles, 80).render());
+
+      settings.appendChild(styles);
+      settings.appendChild(new ReferenceComponent('game', 'Play!').render());
+    } else {
+      names.appendChild(new LabelComponent('Players', 15).render());
+
+      const players = document.createElement('div');
+      players.setAttribute('class', 'players');
+
+      const div1 = document.createElement('div');
+      div1.setAttribute('class', 'players__option');
+      const label = new LabelComponent('Player 1', 22, false).render();
+      label.setAttribute('id', 'id1');
+      div1.appendChild(label);
+      const error1 = document.createElement('div');
+      error1.setAttribute('class', 'error');
+      div1.appendChild(error1);
+      players.appendChild(div1);
+
+      const div2 = document.createElement('div');
+      div2.setAttribute('class', 'players__option');
+      const list = ['computer/easy', 'computer/medium', 'computer/hard', 'player'];
+      div2.appendChild(new SelectorComponent(list, 22).render());
+      const error2 = document.createElement('div');
+      error2.setAttribute('class', 'error');
+      div2.appendChild(error2);
+      players.appendChild(div2);
+      names.appendChild(players);
+
+      names.appendChild(new AddRemoveElement('+', '-').render());
+      settings.appendChild(names);
+
+      const styles = document.createElement('section');
+      styles.setAttribute('class', 'settings__styles');
+      styles.appendChild(new LabelComponent('Styles', 15).render());
+      const listOfStyles = ['classic game', 'play with pirates', 'beat the dragon'];
+      styles.appendChild(new SelectorComponent(listOfStyles, 45).render());
+
+      settings.appendChild(styles);
+      settings.appendChild(new ReferenceComponent('game', 'Play!').render());
+    }
     return settings;
   }
 
@@ -73,12 +146,29 @@ class SettingsComponent implements WebComponent {
       if (players.children.length < 4) {
         const list = ['computer/easy', 'computer/medium', 'computer/hard', 'player'];
         const div = document.createElement('div');
-        div.appendChild(new SelectorComponent(list, 20).render());
-        div.setAttribute('class', 'players__option');
-        const error = document.createElement('div');
-        error.setAttribute('class', 'error');
-        div.appendChild(error);
-        players.appendChild(div);
+        const width = window.innerWidth;
+        if (width <= 576) {
+          div.appendChild(new SelectorComponent(list, 38.5).render());
+          div.setAttribute('class', 'players__option');
+          const error = document.createElement('div');
+          error.setAttribute('class', 'error');
+          div.appendChild(error);
+          players.appendChild(div);
+        } else if (width > 568 && width <= 992) {
+          div.appendChild(new SelectorComponent(list, 22).render());
+          div.setAttribute('class', 'players__option');
+          const error = document.createElement('div');
+          error.setAttribute('class', 'error');
+          div.appendChild(error);
+          players.appendChild(div);
+        } else {
+          div.appendChild(new SelectorComponent(list, 22).render());
+          div.setAttribute('class', 'players__option');
+          const error = document.createElement('div');
+          error.setAttribute('class', 'error');
+          div.appendChild(error);
+          players.appendChild(div);
+        }
       }
       this.change();
 
