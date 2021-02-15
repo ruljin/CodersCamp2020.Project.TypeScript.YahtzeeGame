@@ -121,7 +121,7 @@ class GameComponent implements WebComponent {
     return false;
   }
 
-  private checkIfOnlyOnePlayerPlay(): boolean {
+  checkIfOnlyOnePlayerPlay(): boolean {
     let quantityOfComputerPlayers = 0;
     for (let i = 0; i < this.playersName.length; i++) {
       if (this.isCurrentPlayerComputer(i)) quantityOfComputerPlayers++;

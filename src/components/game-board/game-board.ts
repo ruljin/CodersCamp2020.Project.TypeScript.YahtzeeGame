@@ -123,24 +123,33 @@ class GameBoardComponent implements WebComponent {
   }
 
   private manageTableBackground(board: HTMLElement): void {
+
     const settings: Settings = ls.getSettingsFromLocalStorage()!;
+    try {
+      switch (settings.style) {
+      case 'classic game': {
+        board.style.backgroundImage = `url('${ClassicBoard}')`;
+        break;
+      }
 
-    switch (settings.style) {
-    case 'classic game': {
+      case 'play with pirates': {
+        board.style.backgroundImage = `url('${PiratBoard}')`;
+        break;
+      }
+
+      case 'beat the dragon': {
+        board.style.backgroundImage = `url('${DragonBoard}')`;
+        break;
+      }
+
+      default : {
+        board.style.backgroundImage = `url('${ClassicBoard}')`;
+      }
+      }
+    } catch (error) {
       board.style.backgroundImage = `url('${ClassicBoard}')`;
-      break;
     }
 
-    case 'play with pirates': {
-      board.style.backgroundImage = `url('${PiratBoard}')`;
-      break;
-    }
-
-    case 'beat the dragon': {
-      board.style.backgroundImage = `url('${DragonBoard}')`;
-      break;
-    }
-    }
   }
 
   changeLabel(text: string): void {
