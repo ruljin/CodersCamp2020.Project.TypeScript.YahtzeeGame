@@ -1,6 +1,6 @@
 import './scores.scss';
 import WebComponent, { createElementFromString } from '../../common/WebComponent';
-//import { createTracing } from 'trace_events';
+import ls from '../../local-storage/localstorage';
 
 interface Scores {
   nickname: string,
@@ -10,11 +10,11 @@ interface Scores {
 class ScoresComponent implements WebComponent {
   scores: Scores[]
   constructor() {
-    this.scores = JSON.parse(localStorage.getItem('') || '[]');
+    this.scores = ls.getScoresFromLocalStorage();
   }
 
   render(): Element {
-    return createElementFromString(`<section class="container">
+    return createElementFromString(`<section class="container-scores">
       <h1 class="scores">Best Yahtzee players</h1>
       <table class="table">
         <thead>
@@ -30,8 +30,8 @@ class ScoresComponent implements WebComponent {
     </section>`
     );
   }
+
   setup(): void {
-    console.log(this.scores === []);
     const tableBody = document.querySelector('#tableBody')!;
     if (this.scores.length == 0) {
       tableBody.innerHTML = this.tableEmpty();
@@ -42,10 +42,9 @@ class ScoresComponent implements WebComponent {
           this.createTR(i + 1, this.scores[i].nickname, this.scores[i].points);
       }
     }
-    console.log(this.scores);
   }
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-  public createTR = (place: number, nickname: string, points: number) => {
+
+  public createTR = (place: number, nickname: string, points: number): string => {
     return `
     <tr class="table__row">
       <td class="table__data">${place}</td>
@@ -53,17 +52,17 @@ class ScoresComponent implements WebComponent {
       <td class="table__data">${points}</td>
     </tr>`;
   }
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-  public tableEmpty = () => {
+
+  public tableEmpty = (): string => {
     return `
     <tr class="table__row">
-      <td class="table__data table__data--wide">
-        no scores
-      </td>
+      <td class="table__data"></td>
+      <td class="table__data">no scores yet</td>
+      <td class="table__data"></td>
     </tr>`;
   }
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-  public sortRows(scores: Scores[]) {
+
+  public sortRows(scores: Scores[]): Scores[] {
     for (let i = 0; i < scores.length; i++) {
       for (let j = 0; j < scores.length - (i + 1); j++) {
         if (scores[j].points < scores[j + 1].points) {

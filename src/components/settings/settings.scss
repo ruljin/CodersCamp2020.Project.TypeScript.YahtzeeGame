@@ -1,0 +1,125 @@
+.settings {
+  display: flex;
+  flex-direction: column;
+  height: 55vh;
+  justify-content: space-around;
+  margin: 0 auto 2rem;
+  width: 70vw;
+
+  @media (max-width: 576px) {
+    font-size: 1.7em;
+    height: 55vh;
+    margin-bottom: 10vh;
+    margin-top: 10vh;
+    width: 80vw;
+  }
+
+  @media (max-width: 768px) and (min-width: 577px) {
+    font-size: 1.7em;
+    height: 55vh;
+    margin-bottom: 15vh;
+    margin-top: 12vh;
+    width: 80vw;
+  }
+
+  @media (max-width: 992px) and (min-width: 769px) {
+    font-size: 1.7em;
+    height: 55vh;
+    margin-bottom: 5vh;
+    margin-top: 10vh;
+    width: 70vw;
+  }
+
+  @media (max-width: 1200px) and (min-width: 993px) {
+    height: 55vh;
+    margin-bottom: 7vh;
+    margin-top: 5vh;
+    width: 60vw;
+  }
+
+  &__names {
+    display: grid;
+    grid-column-gap: 2vw;
+    grid-template-columns: 15vw 45vw 6vh;
+    grid-template-rows: 1;
+
+    @media (max-width: 576px) {
+      grid-template-columns: 80vw;
+      grid-template-rows: 7vh 8vh 20vh;
+    }
+
+    @media (max-width: 768px) and (min-width: 577px) {
+      grid-template-columns: 80vw;
+      grid-template-rows: 7vh 8vh 25vh;
+    }
+
+    .players {
+      align-content: space-between;
+      display: flex;
+      flex-wrap: wrap;
+      height: 18vh;
+      justify-content: space-between;
+      margin: 0 auto;
+      width: 45vw;
+
+      @media (max-width: 576px) {
+        width: 80vw;
+      }
+
+      @media (max-width: 768px) and (min-width: 577px) {
+        width: 80vw;
+      }
+    }
+
+    .switch-wrapper {
+      display: flex;
+      flex-direction: column;
+      height: 18vh;
+      justify-content: space-evenly;
+
+      @media (max-width: 576px) {
+        flex-direction: row-reverse;
+        justify-content: space-between;
+      }
+
+      @media (max-width: 768px) and (min-width: 577px) {
+        flex-direction: row-reverse;
+        justify-content: space-around;
+      }
+    }
+  }
+
+  &__styles {
+    display: grid;
+    grid-column-gap: 2vw;
+    grid-template-columns: 15vw 45vw 6vh;
+    grid-template-rows: 1;
+    margin-top: 10%;
+
+    @media (max-width: 576px) {
+      grid-template-columns: 80vw;
+      grid-template-rows: 10vh 15vh;
+    }
+
+    @media (max-width: 768px) and (min-width: 577px) {
+      grid-template-columns: 80vw;
+      grid-template-rows: 10vh 15vh;
+    }
+
+    .select {
+      margin: 0 auto;
+    }
+  }
+}
+
+.button {
+  margin: 0 auto;
+}
+
+.error {
+  color: rgb(255, 0, 0);
+  font-size: 0.8rem;
+  margin: 0;
+  padding: 0.5em 0 1.5em;
+  text-align: center;
+}

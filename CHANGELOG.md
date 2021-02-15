@@ -7,7 +7,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-Nothing new yet!
+- Game Logic
+- LocalStorage implementation in game and scores
+- Change board background depends on settings
+- Check attempt to access game without settings
+
+### Added 
+
+- Screens arrangement.
+- Game board Component.
+- Fabric.js.
+- Settings Component.
+- Modal Component.
+- Responsive view.
+- Modal content for each category in game.
+- Validation functions for settings.
+- Readme file.
+
+### Changed
+
+- Disable max-nesting-depth stylelint rule.
+- Disable max-len eslint rule.
+- Styles correct.
+- Make the modal in the foreground.
+
+### Fixed
+
+- Remove the transparent space in modals.
+- Make the modal buttons the same size.
 
 ## [1.0.0] - 2021-02-03
 

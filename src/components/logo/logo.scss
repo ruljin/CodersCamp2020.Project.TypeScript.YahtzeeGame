@@ -2,4 +2,14 @@
   margin: 0 auto;
   text-align: center;
   width: 35vw;
+
+  @media (max-width: 576px) {
+    margin-top: 2%;
+    width: 55vw;
+  }
+
+  @media (max-width: 993px) and (min-width: 577px) {
+    margin-top: 2%;
+    width: 50vw;
+  }
 }

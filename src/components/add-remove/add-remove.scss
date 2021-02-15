@@ -1,0 +1,23 @@
+.switch {
+  background-color: rgb(187, 191, 192);
+  border: 3px solid rgb(255, 255, 255);
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.5rem;
+  height: 6vh;
+  outline: none;
+  text-align-last: center;
+  width: 6vh;
+
+  @media (max-width: 576px) {
+    flex-wrap: nowrap;
+    height: 5vh;
+    width: 5vh;
+  }
+
+  @media (max-width: 768px) and (min-width: 577px) {
+    flex-wrap: nowrap;
+    height: 5vh;
+    width: 5vh;
+  }
+}

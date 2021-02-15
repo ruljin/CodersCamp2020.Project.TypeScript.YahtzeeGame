@@ -3,4 +3,21 @@
 body {
   background-color: #002c1e;
   height: 100vh;
+};
+
+.menu-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+
+  @media (max-width: 576px) {
+    flex-wrap: wrap;
+    height: 18vh;
+  }
 }
+
+.button {
+  align-items: center;
+}
+
+

@@ -1,15 +1,48 @@
 @import url('https://fonts.googleapis.com/css2?family=Alata&display=swap');
 
-.container {
+.authors {
   color: #fff;
   font-family: 'Alata', sans-serif;
-  font-size: 3em;
-  height: 406px;
+  font-size: 2.5em;
+  height: 55vh;
   line-height: 1.4em;
   margin: 0 auto;
+  margin-bottom: 2rem;
   text-align: center;
   text-shadow: 10px 20px 10px rgba(70, 6, 15, 0.62);
   width: 866px;
+
+  @media (max-width: 576px) {
+    font-size: 1.7em;
+    height: 55vh;
+    margin-bottom: 10vh;
+    margin-top: 5vh;
+    width: 80vw;
+  }
+
+  @media (max-width: 768px) and (min-width: 577px) {
+    font-size: 1.7em;
+    height: 55vh;
+    margin-bottom: 10vh;
+    margin-top: 5vh;
+    width: 80vw;
+  }
+
+  @media (max-width: 992px) and (min-width: 769px) {
+    font-size: 1.7em;
+    height: 55vh;
+    margin-bottom: 10vh;
+    margin-top: 5vh;
+    width: 80vw;
+  }
+
+  @media (max-width: 1200px) and (min-width: 993px) {
+    font-size: 2em;
+    height: 55vh;
+    margin-bottom: 7vh;
+    margin-top: 5vh;
+    width: 60vw;
+  }
 };
 
 .link {

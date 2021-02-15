@@ -1,0 +1,94 @@
+.modal-wrap {
+  display: none;
+}
+
+.modal-wrap.active {
+  background-color: rgba(0, 0, 0, 0.5);
+  display: block;
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+    
+.modal {
+  background: linear-gradient(#46060f 25%, #f9efef 25%) border-box;
+  border: 0.3rem solid #46060f;
+  border-radius: 3rem;
+  display: flex;
+  flex-direction: column;
+  height: 60%;
+  justify-content: space-between;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 30%;
+  
+  &__header {
+    color: #fff;
+    display: flex;
+    flex-direction: column-reverse;
+    font-size: 2rem;
+    padding-left: 1.5rem;
+    padding-top: 1rem;
+
+    &--subheader {
+      font-size: 1.3rem;
+      padding-bottom: 0.5rem;
+    }
+  }
+  
+  &__body {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.6rem;
+    padding: 1.5rem;
+    pointer-events: none;
+    user-select: none;
+
+    &__points {
+      font-size: 1.1rem;
+      padding-bottom: 2.5rem;
+      padding-top: 1rem;
+    }
+  }
+  
+  &__buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding-bottom: 5%;
+
+    &--close,
+    &--next {
+      cursor: pointer;
+    }
+
+    .button,
+    .label {
+      font-size: 1.5rem;
+      height: 2.7rem;
+      line-height: 2.2rem;
+      margin: 0;
+      width: 10rem !important;
+    }
+  }
+
+  @media (max-width: 576px) {
+    width: 70%;
+  }
+
+  @media (max-width: 768px) and (min-width: 577px) {
+    width: 55%;
+  }
+
+  @media (max-width: 992px) and (min-width: 769px) {
+    width: 45%;
+  }
+
+  @media (max-width: 1200px) and (min-width: 993px) {
+    width: 40%;
+  }
+}

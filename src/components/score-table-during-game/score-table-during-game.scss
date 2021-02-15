@@ -1,7 +1,8 @@
-$cell-width: 30px;
+$cell-width: 37px;
+
 
 .score-table {
-  background: repeating-linear-gradient(to right , #fff 0, #fff $cell-width - 0.5px, rgba(100, 100, 245, 0.05) $cell-width);
+  background: #fff;
   display: flex;
   width: fit-content;
 
@@ -32,51 +33,13 @@ $cell-width: 30px;
     background-color: #94d4cc;
   }
 
-  &__names-item::before,
-  &__names-item::after {
-    background-color: rgba(0, 0, 255, 0.2);
-    content: '';
-    height: 100%;
-    left: $cell-width - 0.5px;
-    position: absolute;
-    top: 0;
-    transform: translate(-50%, 0);
-    width: 0.5px;
-  }
-
-  &__names-item::after {
-    left: 2*$cell-width - 1px;
-  }
-
   &__names-item--empty {
     border-bottom: 3px solid #00f;
     cursor: default;
-    height: 60px;
+    height: 80px;
     padding: 0;
     position: relative;
     width: 3*$cell-width;
-  }
-
-  &__names-item--empty::after {
-    background-color: rgba(0, 0, 255, 0.2);
-    content: '';
-    height: 0.5px;
-    left: 0;
-    position: absolute;
-    top: 50%;
-    transform: translate(0, -50%);
-    width: 100%;
-  }
-
-  &__names-item--empty::before {
-    background-color: rgba(0, 0, 255, 0.1);
-    content: '';
-    height: 100%;
-    left: 33%;
-    position: absolute;
-    top: 0;
-    transform: translate(-50%, 0);
-    width: 0.5px;
   }
 
   &__players-container {
@@ -94,22 +57,17 @@ $cell-width: 30px;
     border-right: 1px solid #00f;
     display: flex;
     font-family: sans-serif;
-    font-size: 0.875rem;
-    height: 60px;
+    font-size: 0.75rem;
+    height: 80px;
     justify-content: center;
     position: relative;
+    text-overflow: hidden;
     width: 2*$cell-width;
+    
   }
 
-  &__player-name::after {
-    background-color: rgba(0, 0, 255, 0.2);
-    content: '';
-    height: 0.5px;
-    left: 0;
-    position: absolute;
-    top: 50%;
-    transform: translate(0, -50%);
-    width: 100%;
+  &__player-name--inactive {
+    background-color: #f00;
   }
 
   &__player-field {
@@ -123,20 +81,30 @@ $cell-width: 30px;
     border-bottom: 0;
   }
 
+  &__player-field--red {
+    background-color: #f00;
+    cursor: pointer;
+  }
+
   &__player-field--blue {
+    align-items: center;
     background-color: #94d4cc;
+    display: flex;
+    font-size: 1.25rem;
+    justify-content: center;
     position: relative;
   }
 
-  &__player-field--blue::after {
-    background-color: rgba(0, 0, 255, 0.1);
-    content: '';
-    height: 100%;
-    left: 50%;
-    position: absolute;
-    top: 0;
-    transform: translate(-50%, 0);
-    width: 0.5px;
+  &__player-field--active {
+    animation: background 2s linear infinite;
+    cursor: pointer;
+  }
+
+  &__player-field--filled {
+    align-items: center;
+    display: flex;
+    font-size: 1.25rem;
+    justify-content: center;
   }
 }
 
@@ -147,4 +115,18 @@ $cell-width: 30px;
 
 .border-right-none {
   border-right: 0;
+}
+
+@keyframes background {
+  0% {
+    background-color: #598c11;
+  }
+
+  50% {
+    background-color: #88da15;
+  }
+
+  100% {
+    background-color: #598c11;
+  }
 }
