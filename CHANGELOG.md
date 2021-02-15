@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 - Game Logic
+- LocalStorage implementation in game and scores
+- Change board background depends on settings
+- Check attempt to access game without settings
 
 ### Added 
 

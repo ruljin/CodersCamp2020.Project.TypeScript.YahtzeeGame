@@ -1,5 +1,6 @@
 import './scores.scss';
 import WebComponent, { createElementFromString } from '../../common/WebComponent';
+import ls from '../../local-storage/localstorage';
 
 interface Scores {
   nickname: string,
@@ -9,7 +10,7 @@ interface Scores {
 class ScoresComponent implements WebComponent {
   scores: Scores[]
   constructor() {
-    this.scores = JSON.parse(localStorage.getItem('') || '[]');
+    this.scores = ls.getScoresFromLocalStorage();
   }
 
   render(): Element {

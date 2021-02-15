@@ -301,8 +301,7 @@ function routePathsHandler() {
 
   } else if (router.checkPath('game')) {
     router.clearRoot();
-    const playersName = ['Player 1', 'Player 2', 'computer1'];
-    const game = new GameComponent(playersName);
+    const game = new GameComponent();
     const width = window.innerWidth;
     if (width <= 576) {
       const diceBackgroundComponent =

@@ -4,7 +4,8 @@ import ModalComponent from '../modal/modal';
 import Router from '../../common/Router';
 
 interface PlayerPoints {
-  name: string
+  name: string,
+  leave: boolean,
   ones: number | null,
   twos: number | null,
   threes: number | null,
@@ -33,6 +34,7 @@ class ScoreTableDuringGameComponent implements WebComponent {
     for (const player of playersName) {
       const playerPoints: PlayerPoints = {
         name: player,
+        leave: false,
         ones: null,
         twos: null,
         threes: null,
