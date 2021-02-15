@@ -2,6 +2,19 @@ import './modal.scss';
 import WebComponent, { createElementFromString } from '../../common/WebComponent';
 import ReferenceComponent from '../reference/reference';
 import LabelComponent from '../label/label';
+import * as yahtzee from '../../assets/yahtzee.png';
+import * as twos from '../../assets/twos.png';
+import * as threes from '../../assets/threes.png';
+import * as threeOfKind from '../../assets/threeOfKind.png';
+import * as smStraight from '../../assets/smStraight.png';
+import * as sixes from '../../assets/sixes.png';
+import * as ones from '../../assets/ones.png';
+import * as lgStraight from '../../assets/lgStraight.png';
+import * as fullHouse from '../../assets/fullHouse.png';
+import * as fours from '../../assets/fours.png';
+import * as fourOfKind from '../../assets/fourOfKind.png';
+import * as fives from '../../assets/fives.png';
+import * as chance from '../../assets/chance.png';
 
 interface Modal {
   subheader?: string;
@@ -50,9 +63,70 @@ class ModalComponent implements WebComponent {
     document.querySelector('.modal')!.addEventListener('click', this.modalClick);
     document.querySelector('.modal-wrap')!.addEventListener('click', this.closeModal);
     if (this.modalContent.picture) {
-      document.querySelector('.modal__image')!.setAttribute('src', `src/assets/${this.modalContent.picture}.PNG`);
+      const image = this.chooseImage(this.modalContent.picture);
+      document.querySelector('.modal__image')!.setAttribute('src', `${image}`);
     }
     return;
+  }
+
+  private chooseImage(picture: unknown) {
+    switch (picture) {
+    case 'ones' : {
+      return ones;
+    }
+
+    case 'twos' : {
+      return twos;
+    }
+
+    case 'threes' : {
+      return threes;
+    }
+
+    case 'fours' : {
+      return fours;
+    }
+
+    case 'fives' : {
+      return fives;
+    }
+
+    case 'sixes' : {
+      return sixes;
+    }
+
+    case 'threeOfKind' : {
+      return threeOfKind;
+    }
+
+    case 'fourOfKind' : {
+      return fourOfKind;
+    }
+
+    case 'fullHouse' : {
+      return fullHouse;
+    }
+
+    case 'smStraight' : {
+      return smStraight;
+    }
+
+    case 'lgStraight' : {
+      return lgStraight;
+    }
+
+    case 'yahtzee' : {
+      return yahtzee;
+    }
+
+    case 'chance' : {
+      return chance;
+    }
+
+    default : {
+      return null;
+    }
+    }
   }
 
   private addExtraProperty(element: string | unknown) {
