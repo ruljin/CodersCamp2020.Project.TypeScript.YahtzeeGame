@@ -8,9 +8,13 @@
     width: 55vw;
   }
 
-  @media (max-width: 768px) and (min-width: 577px) {
+  @media (max-width: 993px) and (min-width: 577px) {
     margin-top: 2%;
     width: 50vw;
+  }
+
+  @media (min-width: 884px) {
+    width: 20vw;
   }
 
 }
