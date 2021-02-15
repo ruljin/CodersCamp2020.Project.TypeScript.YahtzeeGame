@@ -1,8 +1,16 @@
 import './game-board.scss';
-import * as BoardImage from '../../assets/table-classic.png';
+import * as ClassicBoard from '../../assets/table-classic.png';
+import * as DragonBoard from '../../assets/table-dragon.png';
+import * as PiratBoard from '../../assets/table-pirat.png';
 import WebComponent from '../../common/WebComponent';
 import Label from '../label/label';
 import { fabric } from 'fabric';
+import ls from '../../local-storage/localstorage';
+
+interface Settings {
+  players: string[],
+  style: string
+}
 
 enum DiceStyle {
   NEW,
@@ -27,7 +35,7 @@ class GameBoardComponent implements WebComponent {
 
     const boardEl = document.createElement('div');
     boardEl.classList.add('board');
-    boardEl.style.backgroundImage = `url('${BoardImage}')`;
+    this.manageTableBackground(boardEl);
 
     const width = window.innerWidth;
     if (width <= 576) {
@@ -78,14 +86,14 @@ class GameBoardComponent implements WebComponent {
     const buttonRollAgain = document.createElement('button');
     buttonRollAgain.classList.add('button-game');
     buttonRollAgain.setAttribute('id', 'buttonRollAgain');
-    buttonRollAgain.innerHTML = 'roll again';
+    buttonRollAgain.innerHTML = 'Roll';
     buttonWrapper.appendChild(buttonRollAgain);
     buttonRollAgain.addEventListener('click', buttonRollAgainEvent);
 
     const buttonFinishRound = document.createElement('button');
     buttonFinishRound.classList.add('button-game');
     buttonFinishRound.setAttribute('id', 'buttonFinishRound');
-    buttonFinishRound.innerHTML = 'finish round';
+    buttonFinishRound.innerHTML = 'Finish Round';
     buttonWrapper.appendChild(buttonFinishRound);
     buttonFinishRound.addEventListener('click', buttonFinishRoundEvent);
 
@@ -114,6 +122,41 @@ class GameBoardComponent implements WebComponent {
     this.boardEl = boardEl;
   }
 
+  private manageTableBackground(board: HTMLElement): void {
+
+    const settings: Settings = ls.getSettingsFromLocalStorage()!;
+    try {
+      switch (settings.style) {
+      case 'classic game': {
+        board.style.backgroundImage = `url('${ClassicBoard}')`;
+        break;
+      }
+
+      case 'play with pirates': {
+        board.style.backgroundImage = `url('${PiratBoard}')`;
+        break;
+      }
+
+      case 'beat the dragon': {
+        board.style.backgroundImage = `url('${DragonBoard}')`;
+        break;
+      }
+
+      default : {
+        board.style.backgroundImage = `url('${ClassicBoard}')`;
+      }
+      }
+    } catch (error) {
+      board.style.backgroundImage = `url('${ClassicBoard}')`;
+    }
+
+  }
+
+  changeLabel(text: string): void {
+    const boardPaused = document.querySelector('.board__pause-cover')!;
+    boardPaused.querySelector('.label')!.innerHTML = text;
+  }
+
   clearCanvas(): void {
     this.canvas.clear();
   }
@@ -140,6 +183,7 @@ class GameBoardComponent implements WebComponent {
     this.decreaseRemainingRolls();
     this.playerDices = randomNumbers.concat(this.getHeldDiceNumbers());
     if (this.remainingRolls == 0) this.pause();
+    if (this.remainingRolls < 3) document.querySelector('#buttonRollAgain')!.innerHTML = 'Roll Again';
     return randomNumbers;
   }
 
@@ -495,8 +539,8 @@ class GameBoardComponent implements WebComponent {
     this.heldDiceNumbers = heldDiceNumbers;
   }
 
-  pause(): void {
-    if (this.playerDices.length == 0) return;
+  pause(forcePause = false): void {
+    if (this.playerDices.length == 0 && forcePause == false) return;
     this.boardDisabledCover.classList.remove('board__pause-cover--hidden');
   }
 
@@ -510,6 +554,7 @@ class GameBoardComponent implements WebComponent {
 
   changePlayer(name: string): void {
     this.labelPlayer.innerHTML = `${name} plays!`;
+    document.querySelector('#buttonRollAgain')!.innerHTML = 'Roll';
   }
 
   getHeldDiceNumbers(): number[] {

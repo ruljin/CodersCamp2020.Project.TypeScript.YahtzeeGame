@@ -4,9 +4,10 @@ import LabelComponent from '../label/label';
 import SelectorComponent from '../selector/selector';
 import AddRemoveElement from '../add-remove/add-remove';
 import ReferenceComponent from '../reference/reference';
-import saveSettings from '../../local-storage/localstorage';
+import ls from '../../local-storage/localstorage';
 
 class SettingsComponent implements WebComponent {
+  playButton = document.querySelector('.button') as HTMLElement;
   render(): Element {
     return this.layout();
   }
@@ -15,18 +16,16 @@ class SettingsComponent implements WebComponent {
     this.add();
     this.change();
     this.remove();
-    this.validate();
+    this.walidate();
     this.saveAndPlay();
   }
 
   private layout(): HTMLElement {
-
     const settings = document.createElement('section');
     settings.setAttribute('class', 'settings');
 
     const names = document.createElement('section');
     names.setAttribute('class', 'settings__names');
-
 
     const width = window.innerWidth;
     if (width <= 576) {
@@ -188,23 +187,10 @@ class SettingsComponent implements WebComponent {
         const option = (select.options[select.selectedIndex].value);
         if (option === 'player') {
           const value = players.indexOf((select.parentElement)!) + 1;
-          const width = window.innerWidth;
-          if (width <= 576) {
-            const newlabel = new LabelComponent(`Player ${value}`, 38.5, false).render();
-            newlabel.setAttribute('id', `id${value}`);
-            select.replaceWith(newlabel);
-            this.validate();
-          } else if (width > 578 && width <= 992) {
-            const newlabel = new LabelComponent(`Player ${value}`, 22, false).render();
-            newlabel.setAttribute('id', `id${value}`);
-            select.replaceWith(newlabel);
-            this.validate();
-          } else {
-            const newlabel = new LabelComponent(`Player ${value}`, 22, false).render();
-            newlabel.setAttribute('id', `id${value}`);
-            select.replaceWith(newlabel);
-            this.validate();
-          }
+          const newlabel = new LabelComponent(`Player ${value}`, 20, false).render();
+          newlabel.setAttribute('id', `id${value}`);
+          select.replaceWith(newlabel);
+          this.walidate();
         }
       });
     }
@@ -226,7 +212,7 @@ class SettingsComponent implements WebComponent {
     });
   }
 
-  private validate(): void {
+  private walidate(): void {
     const inputs = document.querySelectorAll('input');
 
     for (const input of inputs) {
@@ -318,7 +304,6 @@ class SettingsComponent implements WebComponent {
 
   private saveSettingsInLocalStorage(): void {
     const players: string[] = [];
-
     const playersDiv = document.querySelectorAll('.players__option > :first-child');
 
     for (let i = 0; i < playersDiv.length; i++) {
@@ -335,7 +320,7 @@ class SettingsComponent implements WebComponent {
       const option = (select.options[select.selectedIndex].value);
       style = option;
     }
-    saveSettings(players, style);
+    ls.saveSettings(players, style);
   }
 }
 
