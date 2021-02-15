@@ -8,29 +8,35 @@
   width: 60vw;
 
   @media (max-width: 576px) {
+    align-items: center;
     flex-direction: column;
-    height: 80vw;
     width: 80vw;
   }
 
   @media (max-width: 768px) and (min-width: 577px) {
+    align-items: center;
     flex-direction: column;
-    height: 80vw;
     width: 80vw;
   }
 
   @media (max-width: 992px) and (min-width: 769px) {
-    width: 70vw;
+    align-items: center;
+    flex-direction: column;
+    width: 80vw;
   }
 
   @media (max-width: 1200px) and (min-width: 993px) {
     width: 70vw;
+
+    .logo {
+      width: 20vw;
+    }
   }
 }
 
 .buttons-container {
   padding: 0 20px 30px 0;
-  text-align: end;
+  text-align: center;
 
   .button {
     background-color: #46060f;
@@ -44,11 +50,17 @@
     outline: none;
     text-align: center;
     text-transform: capitalize;
+
+    @media (max-width: 576px) {
+      width: 30vw;
+    }
+  
+    @media (max-width: 768px) and (min-width: 577px) {
+      width: 30vw;
+    }
   }
 }
 
 .board {
   margin-top: 50px;
 }
-
-

@@ -66,7 +66,7 @@ class GameBoardComponent implements WebComponent {
       this.diceCanvas = document.createElement('canvas');
       boardEl.appendChild(this.diceCanvas);
       this.canvas = new fabric.Canvas(this.diceCanvas);
-      this.canvas.setDimensions({ width: 280, height: 200 });
+      this.canvas.setDimensions({ width: 300, height: 220 });
     } else if (width > 993 && width <= 1200) {
       this.diceCanvas = document.createElement('canvas');
       boardEl.appendChild(this.diceCanvas);
@@ -123,24 +123,33 @@ class GameBoardComponent implements WebComponent {
   }
 
   private manageTableBackground(board: HTMLElement): void {
+
     const settings: Settings = ls.getSettingsFromLocalStorage()!;
+    try {
+      switch (settings.style) {
+      case 'classic game': {
+        board.style.backgroundImage = `url('${ClassicBoard}')`;
+        break;
+      }
 
-    switch (settings.style) {
-    case 'classic game': {
+      case 'play with pirates': {
+        board.style.backgroundImage = `url('${PiratBoard}')`;
+        break;
+      }
+
+      case 'beat the dragon': {
+        board.style.backgroundImage = `url('${DragonBoard}')`;
+        break;
+      }
+
+      default : {
+        board.style.backgroundImage = `url('${ClassicBoard}')`;
+      }
+      }
+    } catch (error) {
       board.style.backgroundImage = `url('${ClassicBoard}')`;
-      break;
     }
 
-    case 'play with pirates': {
-      board.style.backgroundImage = `url('${PiratBoard}')`;
-      break;
-    }
-
-    case 'beat the dragon': {
-      board.style.backgroundImage = `url('${DragonBoard}')`;
-      break;
-    }
-    }
   }
 
   changeLabel(text: string): void {
@@ -227,8 +236,8 @@ class GameBoardComponent implements WebComponent {
         break;
       }
     } else if (width > 769 && width <= 992) {
-      const x = Math.floor(Math.random() * 170);
-      const y = Math.floor(Math.random() * 250);
+      const x = Math.floor(Math.random() * 190);
+      const y = Math.floor(Math.random() * 270);
       switch (number) {
       case 1:
         this.draw1Dice(x, y, style);

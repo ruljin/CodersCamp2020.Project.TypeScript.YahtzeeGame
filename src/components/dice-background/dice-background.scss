@@ -3,11 +3,13 @@
 
   &--default {
     left: 2%;
+    position: fixed;
     top: 50%;
     transform: translateY(-50%);
   }
 
   &--alt {
+    position: fixed;
     right: 2%;
     top: 50%;
     transform: translateY(-50%);

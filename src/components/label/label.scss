@@ -8,13 +8,32 @@
   font-size: 1.5rem;
   font-weight: 500;
   line-height: 3.5rem;
-  min-height: 3.5rem;
+  min-height: 4vh;
   outline: none;
   text-align: center;
 
   &--alternative {
     background-color: #bbbfc0;
     color: #000;
+    height: 7vh;
+
+    @media (max-width: 576px) {
+      font-size: 1rem;
+      height: 7vh;
+      justify-self: center;
+      line-height: 6vh;
+    }
+  
+    @media (max-width: 768px) and (min-width: 577px) {
+      height: 7vh;
+      justify-self: center;
+      line-height: 6vh;
+    }
+  
+    @media (max-width: 992px) and (min-width: 769px) {
+      height: 7vh;
+      line-height: 7vh;
+    }
   }
   
   @media (max-width: 576px) {
@@ -30,6 +49,12 @@
   }
 
   @media (max-width: 992px) and (min-width: 769px) {
-    line-height: 7vh;
+    height: 7vh;
+    line-height: 6vh;
+  }
+
+  @media (min-width: 993px) {
+    height: 7vh;
+    line-height: 6vh;
   }
 }

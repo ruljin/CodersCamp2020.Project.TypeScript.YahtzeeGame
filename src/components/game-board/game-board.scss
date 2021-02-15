@@ -35,14 +35,14 @@
   }
 
   @media (max-width: 992px) and (min-width: 769px) {
-    grid-template-columns: 35vw;
-    grid-template-rows: min-content 23vw min-content;
-    height: 35vw;
-    width: 35vw;
+    grid-template-columns: 43vw;
+    grid-template-rows: min-content 30vw min-content;
+    height: 45vw;
+    margin-bottom: 5vh;
+    width: 45vw;
 
     .label {
       font-size: 1rem;
-      height: 5vw;
       width: 20vw;
     }
   }
@@ -55,7 +55,7 @@
 
     .label {
       font-size: 1rem;
-      height: 5vw;
+      line-height: 6vh;
       width: 20vw;
     }
   }
@@ -77,6 +77,11 @@
     place-items: flex-start;
     position: absolute;
     width: 100%;
+
+    .label {
+      align-self: center;
+      justify-self: center;
+    }
 
     &--hidden {
       display: none;
