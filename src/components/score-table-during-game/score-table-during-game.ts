@@ -64,7 +64,7 @@ class ScoreTableDuringGameComponent implements WebComponent {
     const rowNames = `
     <div id="scoreTableNames" class="score-table__names">
       <div class="score-table__names-item score-table__names-item--empty"></div>
-      <div id="ones" class="score-table__names-item"><p>ones</p></div>
+      <div id="ones" class="score-table__names-item"><p>&#128161; ones</p></div>
       <div id="twos" class="score-table__names-item"><p>twos</p></div>
       <div id="threes" class="score-table__names-item"><p>threes</p></div>
       <div id="fours" class="score-table__names-item"><p>fours</p></div>
@@ -224,7 +224,7 @@ class ScoreTableDuringGameComponent implements WebComponent {
     case 'yahtzee' : {
       header = 'Yahtzee';
       content = 'All five dice the same.<p class="modal__body__points">50 points.</p><img class="modal__image" />';
-      picture = 'Yahtzee';
+      picture = 'yahtzee';
       break;
     }
 
