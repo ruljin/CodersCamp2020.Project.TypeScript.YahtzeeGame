@@ -154,7 +154,21 @@ class SettingsComponent implements WebComponent {
           error.setAttribute('class', 'error');
           div.appendChild(error);
           players.appendChild(div);
-        } else if (width > 568 && width <= 992) {
+        } else if (width > 577 && width <= 768) {
+          div.appendChild(new SelectorComponent(list, 38.5).render());
+          div.setAttribute('class', 'players__option');
+          const error = document.createElement('div');
+          error.setAttribute('class', 'error');
+          div.appendChild(error);
+          players.appendChild(div);
+        } else if (width > 769 && width <= 992) {
+          div.appendChild(new SelectorComponent(list, 22).render());
+          div.setAttribute('class', 'players__option');
+          const error = document.createElement('div');
+          error.setAttribute('class', 'error');
+          div.appendChild(error);
+          players.appendChild(div);
+        } else if (width > 993 && width <= 1200) {
           div.appendChild(new SelectorComponent(list, 22).render());
           div.setAttribute('class', 'players__option');
           const error = document.createElement('div');
@@ -186,11 +200,38 @@ class SettingsComponent implements WebComponent {
       select.addEventListener('change', (): void => {
         const option = (select.options[select.selectedIndex].value);
         if (option === 'player') {
-          const value = players.indexOf((select.parentElement)!) + 1;
-          const newlabel = new LabelComponent(`Player ${value}`, 20, false).render();
-          newlabel.setAttribute('id', `id${value}`);
-          select.replaceWith(newlabel);
-          this.walidate();
+          const width = window.innerWidth;
+          if (width <= 576) {
+            const value = players.indexOf((select.parentElement)!) + 1;
+            const newlabel = new LabelComponent(`Player ${value}`, 38.5, false).render();
+            newlabel.setAttribute('id', `id${value}`);
+            select.replaceWith(newlabel);
+            this.walidate();
+          } else if (width > 577 && width <= 768) {
+            const value = players.indexOf((select.parentElement)!) + 1;
+            const newlabel = new LabelComponent(`Player ${value}`, 38.5, false).render();
+            newlabel.setAttribute('id', `id${value}`);
+            select.replaceWith(newlabel);
+            this.walidate();
+          } else if (width > 769 && width <= 992) {
+            const value = players.indexOf((select.parentElement)!) + 1;
+            const newlabel = new LabelComponent(`Player ${value}`, 22, false).render();
+            newlabel.setAttribute('id', `id${value}`);
+            select.replaceWith(newlabel);
+            this.walidate();
+          } else if (width > 993 && width <= 1200) {
+            const value = players.indexOf((select.parentElement)!) + 1;
+            const newlabel = new LabelComponent(`Player ${value}`, 22, false).render();
+            newlabel.setAttribute('id', `id${value}`);
+            select.replaceWith(newlabel);
+            this.walidate();
+          } else {
+            const value = players.indexOf((select.parentElement)!) + 1;
+            const newlabel = new LabelComponent(`Player ${value}`, 22, false).render();
+            newlabel.setAttribute('id', `id${value}`);
+            select.replaceWith(newlabel);
+            this.walidate();
+          }
         }
       });
     }

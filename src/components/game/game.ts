@@ -3,7 +3,6 @@ import GameBoardComponent from '../game-board/game-board';
 import LogoComponent from '../logo/logo';
 import ScoreTableComponent from '../score-table-during-game/score-table-during-game';
 import WebComponent, {createElementFromElements, createElementFromString} from '../../common/WebComponent';
-import DiceBackgroundComponent, { DiceTypes } from '../dice-background/dice-background';
 import ls from '../../local-storage/localstorage';
 
 interface Scores {
@@ -35,7 +34,7 @@ class GameComponent implements WebComponent {
 
   constructor() {
     if (ls.getSettingsFromLocalStorage() === null)
-      window.location.href = '../#/rules';
+      window.location.href = '#/rules';
     this.playersName = ls.getSettingsFromLocalStorage()!.players;
     this.gameBoard = new GameBoardComponent(
       () => null,
@@ -50,7 +49,6 @@ class GameComponent implements WebComponent {
   render(): Element {
     const container = document.createElement('div');
     container.append(new LogoComponent().render());
-    container.append(new DiceBackgroundComponent(DiceTypes.BG).render());
     container.append(
       createElementFromElements(
         'game-container',
@@ -58,7 +56,6 @@ class GameComponent implements WebComponent {
         this.scoreTable.render()
       )
     );
-    container.append(new DiceBackgroundComponent(DiceTypes.BG_ALT).render());
     let buttonsContainer =
       '<div class="buttons-container"><button id="gameButtonLeave" class="button button-leave">Leave</button>';
 
@@ -912,7 +909,7 @@ class GameComponent implements WebComponent {
       );
       if (timeToRedirect <= 0) {
         clearInterval(interval);
-        window.location.href = '../#/scores';
+        window.location.href = '#/scores';
       }
       timeToRedirect--;
     }, 1000);

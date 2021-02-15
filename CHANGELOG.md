@@ -7,10 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-- Game Logic
-- LocalStorage implementation in game and scores
-- Change board background depends on settings
-- Check attempt to access game without settings
+## [2.0.0] - 2021-02-15
 
 ### Added 
 
@@ -23,6 +20,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Modal content for each category in game.
 - Validation functions for settings.
 - Readme file.
+- Game Logic.
+- LocalStorage implementation in game and scores.
+- Change board background depends on settings.
+- Check attempt to access game without settings.
+- Favicon.
 
 ### Changed
 
@@ -35,6 +37,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Remove the transparent space in modals.
 - Make the modal buttons the same size.
+- Github pages redirection issues.
 
 ## [1.0.0] - 2021-02-03
 
@@ -95,7 +98,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Sass style loaders with autoprefixer for Webpack.
 - Stylelint for Sass.
 
-[unreleased]: https://github.com/ruljin/CodersCamp2020.Project.TypeScript.YahtzeeGame/compare/1.0.0...HEAD
+[unreleased]: https://github.com/ruljin/CodersCamp2020.Project.TypeScript.YahtzeeGame/compare/2.0.0...HEAD
+[2.0.0]: https://github.com/ruljin/CodersCamp2020.Project.TypeScript.YahtzeeGame/compare/1.0.0...2.0.0
 [1.0.0]: https://github.com/ruljin/CodersCamp2020.Project.TypeScript.YahtzeeGame/compare/0.2.0...1.0.0
 [0.2.0]: https://github.com/ruljin/CodersCamp2020.Project.TypeScript.YahtzeeGame/compare/0.1.0...0.2.0
 [0.1.0]: https://github.com/ruljin/CodersCamp2020.Project.TypeScript.YahtzeeGame/releases/tag/0.1.0
