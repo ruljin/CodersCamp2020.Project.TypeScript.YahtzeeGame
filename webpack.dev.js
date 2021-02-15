@@ -59,7 +59,8 @@ module.exports = {
       filename: 'style.css'
     }),
     new HtmlWebpackPlugin({
-      template: path.resolve(__dirname,"./src/index.html")
+      template: path.resolve(__dirname,"./src/index.html"),
+      favicon: `./src/assets/favicon.png`
     })
   ]
 };

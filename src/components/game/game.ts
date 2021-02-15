@@ -34,7 +34,7 @@ class GameComponent implements WebComponent {
 
   constructor() {
     if (ls.getSettingsFromLocalStorage() === null)
-      window.location.href = '../#/rules';
+      window.location.href = '#/rules';
     this.playersName = ls.getSettingsFromLocalStorage()!.players;
     this.gameBoard = new GameBoardComponent(
       () => null,
@@ -909,7 +909,7 @@ class GameComponent implements WebComponent {
       );
       if (timeToRedirect <= 0) {
         clearInterval(interval);
-        window.location.href = '../#/scores';
+        window.location.href = '#/scores';
       }
       timeToRedirect--;
     }, 1000);
