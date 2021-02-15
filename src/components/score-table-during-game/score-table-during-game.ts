@@ -224,7 +224,7 @@ class ScoreTableDuringGameComponent implements WebComponent {
     case 'yahtzee' : {
       header = 'Yahtzee';
       content = 'All five dice the same.<p class="modal__body__points">50 points.</p><img class="modal__image" />';
-      picture = 'Yahtzee';
+      picture = 'yahtzee';
       break;
     }
 
