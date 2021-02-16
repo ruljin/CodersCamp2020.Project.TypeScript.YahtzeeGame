@@ -37,7 +37,7 @@ Our project is an application to play dice game Yahtzee. This is a browser based
 -	After finishing the game, the player's score is summed up and all players scores are put it the ranking. It can be seen in Scores section. 
 -   Rules section shows rules of Yahtzee game. 
 -   Authors sections shows names of developers working on the application.
--	  The application is responsive, so there is an option to display it on tablets and phones.
+-	The application is responsive, so there is an option to display it on tablets and phones.
 
 ## Technologies
 -	HTML
