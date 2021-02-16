@@ -48,7 +48,10 @@ class GameComponent implements WebComponent {
 
   render(): Element {
     const container = document.createElement('div');
-    container.append(new LogoComponent().render());
+    const logoComponent = new LogoComponent();
+    logoComponent.render();
+    logoComponent.deleteLink();
+    container.append(logoComponent.render());
     container.append(
       createElementFromElements(
         'game-container',
