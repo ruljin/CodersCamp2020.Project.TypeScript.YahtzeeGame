@@ -67,20 +67,20 @@ class ScoreTableDuringGameComponent implements WebComponent {
       <div id="ones" class="score-table__names-item"><p>&#128161;	ones</p></div>
       <div id="twos" class="score-table__names-item"><p>&#128161;	twos</p></div>
       <div id="threes" class="score-table__names-item"><p>&#128161;	threes</p></div>
-      <div id="fours" class="score-table__names-item"><p>&#128161;	fours</p></div>
-      <div id="fives" class="score-table__names-item"><p>&#128161;	fives</p></div>
-      <div id="sixes" class="score-table__names-item"><p>&#128161;	sixes</p></div>
+      <div id="fours" class="score-table__names-item"><p>&#128161; fours</p></div>
+      <div id="fives" class="score-table__names-item"><p>&#128161; fives</p></div>
+      <div id="sixes" class="score-table__names-item"><p>&#128161; sixes</p></div>
       <div id="subtotal" class="score-table__names-item score-table__names-item--blue"><p>&#128161;	subtotal</p></div>
       <div id="bonus" class="score-table__names-item score-table__names-item--blue"><p>&#128161;	bonus</p></div>
       <div id="threeOfaKind" class="score-table__names-item"><p>&#128161;	3 of a kind</p></div>
-      <div id="fourOfaKind" class="score-table__names-item"><p>&#128161;	4 of a kind</p></div>
-      <div id="fullHouse" class="score-table__names-item"><p>&#128161;	full house</p></div>
-      <div id="smStraight" class="score-table__names-item"><p>&#128161;	sm.straight</p></div>
-      <div id="lgStraight" class="score-table__names-item"><p>&#128161;	lg.straight</p></div>
-      <div id="yahtzee" class="score-table__names-item"><p>&#128161;	yahtzee</p></div>
-      <div id="chance" class="score-table__names-item"><p>&#128161;	chance</p></div>
-      <div id="yahtzeeBonus" class="score-table__names-item score-table__names-item--blue"><p>&#128161;	yahtzee bonus</p></div>
-      <div id="total" class="score-table__names-item score-table__names-item--blue"><p>&#128161;	total</p></div>
+      <div id="fourOfaKind" class="score-table__names-item"><p>&#128161; 4 of a kind</p></div>
+      <div id="fullHouse" class="score-table__names-item"><p>&#128161; full house</p></div>
+      <div id="smStraight" class="score-table__names-item"><p>&#128161; sm.straight</p></div>
+      <div id="lgStraight" class="score-table__names-item"><p>&#128161; lg.straight</p></div>
+      <div id="yahtzee" class="score-table__names-item"><p>&#128161; yahtzee</p></div>
+      <div id="chance" class="score-table__names-item"><p>&#128161; chance</p></div>
+      <div id="yahtzeeBonus" class="score-table__names-item score-table__names-item--blue"><p>&#128161; yahtzee bonus</p></div>
+      <div id="total" class="score-table__names-item score-table__names-item--blue"><p>&#128161; total</p></div>
     </div>`;
 
     container += rowNames;
