@@ -34,7 +34,7 @@ Our project is an application to play dice game Yahtzee. This is a browser based
 -	Before each game, player is taken to the Settings, where he/she can choose how many playes would play. Maximum is four players and minimum is two players. Player can choose to play with a friends (on the same computer) or with computer. Computer has three difficulty levels - Easy/Hard/Medium. Player can mix game with computer/friends in the way he/she wants. Additionaly, in Settings panel player can choose style of the game - Classic Game / Play with Pirates / Beat the Dragon, which affects boardgame style and colours of dices. 
 -	Once the game starts, players and computers take they draws according to the rules of Yahtzee game. After each round, player can choose the categhory where the points from the draw would be assigned. Additionaly, scores table shows with green color which cathegory player can choose to gain points (green color) or which cathegory would get 0 points (red color). Points are being counted by the application.
 -   During the game, when player clicks on the cathegory name the modal with a tip will be shown. While clicking on the points in any cathegory, modal with hostory of draws in this round will be shown. 
--	  After finishing the game, the player's score is summed up and all players scores are put it the ranking. It can be seen in Scores section. 
+-	After finishing the game, the player's score is summed up and all players scores are put it the ranking. It can be seen in Scores section. 
 -   Rules section shows rules of Yahtzee game. 
 -   Authors sections shows names of developers working on the application.
 -	  The application is responsive, so there is an option to display it on tablets and phones.
